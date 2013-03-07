@@ -1,4 +1,4 @@
-Helix-Joomla
+Helix framework for Joomla
 ============
 
-Helix framework for joomla
+Browse specific branches of versioned package.
