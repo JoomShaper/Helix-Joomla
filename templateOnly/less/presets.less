@@ -1,0 +1,102 @@
+/**
+ * @package Helix Framework
+ * @author JoomShaper http://www.joomshaper.com
+ * @copyright Copyright (c) 20010 - 2013 JoomShaper
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
+*/
+
+@import 'variables';
+@import 'mixins';
+
+// Button
+.btn-primary(@btnPrimaryBackground: @btnPrimaryBackground) {
+  .buttonBackground(@btnPrimaryBackground, spin(@btnPrimaryBackground, 20%));
+}
+
+//Link color
+a:not(.btn) {
+	color: darken(@link_color,20%);
+	&:hover {
+	  color: @link_color;
+	}
+}
+
+
+body {
+	color:@text_color;
+	&.bg {
+		background:@bg_color;
+	}
+}
+
+//header
+#sp-header-wrapper {
+	#gradient > .vertical(lighten(@header_color,20%),@header_color);
+	
+	//Logo
+	.logo{
+		background-image:url(../../images/presets/@{preset}/logo.png);
+	}
+}
+
+#sp-feature-wrapper {
+	#gradient > .vertical(@link_color,darken(@link_color,20%));
+	
+	//Link
+	a:not(.btn){
+		color:lighten(@link_color, 20%);
+		 
+		&:hover{
+		   color:lighten(@link_color, 40%);
+		}
+	}
+	
+}
+
+//Widgets
+.module {
+	&.highlighted {
+		background:darken(@link_color,10%);
+		a:not(.btn){
+		 color:lighten(@link_color, 10%);
+			 
+		&:hover{
+		   color:darken(@link_color, 20%)
+		  }
+		}
+	}
+}
+
+#sp-bottom-wrapper,
+#sp-footer-wrapper {
+	background:darken(@link_color,30%);
+	color:@white;
+	h3{
+		color:@white;
+	}
+	
+	//Link
+	a:not(.btn){
+		color:lighten(@link_color, 10%);
+		 
+		&:hover{
+		   color:lighten(@link_color, 30%);
+		}
+	}
+}
+
+#sp-footer-wrapper {
+	.sp-border();
+}	
+
+.sp-border {
+	border-top:1px solid darken(@link_color, 40%);
+	&::after {
+		background:darken(@link_color, 23%);
+	}
+}
+
+/*Buttons*/
+.btn-primary, button, input[type='submit'], input[type='button'], submit {
+	.btn-primary(spin(@link_color, 10%));
+}

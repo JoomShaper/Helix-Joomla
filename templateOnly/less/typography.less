@@ -1,0 +1,230 @@
+/**
+ * @package Helix Framework
+ * @author JoomShaper http://www.joomshaper.com
+ * @copyright Copyright (c) 20010 - 2013 JoomShaper
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
+*/
+ 
+/* Dropcap */
+.sp-dropcap{
+	overflow:hidden;
+	&:first-letter{
+		color:#666;
+		display:block;
+		float:left;
+		font-size:50px;
+		line-height:40px;
+		padding:4px 8px 0 0;
+	}
+}
+
+/*Unordered Lists*/
+ul {
+	&.arrow,
+	&.arrow-double,
+	&.tick,
+	&.cross,
+	&.star,
+	&.rss{
+		list-style:none;
+		padding:0;
+		margin:0;
+		li::before,
+		li::after {
+			font-family:FontAwesome;
+			font-size:11px;
+		}
+	}
+}
+
+.ltr {
+	ul {
+		&.arrow,
+		&.arrow-double,
+		&.tick,
+		&.cross,
+		&.star,
+		&.rss{
+			li::before {
+				margin-right:5px;
+			}
+		}	
+	
+		&.arrow{
+			li::before {
+				content:"\f105";
+			}
+		}
+		
+		&.arrow-double{
+			li::before {
+				content:"\f101";
+			}
+		}
+		
+		&.tick{
+			li::before {
+				content:"\f00c";
+			}
+		}
+		
+		&.cross{
+			li::before {
+				content:"\f00d";
+			}
+		}
+		
+		&.star{
+			li::before {
+				content:"\f006";
+			}
+		}
+		&.rss{
+			li::before {
+				content:"\f09e";
+			}
+		}
+	}	
+}
+
+.rtl {
+	ul {
+		&.arrow,
+		&.arrow-double,
+		&.tick,
+		&.cross,
+		&.star,
+		&.rss{
+			li::after {
+				margin-left:5px;
+			}
+		}
+
+		&.arrow{
+			li::after {
+				content:"\f104";
+			}
+		}
+		
+		&.arrow-double{
+			li::after {
+				content:"\f100";
+			}
+		}
+		
+		&.tick{
+			li::after {
+				content:"\f00c";
+			}
+		}
+		
+		&.cross{
+			li::after {
+				content:"\f00d";
+			}
+		}
+		
+		&.star{
+			li::after {
+				content:"\f006";
+			}
+		}
+		&.rss{
+			li::after {
+				content:"\f09e";
+			}
+		}
+	}
+}
+
+/* Block number */
+.sp-blocknumber { 
+     position: relative;
+     padding:5px 0 5px 60px;
+     min-height: 45px;
+	 
+	span{
+		font-weight:bold;  
+		width:48px;
+		height:48px;
+		line-height:48px;
+		display:block;
+		text-align:center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		&.rounded{
+			.border-radius(5px);
+		}
+		&.circle{
+			.border-radius(100%);
+		}
+	}
+    
+} 
+
+.rtl{
+     .sp-blocknumber { 
+         padding:5px 60px 5px 0;
+		 span{
+			 &.bignumber{
+				right: 0;
+				left:auto;
+			}
+		 } 
+	}
+}
+
+/* Block */
+.sp-block{
+	&.rounded{
+		.border-radius(5px);
+	}
+}
+
+//bubble
+.sp-bubble{
+	position:relative;
+	margin-bottom:40px;
+	cite {
+		span{
+			content:' ';
+			position: absolute;
+			top: 0;
+			display: block;
+			width:0;
+			height:0;
+			border-bottom-color:transparent!important;
+		}
+		display: block;
+		height:30px;
+		line-height: 36px;
+		position: absolute;
+		bottom: -30px;
+	}
+}
+.ltr{
+	.sp-bubble{
+		cite {
+			span{
+				left: 0;
+				border-left-color:transparent!important;
+			}
+			left: 15px;
+			padding-left: 40px;
+		}
+	}
+}
+
+.rtl{
+	.sp-bubble{
+		cite {
+			span{
+				right: 0;
+				border-right-color:transparent!important;
+			}
+			right: 15px;
+			padding-right: 40px;
+		}
+	}
+}

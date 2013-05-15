@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="template" client="site" method="upgrade">
+    <name>shaper_helix_ii</name>
+    <creationDate>Feb 2013</creationDate>
+    <author>JoomShaper.com</author>
+    <authorEmail>support@joomshaper.com</authorEmail>
+    <authorUrl>http://www.joomshaper.com</authorUrl>
+    <copyright>Copyright (C) 2010 - 2013 JoomShaper.com. All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GPLv2 or later</license>
+    <version>1.0.2</version>
+    <description>
+		<![CDATA[
+			Shaper Helix – II is the default/blank template of Helix Framework version 2.<br />
+			This template has all the in built functionality of Helix 2.0. Helix - II comes with tons of shortcode such for video, gallery, slideshow, tabs, accordion etc. 
+			Helix 2.0 especially comes with rich administration features such as logo settings, masterpiece layout builder,
+			mega menu, unlimited fonts control, Google analytics,
+			Less complitation and all types of presets control like header color, link color, background color so on.
+			Now you don’t need to worry about its speed. The built-in css and javascript compresses 
+			used by Helix to provide optimal performance.
+			<h3>Key Features</h3>
+			<ul class="arrow">
+				<li>Unlimited module positions with the power of unique layout builder</li>
+				<li>Powered by Bootstrap and compatible with Joomla 2.5 and 3.0</li>
+				<li>Three (3) presets with presets manager</li>
+				<li>Uses latest web technologies like html5 and css3</li>
+				<li>Tons of shortcodes in built</li>
+				<li>Built with LESS CSS</li>
+				<li>Megamenu, RTL Support, CSS and JS compression and many more...</li>
+			</ul>
+		]]>
+	</description>
+    <languages>
+        <language tag="en-GB">en-GB.tpl_shaper_helix_ii.ini</language>
+    </languages>
+    <positions>
+        <position>logo</position>
+        <position>menu</position>
+        <position>search</position>
+        <position>slide</position>
+        <position>user1</position>
+        <position>user2</position>
+        <position>user3</position>
+        <position>user4</position>
+        <position>left</position>
+        <position>right</position>
+        <position>feature</position>
+        <position>bottom1</position>
+        <position>bottom2</position>
+        <position>bottom3</position>
+        <position>bottom4</position>
+        <position>breadcrumb</position>
+        <position>footer1</position>
+        <position>footer2</position>
+    </positions>
+	
+    <files>
+        <file>index.html</file>
+        <file>index.php</file>
+        <file>favicon.ico</file>
+        <file>template_preview.png</file>
+        <file>template_thumbnail.png</file>
+        <file>templateDetails.xml</file>
+        <file>error.php</file>
+        <file>offline.php</file>
+        <file>component.php</file>
+        <folder>css/</folder>
+        <folder>features/</folder>
+        <folder>html/</folder>
+        <folder>images/</folder>
+        <folder>js/</folder>
+        <folder>layout/</folder>
+        <folder>less/</folder>
+    </files>
+    <config>
+        <fields name="params">
+
+            <fieldset name="overviews" addfieldpath="/plugins/system/helix/fields">
+                <field type="asset" />
+                <field type="include" file="overview.php" />
+            </fieldset>
+
+            <fieldset name="basic" addfieldpath="/plugins/system/helix/fields">
+			
+				<field type="group" title="LAYOUT" />
+				 <!-- layout type -->
+                <field name="layout_width" type="list" default="1170" label="WIDTH">
+                    <option value="1170">1170 (px)</option>
+                    <option value="940">940 (px)</option>
+                </field>
+				<field name="layout_type" type="radio" default="responsive" label="TYPE">
+                    <option value="responsive">Responsive</option>
+                    <option value="fixed">Fixed</option>
+                </field>
+
+                <field type="group" title="LOGO" />
+				<!-- logo type -->
+                <field name="logo_type" class="parent logotype" type="radio" default="image" label="TYPE">
+                    <option value="image">Image</option>
+                    <option value="text">Text</option>
+                    <option value="no">None</option>
+                </field>
+                <field name="logo_position" class="child logotype logotype_image logotype_text" type="modpos" default="logo" client_id="0" label="POSITION" maxlength="50" />
+
+                <!-- logo image -->
+                <field name="logo_type_image" class="child logotype logotype_image" type="media" preview="true" label="IMAGE" />
+
+                <!-- logo text -->
+                <field name="logo_type_text" class="child logotype logotype_text" type="text" default="Helix" label="TEXT" />
+                <field name="logo_type_slogan" class="child logotype logotype_text" type="text" default="Joomla! Templates Framework" label="SLOGAN" />
+
+                <!-- logo width, height -->
+                <field name="logo_width" size="40" class="child logotype logotype_image logotype_text logotype_css" type="text" default="260" label="WIDTH" />
+                <field name="logo_height" size="40" class="child logotype logotype_image logotype_text logotype_css" type="text" default="100" label="HEIGHT" />
+
+                <!-- Footer -->
+				<field type="group" title="FOOTER" />
+				<field name="footer_position" type="modpos" default="footer1" client_id="0" label="POSITION" maxlength="50" />
+				
+				<field name="showcp" type="radio" class="parent copyright" default="1" label="COPYRIGHT">
+                    <option value="0">Hide</option>
+                    <option value="1">Show</option>
+                </field>
+                <field name="copyright" class="child copyright copyright_1" type="textarea" rows="6" cols="30" default="Copyright ©  {year} Shaper Helix - II Demo. All Rights Reserved." label="TEXT" />
+				
+                <field name="show_helix_logo" type="radio" default="1" label="HELIX_LOGO">
+                    <option value="0">Hide</option>
+                    <option value="1">Show</option>
+                </field>
+				
+                <field name="jcredit" type="radio" default="1" label="JCREDIT">
+                    <option value="0">Hide</option>
+                    <option value="1">Show</option>
+                </field>
+                <field name="validator" type="radio" default="0" label="VALIDATOR">
+                    <option value="0">Hide</option>
+                    <option value="1">Show</option>
+                </field>
+				
+				<field type="group" title="Goto Top Settings" />
+				<field name="showtop" type="radio" default="1" label="GOTO_TOP" class="parent totop">
+                    <option value="0">Hide</option>
+                    <option value="1">Show</option>
+                </field>
+				<field name="totop_position" type="modpos" class="child totop totop_1" default="footer2" client_id="0" label="POSITION" maxlength="50" />
+             
+            </fieldset>
+
+            <fieldset name="preset"  addfieldpath="/plugins/system/helix/fields">
+                <field type="group" title="PRESET" />
+
+                <field name="preset" type="presets"  default="preset1" label="PRESET" />
+
+                <field type="group" title="PRESET_SETTINGS" />
+				
+				<!--Start Preset1-->
+                <field name="preset1_header" class="preset1" type="picker" default="#f8f8f8" label="Header Color" />
+                <field name="preset1_bg" class="preset1" type="picker" default="#f2f2f2" label="Background Color" />
+                <field name="preset1_text" class="preset1" type="picker" default="#666666" label="Text Color" />
+                <field name="preset1_link" class="preset1" type="picker" default="#22b8f0" label="Link Color" />
+				<!--End Preset1-->
+				
+				<!--Start Preset1-->
+                <field name="preset2_header" class="preset2" type="picker" default="#eeeeee" label="Header Color" />
+                <field name="preset2_bg" class="preset2" type="picker" default="#f5f5f5" label="Background Color" />
+                <field name="preset2_text" class="preset2" type="picker" default="#444444" label="Text Color" />
+                <field name="preset2_link" class="preset2" type="picker" default="#6d7f1b" label="Link Color" />
+				<!--End Preset1-->
+				
+				<!--Start Preset1-->
+                <field name="preset3_header" class="preset3" type="picker" default="#e5ddd5" label="Header Color" />
+                <field name="preset3_bg" class="preset3" type="picker" default="#f2f2f2" label="Background Color" />
+                <field name="preset3_text" class="preset3" type="picker" default="#333333" label="Text Color" />
+                <field name="preset3_link" class="preset3" type="picker" default="#aa824a" label="Link Color" />
+				<!--End Preset1-->	
+
+            </fieldset>
+
+            <fieldset name="layout" addfieldpath="/plugins/system/helix/fields">
+                <field type="layout" name="layout" />
+            </fieldset>
+            <!--End Basic Tab-->
+
+            <!--Start Menu Tab-->
+            <fieldset name="menu">
+
+                <field type="group" title="Select Menu" />
+                <field name="menu" type="menu" default="mainmenu" label="" />
+                <field type="group" title="Menu Settings" />
+
+                <field name="menutype" type="list" default="mega" label="MENU_TYPE">
+                    <option value="mega">Mega Menu</option>
+                </field>
+                <field name="menu_col_width" type="text" default="200" label="DROP_COL_WIDTH" />
+                <field name="show_menu_image" class="parent menuimage" type="radio" default="1" label="SHOW_MENU_IMAGE">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="menu_image_position" class="child menuimage menuimage_1" type="radio" default="1" label="MENU_IMAGE_POSITION">
+                    <option value="0">Background Image</option>
+                    <option value="1">Image Source</option>
+                </field>
+
+				<field type="group" title="Menu Offsets" />
+                <field name="init_x" type="text" default="0" label="X_OFFSET1" />
+                <field name="init_y" type="text" default="0" label="Y_OFFSET1" />
+                <field name="sub_x" type="text" default="0" label="X_OFFSET2" />
+                <field name="sub_y" type="text" default="0" label="Y_OFFSET2" />
+
+            </fieldset>
+            <!--End Menu Tab-->
+
+            <!--Start Font Tab-->
+            <fieldset name="fonts">
+                <field type="group" title="Body Font" />
+					<field name="body_font" type="text" default="" label="BODY_FONT" />
+					<field name="body_selectors" type="textarea" rows="6" cols="30" label="SELECTORS" />
+                <field type="group" title="Header Font" />
+					<field name="header_font" type="text" default="" label="HEADER_FONT" />
+					<field name="header_selectors" type="textarea" default="" rows="6" cols="30" label="SELECTORS" />
+                <field type="group" title="Others Font"  />
+					<field name="other_font" type="text" default="" label="OTHER_FONT" />
+					<field name="other_selectors" type="textarea" rows="6" cols="30" label="SELECTORS" />
+            </fieldset>
+            <!--End Font Tab-->
+
+            <!--Start Advanced Tab-->
+            <fieldset name="advanced">
+                <field type="group" title="Cache Setting" />
+                <field name="cache_time" size="40" type="text" default="60" label="CACHE_TIME" />
+                <field name="compress_css" type="radio" default="0" label="CSS_COMPRESS">
+                    <option value="0">Disable</option>
+                    <option value="1">Enable</option>
+                </field>
+                <field name="compress_js" type="radio" default="0" label="JS_COMPRESS">
+                    <option value="0">Disable</option>
+                    <option value="1">Enable</option>
+                </field>
+                <field type="group" title="LINE_GA" />
+                <field name="enable_ga" class="parent analytics" type="radio" default="0" label="Enable">
+                    <option value="0">No</option>
+                    <option value="1">YES</option>
+                </field>
+                <field name="ga_code" class="child analytics analytics_1" type="text" default="" label="GA_CODE" />
+				
+				
+                <field type="group" title="LOAD_JQUERY" />
+                <field name="loadjquery" class="parent loadjquery" type="radio" default="0" label="Force Load">
+                    <option value="0">No</option>
+                    <option value="1">YES</option>
+                </field>
+				
+				<field name="loadfromcdn" class="child loadjquery loadjquery_1" type="radio" default="0" label="Use CDN">
+                    <option value="0">No</option>
+                    <option value="1">YES</option>
+                </field>
+				
+				<field type="group" title="LESS" />
+				 <field name="lessoption" class="" type="radio" default="1" label="Enable">
+                    <option value="0">No</option>
+                    <option value="1">YES</option>
+                </field>
+                <!--End Advanced Tab-->
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>

@@ -1,0 +1,58 @@
+/**
+ * @package Helix Framework
+ * @author JoomShaper http://www.joomshaper.com
+ * @copyright Copyright (c) 20010 - 2013 JoomShaper
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
+*/
+
+.responsive {
+
+	@media (max-width:767px) {
+		&body {
+			padding-left: 0;
+			padding-right: 0;
+		}
+		 .container {
+			padding:0 10px;
+			max-width:480px;
+			min-width:280px;
+		}
+		
+		#sp-feature-wrapper {
+			padding:20px 0;
+			#feature {
+				h1{
+					font-size:200%;
+					line-height:200%;
+				}
+				p{
+					font-size:100%;
+				}
+				.btn{
+					.btn-mini();
+					margin-bottom:5px;
+				}
+			}
+		}		
+		
+	}
+
+	@media (max-width: 979px) {
+	#sp-header-wrapper{
+		[class*="span"] {
+				width:auto;
+				float:left;
+				&#sp-menu{
+					float:right;
+				}
+			}
+		}
+	}
+}
+
+//Fixed width
+.fixed{
+	.hidden-desktop{
+		display:none;
+	}
+}

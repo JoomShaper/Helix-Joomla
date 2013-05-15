@@ -1,0 +1,228 @@
+/**
+ * @package Helix Framework
+ * @author JoomShaper http://www.joomshaper.com
+ * @copyright Copyright (c) 20010 - 2013 JoomShaper
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
+*/
+.center {
+	text-align:center;
+	th,tr,td{
+		text-align:center;
+	}
+}
+
+.row-fluid {
+	margin-bottom:20px;
+	&:first-child{
+		margin-bottom:0;
+	}
+}
+
+/*Header start here */
+#sp-header-wrapper{
+	padding:20px 0;
+	.logo-wrapper{
+		.logo{
+			background-position:0 50%;
+			background-repeat:no-repeat;
+		}
+		.logo-text{
+			font-size:24px;
+		}
+		.logo-slogan{
+			font-size:11px;
+		}
+	}
+	
+	
+	.search{
+		margin-top:10px;
+		form{
+			margin:0;
+		}
+	}
+}
+
+#sp-main-body-wrapper {
+	padding:30px 0;
+	border-top:1px solid @white;
+	border-bottom:1px solid @white;
+}
+
+#sp-bottom-wrapper {
+	padding:40px 0;
+}
+
+/*Feature main title  start here */
+#sp-feature-wrapper{
+	padding:80px 0;
+	border-top:1px solid @white;
+	.box-shadow(0 1px 5px rgba(0,0,0,.3) inset);
+	text-align:center;
+	
+	#feature{
+		color:@white;
+		h1{
+			color:@white;
+			font-size: 72px;
+			line-height: 100px;
+			font-weight: 700;
+			margin-bottom: 10px;
+		}
+		p{
+			font-size:24px;
+			line-height:120%;
+			margin:0 80px;
+			margin-bottom:20px;
+		}
+	}
+}
+
+#sp-users-wrapper {
+	padding:30px 0;
+	border-top:1px solid @bg_color;
+	background:darken(@bg_color, 5%);
+}
+
+//Breadcrumb
+ul{
+	&.breadcrumb{
+		margin:0;
+		padding-left:0;
+		padding-right:0;
+		background:transparent;
+	}
+}	
+
+.sp-border {
+	position:relative;
+	&::after {
+		content: " ";
+		position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:1px;
+	}
+}
+
+/*Footer*/
+#sp-footer-wrapper {
+	padding:30px 0;
+	.sp-border();
+	ul {
+		.unstyled();
+		li {
+			display:inline-block;
+			margin-left:10px;
+			font-size:12px;
+			a {
+				color:#999
+			}
+		}
+	}
+}
+
+//Footer
+#sp-footer-wrapper {
+	padding:30px 0;
+
+	ul {
+		display:inline-block;
+		&.nav {
+			display:inline-block;
+			list-style:none;
+			padding:0;
+			margin:0 5px;
+			li {
+				display:inline-block; 
+				margin:0 5px;
+				a {
+					display:block;
+					&:hover{
+						background:none;
+					}
+				}
+			}
+		}
+	}
+	
+	.sp-totop{
+		display:inline-block;
+		i{
+			color:@white;
+		}
+		small{
+			display:none;
+		}
+	}
+
+	#sp-footer2	{
+		text-align:right;
+	}
+	
+	.helix-framework {
+		display:inline-block;
+		float:left;
+		margin-right:15px;
+		.helix-logo {
+			display:block;
+			width:130px;
+			height:40px;
+			text-indent:-9999px;
+			background:url(../images/helix-logo-white.png) no-repeat 0 0;
+		}
+	}
+
+	.copyright {
+		display:block;
+	}	
+	
+}
+
+/*Buttons*/
+button,
+input[type='submit'],
+input[type='button'],
+submit {
+	.btn();
+}
+
+//Social Icons
+.btn{
+	&.social{
+		background:@white;
+		.transition(all 200ms);
+		&.facebook{
+			color:darken(@blue,10%);
+			&:hover{
+				background:darken(@blue,10%);
+				color:@white;
+			}
+		}
+		&.twitter{
+			color:lighten(@blue,10%);
+			&:hover{
+				background:lighten(@blue,10%);
+				color:@white;
+			}
+		}
+		&.pinterest{
+			color:lighten(@red,20%);
+			&:hover{
+				background:lighten(@red,20%);
+				color:@white;
+			}
+		}
+		&.gplus{
+			color:@red;
+			&:hover{
+				background:@red;
+				color:@white;
+			}
+		}
+		&:hover{
+			text-decoration:none;
+		}
+	}
+}

@@ -1,0 +1,207 @@
+/**
+ * @package Helix Framework
+ * @author JoomShaper http://www.joomshaper.com
+ * @copyright Copyright (c) 20010 - 2013 JoomShaper
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
+*/
+
+#sp-menu {
+	margin-top:4px;
+}
+
+/* Menu */
+
+.rtl{
+	.sp-submenu {
+		right:0;
+		//Submenu Parent
+		&.sub-level {
+			margin-top:30px;  //  30
+			&.open {
+				margin-top:0;
+				.transition(margin 200ms);
+			}
+		}
+		
+		//Submenu Children
+		&.sub-level-child {
+			margin-right:30px;  // 30
+			&.open {
+				margin-right:0px;
+				.transition(margin 200ms);
+			}
+		}		
+		.megacol {
+			float:left;
+		}	
+	}
+}
+
+.ltr{
+	.sp-submenu {
+		left:0;
+		
+		//Submenu Parent
+		&.sub-level {
+			margin-top:30px;  // 30
+			&.open {
+				margin-top:0;
+				.transition(margin 200ms);
+			}
+		}
+		
+		//Submenu Children
+		&.sub-level-child {
+			margin-left:30px;  // 30
+			&.open {
+				margin-left:0px;
+				.transition(margin 200ms);
+			}
+		}
+		
+		.megacol {
+			float:left;
+		}
+		
+	}
+}
+
+.sp-submenu {
+	position: absolute;
+	top:0;
+	z-index:0;
+	visibility:hidden;
+	opacity:0;
+	
+	//display:none;
+	
+	.sp-submenu-wrap{
+		background:#fff;
+		.box-shadow(~"0 3px 8px rgba(0, 0, 0, 0.125)");
+		}
+	
+	&.open {
+		z-index:1;
+		
+		//display:block;
+		
+		visibility:visible;
+		opacity:1;
+		
+	}
+}
+
+#sp-main-menu {
+	ul {
+		list-style:none;
+		margin:0;
+		padding:0;
+		
+		&.level-0 {
+			> li {
+				//Parent List Item
+				display:inline-block;
+				margin:0 5px 0 0;
+				padding:0;
+				position:relative;
+				
+				//Anchor Link
+				a {
+					display:block;
+					margin:0;
+					padding:10px;
+					color:#666;
+					
+					//Menu Item Description
+					.menu-desc {
+						font-size:11px;
+						color:#999;
+						display:block;
+					}
+				}
+				
+				&:hover,
+				&.active {
+					background-color:#eee;
+					.box-shadow(~"inset 0 2px 1px rgba(0, 0, 0, 0.05)");
+					border-bottom:1px solid @white;
+					.border-radius(3px);
+				}
+				&:hover {
+					background-color:@white;
+					.box-shadow(~"inset 0 1px 0 rgba(0, 0, 0, 0.1), 0 3px 8px rgba(0, 0, 0, 0.125)");
+				}
+				&.parent {
+					&:hover {
+						.border-radius(3px 3px 0 0);
+					}
+				}
+				//Animation
+				.transition(all 200ms);			
+			}
+		}
+	}
+	
+	//Menu Items for Dropdown
+	li{
+		li:not(.sp-menu-group) {
+			display:block;
+			border-top:1px solid #eee;
+			position:relative;
+			&:first-child {
+				border-top: none;
+			}
+			a {
+				display:block;
+				font-size:12px;
+				font-weight:400;
+				line-height:normal;
+				text-decoration:none;
+				padding:10px;
+				color:#999;
+			}
+			&:hover,
+			&.active{
+				background:#f5f5f5;
+			}
+			//Animation
+			.transition(all 200ms);
+		}
+	}
+	
+	//Megamenu Groups
+	div.sp-menu-group {
+		margin:10px;
+		.sp-menu-group-title {
+			.menu-title {
+				text-transform:uppercase;
+			}
+			border-bottom:1px solid #eee;
+		}
+		
+		//Module Styling inside Menu
+		.sp-menu-group-content {
+			.module{
+				margin:0;
+				padding:10px;
+				color:#999
+			}
+		}
+	}
+}
+
+#sp-moble-menu {
+	position:relative;
+	select{
+		&.select-menu {
+			width: 32px;
+			height: 27px;
+			opacity: 0;
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index:1;
+			cursor:pointer;
+		}
+	}
+}

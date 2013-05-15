@@ -1,0 +1,112 @@
+/**
+ * @package Helix Framework
+ * @author JoomShaper http://www.joomshaper.com
+ * @copyright Copyright (c) 20010 - 2013 JoomShaper
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
+*/
+
+a, a:hover {
+	text-decoration:none;
+	.transition(all 200ms);
+}
+
+//Page header
+.page-header{
+	padding-bottom: 10px;
+	margin: 0 0 20px;
+}
+
+//Entry meta
+.entry-meta {
+	&.muted{
+		background:darken(@bg_color, 5%);
+		padding:5px;
+		margin-bottom:20px;
+		font-size:12px;
+		>span,
+		>time{
+			margin:0 5px;
+		}
+	}
+	ul {
+		margin:0 5px;
+		&.actions {
+			float:right;
+			li {
+				display:inline-block;
+				&.print-icon {
+					a {
+						&::before {
+							content:"\f02f";
+						}
+					}
+				}
+				
+				&.email-icon {
+					a {
+						&::before {
+							content:"\f003";
+						}
+					}
+				}
+				
+				&.edit-icon {
+					a {
+						&::before {
+							content:"\f044";
+						}
+					}
+				}
+				a {
+					font-family:FontAwesome;
+					display:block;
+					font-size:14px;
+					margin-left:5px;
+					img {
+						display:none;
+					}	
+				}
+				
+				//Joomla 3.0
+				a{
+					span{
+						display:none;
+					}
+					
+				}
+			}
+		}
+	}
+}
+
+//Page navigation
+ul {
+	&.pagenav {
+		list-style:none;
+		padding: 0;
+		clear: both;
+		margin-top: 10px;
+		margin-left: 0;
+		overflow: hidden;
+		.pagenav-prev {
+			float:left;
+		}
+		.pagenav-next {
+			float:right;
+		}
+	}
+}
+
+//Joomla Core
+dl {
+	dt,dd {
+		display:inline;
+	}
+}
+
+//Labels
+label{
+	&.invalid{
+		color:lighten(@red,10%);
+	}
+}

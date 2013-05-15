@@ -1,0 +1,24 @@
+body {
+  background: #f5f5f5;
+}
+body #offline-page {
+  margin-top: 50px;
+}
+body #offline-page .form-signin {
+  max-width: 350px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+}
+body #offline-page .form-signin .form-signin-heading,
+body #offline-page .form-signin .checkbox {
+  margin-bottom: 10px;
+}
+body #offline-page .form-signin input[type="text"],
+body #offline-page .form-signin input[type="password"] {
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+}

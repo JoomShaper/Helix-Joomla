@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="params" addfieldpath="/plugins/system/helix/elements">
+	<fieldset name="spmegamenu" label="Helix Mega Menu Options">
+		<field name="showmenutitle" type="radio" default="1" class="btn-group" label="Show Title" description="Show/Hide menu item title.">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</field>		
+		<field name="desc" type="textarea" rows="2" cols="40" default="" label="Add Title Description" description="Add your menu item description here." />
+
+		<field name="cols" type="list" default="0" label="Columns" description="Number of sub groups">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+		</field>
+		<field name="group" type="radio" default="0" class="btn-group" label="Group" description="Whether the item is group or not.">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</field>
+		<field name="showgrouptitle" type="radio" class="btn-group" default="1" label="Show Group Title" description="Show/Hide group title.">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</field>			
+		<field name="cwidth" type="text" size="30" default="" label="Submenu Column Width" description="Set submenu column width, eg. 400" />
+		<field name="colxw" type="textarea" rows="3" cols="40" default="" label="Submenu Column[i] Width" description="Set individual width of each column." />
+		<field name="class" type="text" default="" label="Add Custom Class" description="A custom css class that can be assign to this item." />
+		
+		<field name="subcontent" type="radio" class="btn-group" default="normal" label="Submenu Content" description="Set the subcontent type.">
+			<option value="normal">Normal link</option>
+			<option value="modules">Modules</option>
+			<option value="positions">Module positions</option>
+		</field>
+		<field name="mods" id="mods" type="sql" default="0" multiple="multiple" size="10" label="Select Modules" description="Select Module(s)" query="SELECT id, module, title FROM #__modules WHERE ( `published` !=-2 AND `published` !=0 ) AND `client_id`=0 AND module != 'mod_mainmenu' ORDER BY position ASC" key_field="id" value_field="title" />
+		<field name="positions" id="position" type="sql" default="0" multiple="multiple" size="10" label="Select Positions" description="Select Position(s)" query="SELECT DISTINCT position FROM #__modules WHERE ( `published` !=-2 AND `published` !=0 ) ORDER BY position ASC" key_field="position" value_field="position"/>
+		</fieldset>
+	</fields>
+</form>
