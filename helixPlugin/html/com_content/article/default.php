@@ -264,5 +264,14 @@ $user		= JFactory::getUser();
 			</time>
 		<?php endif; ?>
 		<?php //End Modify Date ?>
+		
+		
+		<?php if(version_compare(JVERSION, '3.1.0', 'ge')): //Tag feature ?>
+		<?php if ($params->get('show_tags', 1) && !empty($this->item->tags)) : ?>
+			<?php $this->item->tagLayout = new JLayoutFile('joomla.content.tags'); ?>
+			<?php echo $this->item->tagLayout->render($this->item->tags->itemTags); ?>
+		<?php endif; ?>
+		<?php endif; ?>	
+		
     </footer>
 </article>
