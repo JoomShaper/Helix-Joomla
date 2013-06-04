@@ -84,7 +84,7 @@ if(!function_exists('gallery_sc')) {
 		<?php if($filter=='yes') { ?>
 			<script type="text/javascript">
 				window.addEvent('load', function(){
-					jQuery(function($){
+					spnoConflict(function($){
 					$gallery = $('.gallery');
 					$gallery.isotope({
 					  // options

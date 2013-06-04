@@ -639,7 +639,7 @@
         * @param string $seperator. default is , (comma)
         * @return self
         */
-        public static function addCSS($sources, $seperator=',') {
+        public static function addCSS($sources, $seperator=',',$checkpath=true) {
 
             $srcs = array();
             if( is_string($sources) ) $sources = explode($seperator,$sources);
@@ -650,6 +650,11 @@
             foreach ($srcs as $src) {
 
                 if(self::getInstance()->isExternalURL($src)) self::getInstance()->document->addStyleSheet($src);
+
+                if( $checkpath==false ){
+                    self::getInstance()->document->addStyleSheet($src);
+                    continue; 
+                } 
 
                 //cheack in template path
                 if( file_exists( self::getInstance()->themePath() . '/css/'. $src)) { 
@@ -670,7 +675,7 @@
         * @param string $seperator. default is , (comma)
         * @return self
         */
-        public static function addJS($sources, $seperator=',') {
+        public static function addJS($sources, $seperator=',', $checkpath=true) {
 
             $srcs = array();
             if( is_string($sources) ) $sources = explode($seperator,$sources);
@@ -681,6 +686,11 @@
             foreach ($srcs as $src) {
 
                 if(self::getInstance()->isExternalURL($src)) self::getInstance()->document->addScript($src);
+
+                if( $checkpath==false ){
+                    self::getInstance()->document->addScript($src);
+                    continue; 
+                } 
 
                 //cheack in template path
                 if( file_exists( self::getInstance()->themePath() . '/js/'. $src)) { 
@@ -927,6 +937,8 @@
             } else {
                 $current = self::getInstance()->getDocument()->direction;
             }
+			
+			self::getInstance()->getDocument()->direction = $current;
 
             return $current;
         }
@@ -990,6 +1002,13 @@
                 self::getInstance()->addInlineCSS('.container{width:' . self::getInstance()->Param('layout_width') . 'px}');
             }
 
+
+
+            // add jQuery
+            if((bool) self::getInstance()->Param('loadjquery',1)==true ){
+                self::getInstance()->addJQuery((bool)self::getInstance()->Param('loadfromcdn',0), true);
+            }
+
             self::getInstance()->addBootstrap();
 
             self::getInstance()->addJS('modernizr-2.6.2.min.js');
@@ -997,10 +1016,7 @@
             self::getInstance()->selectivizr();
             self::getInstance()->respondJS();
 
-            // add jQuery
-            if((bool) self::getInstance()->Param('loadjquery',1)==true ){
-                self::getInstance()->addJQuery((bool)$this->helix->Param('loadfromcdn',0), true);
-            }
+
             self::getInstance()->addJS('helix.core.js');
 
             //Initiate less
@@ -1085,6 +1101,7 @@
         public function addJQuery($usecdn=false, $forceLoad=false) {
             if (JVERSION>=3) {
                 JHtml::_('jquery.framework');
+                self::getInstance()->addJS( 'jquery-noconflict.js' );
             } else {
                 $scripts = (array) array_keys( self::getInstance()->getDocument()->_scripts );
                 $hasjquery=false;
@@ -1099,11 +1116,65 @@
                 if( !$hasjquery ) {
                     if( $usecdn ) self::getInstance()->addJS( 'http://code.jquery.com/jquery-latest.min.js' );
                     else self::getInstance()->addJS( 'jquery.min.js' );
+
+                    self::getInstance()->addJS( 'jquery-noconflict.js' );
                 }
-                self::getInstance()->addJS( 'jquery-noconflict.js' );
             }
             return self::getInstance();
         }
+
+
+        /**
+        * Remove CSS
+        * 
+        * @param mixed $sources
+        * @param mixed $seperator
+        */
+        public function removeJS($sources, $seperator=',') {
+
+            $srcs = array();
+            if( is_string($sources) ) $sources = explode($seperator,$sources);
+            if(!is_array($sources)) $sources = array($sources);
+
+            foreach( (array) $sources as $source ) $srcs[] = trim($source);
+
+            $scripts = (array) array_keys( self::getInstance()->getDocument()->_scripts );
+            $removedJS = array();
+            foreach ($srcs as $src) {
+                foreach($scripts as $script) {
+                    if (preg_match("/\b".$src."\b/i", $script)) {
+                        $removedJS[] = $script;
+                        unset( self::getInstance()->getDocument()->_scripts[$script] );
+                    }  
+                }
+            }
+            return $removedJS;
+        }
+
+
+        public function removeCSS($sources, $seperator=',') {
+
+            $srcs = array();
+            if( is_string($sources) ) $sources = explode($seperator,$sources);
+            if(!is_array($sources)) $sources = array($sources);
+
+            foreach( (array) $sources as $source ) $srcs[] = trim($source);
+
+            $scripts = (array) array_keys( self::getInstance()->getDocument()->_styleSheets );
+            $removedCSS = array();
+            foreach ($srcs as $src) {
+                foreach($scripts as $script) {
+                    if (preg_match("/\b".$src."\b/i", $script)) {
+                        $removedCSS[] = $script;
+                        unset( self::getInstance()->getDocument()->_styleSheets[$script] );
+                    }  
+                }
+            }
+            return $removedCSS;
+        }
+
+
+
 
 
         //Add bootstrap	

@@ -68,7 +68,8 @@ class HelixFeatureMenu {
 				$sublevel=0;
 			}
                         
-            $this->helix->addInlineJS("spconfilct(function($){
+            $this->helix->addInlineJS("spnoConflict(function($){
+            	
                         function mainmenu() {
                             $('.sp-menu').spmenu({
                                 startLevel: 0,

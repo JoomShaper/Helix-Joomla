@@ -46,7 +46,7 @@ if(!function_exists('video_sc')) {
 		<iframe src="<?php echo $src; ?>" width="500" height="<?php echo $height; ?>" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 	</div>
 	<script>
-		jQuery(function($){
+		spnoConflict(function($){
 			$("#video-<?php echo $id; ?>").fitVids();
 		});
 	</script>
