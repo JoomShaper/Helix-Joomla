@@ -144,7 +144,8 @@
 				<field name="totop_position" type="modpos" class="child totop totop_1" default="footer2" client_id="0" label="POSITION" maxlength="50" />
              
             </fieldset>
-
+			 <!--End Basic Tab-->
+			 
             <fieldset name="preset"  addfieldpath="/plugins/system/helix/fields">
                 <field type="group" title="PRESET" />
 
@@ -174,11 +175,12 @@
 				<!--End Preset1-->	
 
             </fieldset>
-
+			<!--End Preset-->
+			
             <fieldset name="layout" addfieldpath="/plugins/system/helix/fields">
                 <field type="layout" name="layout" />
             </fieldset>
-            <!--End Basic Tab-->
+          <!--End Layout-->	
 
             <!--Start Menu Tab-->
             <fieldset name="menu">
@@ -205,7 +207,6 @@
                 <field name="init_y" type="text" default="0" label="Y_OFFSET1" />
                 <field name="sub_x" type="text" default="0" label="X_OFFSET2" />
                 <field name="sub_y" type="text" default="0" label="Y_OFFSET2" />
-
             </fieldset>
             <!--End Menu Tab-->
 
@@ -241,7 +242,6 @@
                     <option value="1">YES</option>
                 </field>
                 <field name="ga_code" class="child analytics analytics_1" type="text" default="" label="GA_CODE" />
-				
 				
                 <field type="group" title="LOAD_JQUERY" />
                 <field name="loadjquery" class="parent loadjquery" type="radio" default="0" label="Force Load">
