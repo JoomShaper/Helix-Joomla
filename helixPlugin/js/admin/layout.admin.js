@@ -1,8 +1,8 @@
 /**
- * @package Helix Framework
- * @author JoomShaper http://www.joomshaper.com
- * @copyright Copyright (c) 2010 - 2013 JoomShaper
- * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
+* @package Helix Framework
+* @author JoomShaper http://www.joomshaper.com
+* @copyright Copyright (c) 2010 - 2013 JoomShaper
+* @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
 */
 jQuery(function($){
 
@@ -265,10 +265,18 @@ jQuery(function($){
 
                         var id = $(this).attr('href');
 
-                        var currentSpan = $(this).parents('.column').getClass(/\bspan([0-9]{1,2})\b/);
 
-                        $(id).find('#spanwidth option').removeAttr('selected');
-                        $(id).find('#spanwidth option[value="'+currentSpan+'"]').attr('selected', true);
+                        var currentSpan = $(this).closest('.column').getClass(/\bspan([0-9]{1,2})\b/);
+
+                        //$(id).find('#spanwidth option').removeAttr('selected');
+                        //$(id).find('#spanwidth option[value="'+currentSpan+'"]').attr('selected', true);
+                        //$(id).find('#spanwidth select').val(currentSpan);
+
+                        setTimeout(function(value, $this){
+                                $this.next().find('#spanwidth select').val(value);
+                            }, 300, currentSpan, $(this));
+
+
                         $("#content,#element-box").delegate(".popover select.possiblewidths",'change', function(event){
 
                                 event.stopImmediatePropagation();
@@ -277,9 +285,19 @@ jQuery(function($){
                                 $(this).parents('.popover').parent().parent().removeClass().addClass('column span'+newSpan);
                         });
 
-                        var currentOffset = $(this).parents('.column').getClass(/\boffset([0-9]{1,2})\b/);
-                        $(id).find('#spanoffset option').removeAttr('selected');
-                        $(id).find('#spanoffset option[value="'+currentOffset+'"]').attr('selected', true);
+
+
+
+                        var currentOffset = $(this).closest('.column').getClass(/\boffset([0-9]{1,2})\b/);
+
+                        
+                        //$(id).find('#spanoffset option').removeAttr('selected');
+                        //$(id).find('#spanoffset option[value="'+currentOffset+'"]').attr('selected', true);
+
+                        setTimeout(function(value, $this){
+                                $this.next().find('#spanoffset select').val(value);
+                            }, 300, currentOffset, $(this));
+
                         $("#content,#element-box").delegate(".popover select.possibleoffsets",'change', function(event){
 
                                 event.stopImmediatePropagation();
@@ -299,9 +317,18 @@ jQuery(function($){
                         });
 
 
-                        var currentIncludetype = $(this).parents('.column').find('>.typeinput').val();
-                        $(id).find('#includetypes option').removeAttr('selected');
-                        $(id).find('#includetypes option[value="'+currentIncludetype+'"]').attr('selected', true);
+
+
+                        var currentIncludetype = $(this).closest('.column').find('.typeinput').val();
+                        //$(id).find('#includetypes option').removeAttr('selected');
+                        //$(id).find('#includetypes option[value="'+currentIncludetype+'"]').attr('selected', true);
+
+                        
+
+                        setTimeout(function(value, $this){
+                                $this.next().find('#includetypes select').val(value);
+                            }, 300, currentIncludetype, $(this));
+
                         $("#content,#element-box").delegate(".popover select.includetypes",'change', function(event){
 
                                 event.stopImmediatePropagation();
@@ -323,9 +350,18 @@ jQuery(function($){
                         });
 
 
-                        var currentPosition = $(this).parents('.column').find('>.positioninput').val();
-                        $(id).find('#positions option').removeAttr('selected');
-                        $(id).find('#positions option[value="'+currentPosition+'"]').attr('selected', true);
+                        var currentPosition = $(this).closest('.column').find('.positioninput').val();
+
+
+
+                        //$(id).find('#positions option').removeAttr('selected');
+                        //$(id).find('#positions option[value="'+currentPosition+'"]').attr('selected', true);
+
+
+                        setTimeout(function(value, $this){
+                                $this.next().find('#positions select').val(value);
+                            }, 300, currentPosition, $(this));
+
                         $("#content,#element-box").delegate(".popover select.positions",'change', function(event){
 
                                 event.stopImmediatePropagation();
@@ -335,9 +371,17 @@ jQuery(function($){
                                 $(this).parents('.popover').parent().parent().find('>.position-name').text(newPosition);
                         });
 
-                        var currentStyle = $(this).parents('.column').find('>.styleinput').val();
-                        $(id).find('#modchrome option').removeAttr('selected');
-                        $(id).find('#modchrome option[value="'+currentStyle+'"]').attr('selected', true);
+
+
+                        var currentStyle = $(this).closest('.column').find('.styleinput').val();
+                        //$(id).find('#modchrome option').removeAttr('selected');
+                        //$(id).find('#modchrome option[value="'+currentStyle+'"]').attr('selected', true);
+
+                        setTimeout(function(value, $this){
+                                $this.next().find('#modchrome select').val(value);
+                            }, 300, currentStyle, $(this));
+
+
                         $("#content,#element-box").delegate(".popover select.modchrome",'change', function(event){
 
                                 event.stopImmediatePropagation();
@@ -345,13 +389,20 @@ jQuery(function($){
                                 $(this).parents('.popover').parent().parent().find('>.styleinput').val(newStyle);
                         });
 
-                        var currentCustomClass = $(this).parents('.column').find('>.customclassinput').val();
 
-                        setTimeout(function($this, value){
-                                $this.parents('.column').find('>.columntools >.popover .customclass').val(value);
-                            }, 500, $(this), currentCustomClass);
 
-                        $(this).parents('.column').find('>.columntools >.popover .customclass').val(currentCustomClass);
+
+                        var currentCustomClass = $(this).closest('.column').find('.customclassinput').val();
+
+
+
+                        setTimeout(function(value, $this){
+                                $this.next().find('#inputcustomclass').val(value);
+                            }, 300, currentCustomClass, $(this));
+
+                        
+
+                        //$(this).parents('.column').find('>.columntools >.popover .customclass').val(currentCustomClass);
                         $("#content,#element-box").delegate(".popover input.customclass",'blur', function(event){
 
                                 event.stopImmediatePropagation();
@@ -379,13 +430,12 @@ jQuery(function($){
                         ///
                         //var currentResponsive = $(this).parents('.column').getClass(true);
 
-                        var currentResponsive = $(this).parents('.column').find('>.responsiveclassinput').val().split(/\s+/);
+                        var currentResponsive = $(this).closest('.column').find('.responsiveclassinput').val().split(/\s+/);
 
 
-                        //alert( currentResponsive );
+                       
 
                         $(id).find('#responsive input:checkbox').removeAttr('checked');
-
 
 
                         $.each(currentResponsive, function(index, item) {
@@ -604,7 +654,7 @@ jQuery(function($){
 
 
             });
-            
+
             $( ".generator" ).sortable( "refreshPositions" );
 
             $('.generator > .row-fluid .row-fluid .column').sortable({
@@ -614,8 +664,8 @@ jQuery(function($){
                     handle: ".row-move-in-column",
                     items:'>div'
             });
-            
-            
+
+
         }
 
         rowColumnSortable();
