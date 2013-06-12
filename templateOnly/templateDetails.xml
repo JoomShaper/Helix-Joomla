@@ -109,8 +109,8 @@
                 <field name="logo_type_slogan" class="child logotype logotype_text" type="text" default="Joomla! Templates Framework" label="SLOGAN" />
 
                 <!-- logo width, height -->
-                <field name="logo_width" size="40" class="child logotype logotype_image logotype_text logotype_css" type="text" default="260" label="WIDTH" />
-                <field name="logo_height" size="40" class="child logotype logotype_image logotype_text logotype_css" type="text" default="100" label="HEIGHT" />
+                <field name="logo_width" size="40" class="child logotype logotype_image logotype_text logotype_css" type="text" default="130" label="WIDTH" />
+                <field name="logo_height" size="40" class="child logotype logotype_image logotype_text logotype_css" type="text" default="50" label="HEIGHT" />
 
                 <!-- Footer -->
 				<field type="group" title="FOOTER" />
@@ -131,6 +131,14 @@
                     <option value="0">Hide</option>
                     <option value="1">Show</option>
                 </field>
+				
+                <field type="group" title="Brand Info" />
+				<field name="credit_link" type="radio" default="1" label="CREDIT_TEXT" class="parent credit_text">
+                    <option value="0">Hide</option>
+                    <option value="1">Show</option>
+                </field>
+				<field name="credit_text" class="child credit_text credit_text_1" type="textarea" rows="6" cols="30" default="Designed by {JoomShaper}" label="TEXT" filter="raw" />
+				
                 <field name="validator" type="radio" default="0" label="VALIDATOR">
                     <option value="0">Hide</option>
                     <option value="1">Show</option>
