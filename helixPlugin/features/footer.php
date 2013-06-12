@@ -52,7 +52,10 @@ class HelixFeatureFooter {
 			$jscreditlink = '<a title="JoomShaper" class="sp-brand" target="_blank" href="http://www.joomshaper.com">JoomShaper</a>';
 			$jscreditreplace =  str_ireplace('{JoomShaper}',$jscreditlink, $this->helix->Param('credit_text') );			
 			echo '<span class="designed-by">'. $jscreditreplace .' </span> ';
+		} else{
+			echo '<a title="JoomShaper" class="sp-brand" target="_blank" href="http://www.joomshaper.com">JoomShaper</a>';
 		}
+		
 		//Joomla Credit
 		if ($this->helix->Param('jcredit'))
 			echo '<span class="powered-by">' . JText::_('Powered by') . ' <a target="_blank" title="Joomla" href="http://www.joomla.org/">Joomla!</a></span> ';

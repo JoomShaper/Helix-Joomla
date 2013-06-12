@@ -266,7 +266,7 @@
 
             $data = JFactory::getApplication()->getTemplate(true)->params->get($name);
 
-            if( is_null($data) ){
+            if( is_null($data) or !isset($data) ){
                 JFactory::getApplication()->getTemplate(true)->params->set($name, $value);
                 return $value;
             } else {
