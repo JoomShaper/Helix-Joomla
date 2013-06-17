@@ -1180,6 +1180,8 @@
         // Add bootstrap	
         public function addBootstrap($responsive=true, $rtl=false) {
             
+			
+			self::getInstance()->addCSS('font-awesome.css');
 			// RTL enable
             if( self::getInstance()->direction()=='rtl' ) {
 				self::getInstance()->addCSS('bootstrap.min.rtl.css');
@@ -1191,7 +1193,7 @@
 				if (self::getInstance()->Param('layout_type')=='responsive') self::getInstance()->addCSS('bootstrap-responsive.min.css');
 			}
 			
-			self::getInstance()->addCSS('font-awesome.css');
+			
             self::getInstance()->addJQuery();
             self::getInstance()->addJS('bootstrap.min.js');
 
