@@ -95,7 +95,7 @@ class HelixFeatureMenu {
                         //Mobile Menu
                         $('#sp-main-menu > ul').mobileMenu({
                             defaultText:'".JText::_('NAVIGATE')."',
-                            appendTo: '#sp-moble-menu'
+                            appendTo: '#sp-moble-menu, #sp-mobile-menu'
                         });
                         
                     });");
