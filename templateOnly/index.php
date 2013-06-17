@@ -2,9 +2,9 @@
 /**
  * @package Helix Framework
  * Template Name - Shaper Helix
- * Template Version 1.0.0
+ * Template Version 1.0.3
  * @author JoomShaper http://www.joomshaper.com
- * @copyright Copyright (c) 20010 - 2013 JoomShaper
+ * @copyright Copyright (c) 2010 - 2013 JoomShaper
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
 */
 //no direct accees
@@ -16,17 +16,11 @@ defined ('_JEXEC') or die ('resticted aceess');
 <!--[if IE 8]>         <html class="no-js lt-ie9"  lang="<?php echo $this->language; ?>"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="<?php echo $this->language; ?>"> <!--<![endif]-->
     <head>
-
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		
-		 
         <jdoc:include type="head" />
-
         <?php
-	
             $this->helix->Header()
             ->setLessVariables(array(
-
                     'preset'=>$this->helix->Preset(),
                     'header_color'=> $this->helix->PresetParam('_header'),
                     'bg_color'=> $this->helix->PresetParam('_bg'),
