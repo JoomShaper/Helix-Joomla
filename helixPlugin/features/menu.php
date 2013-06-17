@@ -47,7 +47,7 @@ class HelixFeatureMenu {
 
 			ob_start();
 				?>	
-					<div class="mobile-menu pull-right btn hidden-desktop" id="sp-moble-menu">
+					<div class="mobile-menu pull-right btn hidden-desktop" id="sp-mobile-menu">
 						<i class="icon-align-justify"></i>
 					</div>
 				
@@ -95,7 +95,7 @@ class HelixFeatureMenu {
                         //Mobile Menu
                         $('#sp-main-menu > ul').mobileMenu({
                             defaultText:'".JText::_('NAVIGATE')."',
-                            appendTo: '#sp-moble-menu, #sp-mobile-menu'
+                            appendTo: '#sp-mobile-menu'
                         });
                         
                     });");

@@ -54,5 +54,5 @@ if(!function_exists('video_sc')) {
 		$data = ob_get_clean();
 		return $data;
 	}
-	add_shortcode( 'video', 'video_sc' );
+	add_shortcode( 'spvideo', 'video_sc' );
 }
