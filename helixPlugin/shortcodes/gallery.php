@@ -120,7 +120,7 @@ if(!function_exists('gallery_sc')) {
 	function gallery_item_sc( $atts, $content="" ){
 		global $galleryArray;
 		$galleryArray[] = array(
-			'src'=>$atts['src'],
+			'src'=>(isset($atts['src'])?$atts['src']:''),
 			'tag'=>(isset($atts['tag']) && $atts['tag'] !='')?$atts['tag']:'',
 			'content'=>$content
 		);

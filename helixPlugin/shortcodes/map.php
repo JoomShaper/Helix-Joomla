@@ -46,5 +46,5 @@ if(!function_exists('map_sc')) {
 			$data = ob_get_clean();
 			return $data;
 	}
-	add_shortcode( 'map', 'map_sc' );
+	add_shortcode( 'spmap', 'map_sc' );
 }

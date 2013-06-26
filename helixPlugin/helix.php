@@ -23,7 +23,16 @@
 
             } else {
                 echo JText::_('Helix framework not found.');
-                die;
+                jexit();
+            }
+        }
+
+        function onAfterRoute()
+        {
+
+            $app = JFactory::getApplication();
+            if('com_search' == JRequest::getCMD('option') and !$app->isAdmin()) {
+                require_once(dirname(__FILE__) .'/html/com_search/view.html.php');
             }
         }
 
@@ -31,13 +40,10 @@
         {
             if(  !JFactory::getApplication()->isAdmin() ){
 
-                $template_style_id = (int) JFactory::getApplication()
-                ->getMenu()
-                ->getActive()
-                ->template_style_id;
+                $activeMenu = JFactory::getApplication()->getMenu()->getActive();
 
-
-
+                if(is_null($activeMenu)) $template_style_id = 0;
+                else $template_style_id = (int) $activeMenu->template_style_id;
                 if( $template_style_id > 0 ){
 
                     JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_templates/tables');
@@ -64,9 +70,9 @@
                     $data =  JResponse::getBody();
                     Helix::getInstance()->importShortCodeFiles();
 
+                    $data = shortcode_unautop($data);
                     $data = do_shortcode($data); 
                     $newhead = $document->getHeadData();  // new head
-
                     $scripts =  (array)  array_diff_key($newhead['scripts'], $oldhead['scripts']);
                     $styles  =  (array) array_diff_key($newhead['styleSheets'], $oldhead['styleSheets']);
 

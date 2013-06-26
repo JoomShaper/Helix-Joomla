@@ -47,11 +47,11 @@ class HelixFeatureMenu {
 
 			ob_start();
 				?>	
-					<div class="mobile-menu pull-right btn hidden-desktop" id="sp-mobile-menu">
+					<div class="mobile-menu  btn hidden-desktop" id="sp-mobile-menu">
 						<i class="icon-align-justify"></i>
 					</div>
 				
-					<div id="sp-main-menu" class="visible-desktop">
+					<div id="sp-main-menu" class="visible-desktop pull-right">
 						<?php echo $menu->showMenu(); ?>        
 					</div>  				
 				<?php

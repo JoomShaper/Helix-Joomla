@@ -16,7 +16,8 @@ if(!function_exists('alert_sc')){
 		"style" =>'',
         "close" => true
      ), $atts));
-     return '<div class="alert alert-' . $type . '" . style=' . $style . '>' . do_shortcode( $content ) . '<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+     return '<div class="alert alert-' . $type . ' fade in" . style=' . $style . '><button type="button" class="close" data-dismiss="alert">&times;</button><div>' . do_shortcode( $content ) . '</div></div>';
 	}
 	add_shortcode('alert','alert_sc');
 }
+

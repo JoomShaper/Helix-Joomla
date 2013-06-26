@@ -45,12 +45,17 @@
                                 } else {
 
                                     var offset = $submenu.offset();
-                                    var Width = offset.left + $submenu.width();
-                                    var mainWidth = $(window).width();
+                                    var submenuWidth = offset.left + $submenu.width();
+                                    var viewport = $(window).width();
 
-                                    if (mainWidth < Width) {
-                                        var restWidth = Width - mainWidth;
-                                    } else {
+                                    if (viewport < submenuWidth) {
+                                        var restWidth = submenuWidth - viewport;
+                                    } 
+                                    else if(offset.left < 0){
+                                        restWidth = offset.left*(-1);
+                                       }
+
+                                    else {
                                         var restWidth = 0;
                                     }
 
@@ -82,37 +87,77 @@
                                 $submenu.addClass('sub-level-child');
                                 var marginTop = options.marginTop;
                                 var offset = $submenu.offset();
-                                var mainWidth = $(window).width();
-
+                                var viweport = $(window).width();
                                 var outerWidth = $submenu.outerWidth(true);
-                                var Width = $submenu.width();
-                                var menuWidth = $submenu.width();
-
-                                if (Width >= outerWidth) {
-                                    var elementWidth = offset.left + Width + (options.width - (Width - outerWidth));
-                                } else {
-                                    var elementWidth = offset.left + Width + (options.width - (outerWidth - Width));
+                                var submenuWidth = $submenu.width();
+                                var parentouterWidth = $submenu.parent().outerWidth(true);
+                                var parentWidth = $submenu.parent().width();
+                                
+                                
+                                
+                                var isVisible = function(){
+                                    if( offset.left < 0 ) return false;
+                                    else if( viweport < (outerWidth+offset.left+submenuWidth) ) return false;
+                                    else return true;
                                 }
 
-                                if (mainWidth < elementWidth) {
-                                    marginLeft = -($submenu.width());
+                                var isMegaMenu = function(){
+                                    if( options.width < submenuWidth ) return true;
+                                    else return false;
+                                }
 
-                                    if (options.direction == 'rtl'){
-                                        marginLeft = options.width;
+
+                                var moveMenuPX = function(){
+                            
+                                   if (options.direction == 'ltr') {
+
+                                    if( outerWidth > parentouterWidth ){
+                                        if( isVisible() ) return parentouterWidth;
+                                        else return submenuWidth;
                                     }
-                                    //console.log(elementWidth);
+                                     else if( parentouterWidth < outerWidth ) return parentWidth;
+                                     else if( outerWidth == parentouterWidth ) return outerWidth;
+                                     else return options.width;
+                                 } else {
 
+                                   if( outerWidth > parentouterWidth ) return submenuWidth;
+                                   else if( parentouterWidth < outerWidth ) return parentWidth;
+                                   else if( outerWidth == parentouterWidth ) return submenuWidth;
+                                   else return options.width;
+                               }
+  
+                               }
+
+
+                                $submenu.attr('data-width', submenuWidth);
+                                $submenu.attr('data-offset', offset.left);
+                                $submenu.attr('data-outerwidth', outerWidth);
+                                $submenu.attr('data-isvisible', isVisible);
+                                $submenu.attr('data-ismegamenu', isMegaMenu);
+                                $submenu.attr('data-viewport', viweport);
+                                $submenu.attr('data-parentouterwidth', $submenu.parent().outerWidth(true));
+
+
+                              if (options.direction == 'ltr') {
+
+                                if( isVisible() ){
+                                    marginLeft = moveMenuPX();
                                 } else {
-
-                                    if ($submenu.width() > options.width) {
-                                        // mega
-                                        marginLeft = $submenu.outerWidth(true) - options.width;
-                                    } else {
-                                        // mormal
-                                        marginLeft = $submenu.width(); // on +
-                                    }
+                                    marginLeft = -moveMenuPX();
 
                                 }
+
+                              } else {
+
+                                if( isVisible() ){
+                                    marginLeft = -moveMenuPX();
+                                } else {
+                                    marginLeft = moveMenuPX();
+
+                                }
+                              }
+ 
+  
 
                                 $submenu.find('>.sp-submenu-wrap').css({
                                         'margin-top': options.subOffset.y,

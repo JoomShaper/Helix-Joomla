@@ -30,7 +30,7 @@ class HelixFeatureLogo {
 	public function Position()
 	{
 
-		if( $this->helix->Param('logo_type')!='no' )
+		if( $this->helix->Param('logo_type', 'image')!='no' )
 			return $this->helix->Param('logo_position');
 	}
 

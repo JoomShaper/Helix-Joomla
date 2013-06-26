@@ -29,13 +29,10 @@
         */
         final public static function getInstance()
         {
-
             if( !self::$_instance ){
-
                 self::$_instance = new self();
                 self::getInstance()->getDocument();
                 self::getInstance()->getDocument()->helix = self::getInstance();
-
             } 
             return self::$_instance;
         }
@@ -1001,7 +998,6 @@
             } else {
                 self::getInstance()->addInlineCSS('.container{width:' . self::getInstance()->Param('layout_width') . 'px}');
             }
-
 
 
             // add jQuery
