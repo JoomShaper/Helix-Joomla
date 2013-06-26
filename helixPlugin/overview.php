@@ -6,7 +6,6 @@
 			<p id="sp-theme-info" class="clearfix">	
 			</p>
 		</div>
-		
 		<div class="span7">
 			<div class="sp-block sp-style1">
 				<h2><i class="icon-question-sign"></i> Helix Information</h2>
