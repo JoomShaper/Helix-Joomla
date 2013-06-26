@@ -157,14 +157,11 @@ ul{
 		}
 	}
 
-	#sp-footer2	{
-		text-align:right;
-	}
+
 	
 	.helix-framework {
 		display:inline-block;
-		float:left;
-		margin-right:15px;
+		
 		.helix-logo {
 			display:block;
 			width:130px;
@@ -179,6 +176,22 @@ ul{
 	}	
 	
 }
+.ltr #sp-footer-wrapper .helix-framework{
+	float:left;
+	margin-right:15px;
+}
+.ltr #sp-footer-wrapper #sp-footer2{
+	text-align:right;
+}
+
+.rtl #sp-footer-wrapper .helix-framework{
+	float: right;
+	margin-left: 15px;
+}
+.rtl #sp-footer-wrapper #sp-footer2{
+	text-align: left;
+}
+
 
 /*Buttons*/
 button,

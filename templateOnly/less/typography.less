@@ -140,7 +140,6 @@ ul {
 /* Block number */
 .sp-blocknumber { 
      position: relative;
-     padding:5px 0 5px 60px;
      min-height: 45px;
 	 
 	span{
@@ -152,7 +151,6 @@ ul {
 		text-align:center;
 		position: absolute;
 		top: 0;
-		left: 0;
 		&.rounded{
 			.border-radius(5px);
 		}
@@ -163,14 +161,20 @@ ul {
     
 } 
 
+.ltr{
+     .sp-blocknumber { 
+         padding:5px 0 5px 60px;
+		 span{
+			left: 0;
+		 } 
+	}
+}
+
 .rtl{
      .sp-blocknumber { 
          padding:5px 60px 5px 0;
 		 span{
-			 &.bignumber{
-				right: 0;
-				left:auto;
-			}
+			right: 0;
 		 } 
 	}
 }
@@ -227,4 +231,24 @@ ul {
 			padding-right: 40px;
 		}
 	}
+}
+
+.ltr [class^="icon-"].pull-left,
+.ltr [class*=" icon-"].pull-left {
+  margin-right: .3em;
+}
+.ltr [class^="icon-"].pull-right,
+.ltr [class*=" icon-"].pull-right {
+  margin-left: .3em;
+}
+
+
+
+.rtl [class^="icon-"].pull-left,
+.rtl [class*=" icon-"].pull-left {
+  margin-left: .3em;
+}
+.rtl [class^="icon-"].pull-right,
+.rtl [class*=" icon-"].pull-right {
+  margin-right: .3em;
 }
