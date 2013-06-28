@@ -999,10 +999,9 @@
                 self::getInstance()->addInlineCSS('.container{width:' . self::getInstance()->Param('layout_width') . 'px}');
             }
 
-
             // add jQuery
-            if((bool) self::getInstance()->Param('loadjquery',1)==true ){
-                self::getInstance()->addJQuery((bool)self::getInstance()->Param('loadfromcdn',0), true);
+            if((bool) self::getInstance()->Param('loadjquery', 0)==true ){
+                self::getInstance()->addJQuery((bool)self::getInstance()->Param('loadfromcdn', 0), true);
             }
 
             self::getInstance()->addBootstrap();
@@ -1097,7 +1096,7 @@
         public function addJQuery($usecdn=false, $forceLoad=false) {
             if (JVERSION>=3) {
                 JHtml::_('jquery.framework');
-                self::getInstance()->addJS( 'jquery-noconflict.js' );
+                
             } else {
                 $scripts = (array) array_keys( self::getInstance()->getDocument()->_scripts );
                 $hasjquery=false;
@@ -1111,11 +1110,10 @@
 
                 if( !$hasjquery ) {
                     if( $usecdn ) self::getInstance()->addJS( 'http://code.jquery.com/jquery-latest.min.js' );
-                    else self::getInstance()->addJS( 'jquery.min.js' );
-
-                    self::getInstance()->addJS( 'jquery-noconflict.js' );
+                    else self::getInstance()->addJS( 'jquery.min.js' );                    
                 }
             }
+            self::getInstance()->addJS( 'jquery-noconflict.js' );
             return self::getInstance();
         }
 
@@ -1176,8 +1174,7 @@
         // Add bootstrap	
         public function addBootstrap($responsive=true, $rtl=false) {
             
-			
-			self::getInstance()->addCSS('font-awesome.css');
+
 			// RTL enable
             if( self::getInstance()->direction()=='rtl' ) {
 				self::getInstance()->addCSS('bootstrap.min.rtl.css');
@@ -1189,7 +1186,7 @@
 				if (self::getInstance()->Param('layout_type')=='responsive') self::getInstance()->addCSS('bootstrap-responsive.min.css');
 			}
 			
-			
+			self::getInstance()->addCSS('font-awesome.css');
             self::getInstance()->addJQuery();
             self::getInstance()->addJS('bootstrap.min.js');
 

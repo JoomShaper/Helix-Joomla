@@ -51,7 +51,7 @@ class HelixFeatureMenu {
 						<i class="icon-align-justify"></i>
 					</div>
 				
-					<div id="sp-main-menu" class="visible-desktop pull-right">
+					<div id="sp-main-menu" class="visible-desktop">
 						<?php echo $menu->showMenu(); ?>        
 					</div>  				
 				<?php

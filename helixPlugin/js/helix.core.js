@@ -13,19 +13,6 @@ spnoConflict(function($){
     });
     
     
-    $('.sp-totop').fadeOut('fast');
-    
-    $(document).scroll(function () {
-    var y = $(this).scrollTop();
-
-    if (y > 800) {
-        $('.sp-totop').fadeIn();
-    } else {
-        $('.sp-totop').fadeOut();
-    }
-
-});
-    
     //tooltip
     $('.hasTip').tooltip({
         html: true
