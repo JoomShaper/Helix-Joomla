@@ -167,8 +167,21 @@ select{height:36px;padding:0 0 0 10px;width:110px}
 .popover .tab-pane > div input.customclass{width:88px}
 .popover select,
 .popover .tab-pane input[type="text"]{float:left}
-.popover .rownameOuter input,
-.popover .rowclassOuter input{width:130px}
+.rownameOuter input,
+.rowclassOuter input{width:130px}
+.rowcolorOuter input,
+.rowcolorOuter input{width:90px}
+.rowcolorOuter label{
+	width: 89px;
+	border: 1px solid #dadada;
+	border-right: 0;
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 5px;
+}
+
+.rowcolorOuter{margin-top: 10px; overflow: hidden;}
 
 /*Menu Assignment*/
 #jform_menuselect{padding:15px;position:relative}

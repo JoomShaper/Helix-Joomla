@@ -363,6 +363,19 @@
         }
 
 
+        private $inline_css = '';
+
+        private static function get_layout_value($class, $method){
+            if( $class->$method=="" ) return false;
+            return (isset( $class->$method )) ? $class->$method : FALSE;
+        }
+
+        private static function get_color_value($class, $method){
+            $get = isset( $class->$method ) ? $class->$method : 'rgba(255, 255, 255, 0)';
+            return ('rgba(255, 255, 255, 0)'==$get) ? FALSE : $get;
+        }
+
+
         /**
         * Layout generator
         * 
@@ -391,6 +404,58 @@
 
                 //  self::getInstance()->layout.="\n\n".'<!-- Start Row: '.$index.' -->'."\n";
                 //  start row
+
+
+                $id = ' #sp-'. self::getInstance()->slug($value->name) .'-wrapper{'."\n";
+                $link = ' #sp-'. self::getInstance()->slug($value->name) .'-wrapper a{'."\n";
+                $linkhover = ' #sp-'. self::getInstance()->slug($value->name) .'-wrapper a:hover{'."\n";
+                $endcss = "\n".'}';
+
+
+
+                self::getInstance()->inline_css .= $id;
+                if( self::getInstance()->get_color_value( $value, 'backgroundcolor' ) ){
+                    self::getInstance()->inline_css .= 'background: '. self::getInstance()->get_color_value( $value, 'backgroundcolor' ) .';';                   
+                }
+
+                if( self::getInstance()->get_color_value( $value, 'textcolor' ) ){
+                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'textcolor' ) .';';                   
+                }  
+
+
+
+                if( FALSE !== self::getInstance()->get_layout_value( $value, 'margin' ) ){
+                    self::getInstance()->inline_css .= 'margin: '. self::getInstance()->get_layout_value( $value, 'margin' ) .';';                   
+                }
+                if( FALSE !== self::getInstance()->get_layout_value( $value, 'padding' ) ){
+                    self::getInstance()->inline_css .= 'padding: '. self::getInstance()->get_layout_value( $value, 'padding' ) .';';                   
+                }
+                self::getInstance()->inline_css .= $endcss;
+
+
+
+                self::getInstance()->inline_css .= $link;
+                if( self::getInstance()->get_color_value( $value, 'linkcolor' ) ){
+                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkcolor' ) .';';                   
+                }
+                self::getInstance()->inline_css .= $endcss;
+
+
+                self::getInstance()->inline_css .= $linkhover;
+                if( self::getInstance()->get_color_value( $value, 'linkhovercolor' ) ){
+                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkhovercolor' ) .';';                   
+                }
+                self::getInstance()->inline_css .= $endcss;
+
+
+
+
+
+               
+
+
+
+
                 self::getInstance()->layout.='<'.$sematic.' id="sp-'. self::getInstance()->slug($value->name) .'-wrapper" class="'.(((empty($value->class) or $value->class!='container' or $value->class!='container-fluid')?'':' '.$value->class.' ')).' '.((empty($value->responsive)?'':' '.$value->responsive.'')).'">';
                 //
 
@@ -526,6 +591,9 @@
                 self::getInstance()->layout.='</'.$sematic.'>';
                 // self::getInstance()->layout.="\n\n".'<!-- End Row: '.$index.' -->'."\n";
             }
+
+            $css = self::getInstance()->inline_css;
+            self::getInstance()->addInlineCSS( $css );
         }
 
 
@@ -1083,6 +1151,17 @@
         public static function loadMegaMenu() {
             self::getInstance()->import('core/classes/menu.php');
             return new HelixMenu(self::getInstance(), self::getInstance()->Param(), self::getInstance()->megaMenuType());
+        }
+
+
+        /**
+        * Load Menu
+        *
+        * @since    1.0
+        */
+        public static function loadMobileMenu() {
+            self::getInstance()->import('core/classes/menu.php');
+            return new HelixMenu(self::getInstance(), self::getInstance()->Param(), 'mobile');
         }
 
         /**

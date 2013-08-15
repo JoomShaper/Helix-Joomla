@@ -1,0 +1,73 @@
+/**
+ * @package Helix Framework
+ * @author JoomShaper http://www.joomshaper.com
+ * @copyright Copyright (c) 2010 - 2013 JoomShaper
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
+ */
+
+ .sp-main-menu-toggler{
+  display: inline-block;
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  z-index: 1;
+ }
+
+.sp-mobile-menu{
+  position: absolute !important;
+  top: 90px;
+  left: 0;
+  width: 100%;
+}
+
+.sp-mobile-menu ul{
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sp-mobile-menu ul li{
+  display: block;
+  margin: 0;
+  padding: 0 10px;
+  background: #333;
+  cursor: pointer;
+}
+
+.sp-mobile-menu ul li span.sp-menu-toggler{
+  display: block;
+  width: 30px;
+  float: right;
+  cursor: pointer;
+  color: #fff;
+  line-height: 40px;
+  text-align: center;
+}
+
+.sp-mobile-menu ul li span.sp-menu-toggler i{
+  display: block;
+  line-height: 40px;
+}
+
+.sp-mobile-menu ul li span.sp-menu-toggler .icon-angle-right,
+.sp-mobile-menu ul li span.sp-menu-toggler.collapsed .icon-angle-down{
+  display: none;
+}
+
+.sp-mobile-menu ul li span.sp-menu-toggler .icon-angle-down,
+.sp-mobile-menu ul li span.sp-menu-toggler.collapsed .icon-angle-right{
+  display: block;
+}
+
+.sp-mobile-menu ul li a{
+  display: inline-block;
+  line-height: 40px;
+  font-size: 15px;
+  color: #777;
+}
+
+.sp-mobile-menu ul li.active > a,
+.sp-mobile-menu ul li:hover > a{
+  color: #fff;
+}

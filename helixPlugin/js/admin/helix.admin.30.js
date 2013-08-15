@@ -245,4 +245,8 @@ jQuery(function($){
         $assets.next().remove();
         $assets.remove();
 
+        setTimeout(function(){
+            $('.chzn-done').css('display', 'inline-block').next().remove();
+        }, 500);
+
 });

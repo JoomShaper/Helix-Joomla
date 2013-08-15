@@ -18,17 +18,38 @@ class HelixFeatureMenu {
 
 	public function onHeader()
 	{
-		$this->helix->addCSS('menu.css');
-		//if ($this->helix->megaMenuType()=='drop') {
-			//$this->helix->addInlineCSS('#sublevel ul.level-1 {display:none}');
-		   // $this->helix->addJS('dropline.js');
-		//}
-		$this->helix->addJS('menu.js');
+		
+		if ($this->helix->megaMenuType()=='drop') {
+			$this->helix->addCSS('dropline.css');
+			$this->helix->addJS('dropline.js');
+		} elseif($this->helix->megaMenuType()=='split') {
+			$this->helix->addCSS('dropline.css');
+		} else {
+			$this->helix->addJS('menu.js');
+		}
+		
+		$this->helix->addCSS('mobile-menu.css');
+		
 	}
 
 	public function onFooter()
 	{
 
+		ob_start();
+		?>	
+
+		<a class="hidden-desktop btn btn-inverse sp-main-menu-toggler" href="#" data-toggle="collapse" data-target=".nav-collapse">
+			<i class="icon-align-justify"></i>
+		</a>
+
+		<div class="hidden-desktop sp-mobile-menu nav-collapse collapse">
+			<?php
+			$mobilemenu = $this->helix->loadMobileMenu();
+			echo $mobilemenu->showMenu(); 
+			?>   
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 
 
@@ -46,20 +67,24 @@ class HelixFeatureMenu {
 		if ($menu) {
 
 			ob_start();
-				?>	
-					<div class="mobile-menu  btn hidden-desktop" id="sp-mobile-menu">
-						<i class="icon-align-justify"></i>
-					</div>
-				
-					<div id="sp-main-menu" class="visible-desktop">
-						<?php echo $menu->showMenu(); ?>        
-					</div>  				
-				<?php
+			?>	
 
-			if (($this->helix->megaMenuType()=='split') && $menu->hasSub() || $this->helix->megaMenuType()=='drop') {    
-				echo '<div id="split" class="visible-desktop">';
-					$menu->showMenu(1);
-				echo '</div>';            
+
+			<div id="sp-main-menu" class="visible-desktop">
+				<?php echo $menu->showMenu(); ?>        
+			</div>  				
+			<?php
+
+			if (($this->helix->megaMenuType()=='split') && $menu->hasSub() || $this->helix->megaMenuType()=='drop') {
+				if($this->helix->megaMenuType()=='drop'){
+					$newclass = 'dropline empty ';
+				} else{
+					$newclass = 'split ';
+				}
+
+				echo '<div id="sublevel" class="' . $newclass . 'visible-desktop"><div class="container">';
+				$menu->showMenu(1);
+				echo '</div></div>';            
 			}
 
 			if (($this->helix->megaMenuType()=='split' && $menu->hasSub()) || $this->helix->megaMenuType()=='drop') {
@@ -67,39 +92,66 @@ class HelixFeatureMenu {
 			} else {
 				$sublevel=0;
 			}
-                        
-            $this->helix->addInlineJS("spnoConflict(function($){
-            	
-                        function mainmenu() {
-                            $('.sp-menu').spmenu({
-                                startLevel: 0,
-                                direction: '" . $this->helix->direction() . "',
-                                initOffset: {
-                                    x: ".$this->helix->Param('init_x',0).",
-                                    y: ".$this->helix->Param('init_y',0)."
-                                },
-                                subOffset: {
-                                    x: ".$this->helix->Param('sub_x',0).",
-                                    y: ".$this->helix->Param('sub_y',0)."
-                                },
-                                center: ".$this->helix->Param('submenu_position',0)."
-                            });
-                        }
-						
-						mainmenu();
-                        
-                        $(window).on('resize',function(){
-								mainmenu();
-                        });
-                        
-                        //Mobile Menu
-                        $('#sp-main-menu > ul').mobileMenu({
-                            defaultText:'".JText::_('NAVIGATE')."',
-                            appendTo: '#sp-mobile-menu'
-                        });
-                        
-                    });");
-            
+
+			if (($this->helix->megaMenuType()=='split') && $menu->hasSub() || $this->helix->megaMenuType()=='drop') {  
+
+				if($this->helix->megaMenuType()=='drop') {
+
+					$this->helix->addInlineJS("spnoConflict(function($){
+
+						function mainmenu() {
+							$('#sp-main-menu').droplinemenu({
+								sublevelContainer:$('#sublevel > div')
+							});
+				}
+
+				mainmenu();
+
+				$(window).on('resize',function(){
+					mainmenu();
+				});
+
+
+
+				});");
+				}
+
+
+
+			} else {
+
+				$this->helix->addInlineJS("spnoConflict(function($){
+
+					function mainmenu() {
+						$('.sp-menu').spmenu({
+							startLevel: 0,
+							direction: '" . $this->helix->direction() . "',
+							initOffset: {
+								x: ".$this->helix->Param('init_x',0).",
+								y: ".$this->helix->Param('init_y',0)."
+							},
+							subOffset: {
+								x: ".$this->helix->Param('sub_x',0).",
+								y: ".$this->helix->Param('sub_y',0)."
+							},
+							center: ".$this->helix->Param('submenu_position',0)."
+						});
+			}
+
+			mainmenu();
+
+			$(window).on('resize',function(){
+				mainmenu();
+			});
+
+
+			});");
+
+
+			}
+
+
+
 
 			return ob_get_clean();
 		}

@@ -11,7 +11,7 @@
 			<div class="sp-block sp-style1">
 				<h2><i class="icon-question-sign"></i> Helix Information</h2>
 				<div class="sp-content">
-					<h3>Version 2.0.9 <small>(Beta)</small></h3>
+					<h3>Version 2.1.0</h3>
 					<p>
 						Powerful template framework for Joomla and Wordpress templating. It is now very much easy to develop a Joomla or Wordpress website using Helix Framework.
 						<br />

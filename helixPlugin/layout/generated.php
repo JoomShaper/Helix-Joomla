@@ -5,6 +5,23 @@
  * @copyright Copyright (c) 2010 - 2013 JoomShaper
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
 */
+
+
+
+if( !function_exists('get_value') ){
+
+    function get_value($item, $method){
+        return isset($item->$method) ? $item->$method : '';
+    }
+}
+
+if( !function_exists('get_color') ){
+
+    function get_color($item, $method){
+        return isset($item->$method) ? $item->$method : 'rgba(255, 255, 255, 0)';
+    }
+}
+
 ?>
 <div class="container-fluid">
 
@@ -103,6 +120,8 @@
 	
         <div>
 			<div class="row-fluid">
+
+
 				<div class="span6 rownameOuter">
 					<label>Name: </label>
 					<input type="text" class="rowname" id="">
@@ -112,7 +131,47 @@
 					<label>Custom Class: </label>
 					<input type="text" class="rowcustomclass" id="">
 				</div>
+
 			</div>	
+
+            <div class="row-fluid">
+                <div class="span6 rowcolorOuter">
+                    <label>Background: </label>
+                    <input type="text" class="rowbackgroundcolor" id="">
+                </div>
+                
+                <div class="span6 rowcolorOuter">
+                    <label>Text: </label>
+                    <input type="text" class="rowtextcolor" id="">
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span6 rowcolorOuter">
+                    <label>Link: </label>
+                    <input type="text" class="rowlinkcolor" id="">
+                </div>
+                
+                <div class="span6 rowcolorOuter">
+                    <label>Link hover: </label>
+                    <input type="text" class="rowlinkhovercolor" id="">
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span6 rownameOuter">
+                    <label>Margin: </label>
+                    <input type="text" class="rowmargin" id="">
+                </div>
+                
+                <div class="span6 rowclassOuter">
+                    <label>Padding: </label>
+                    <input type="text" class="rowpadding" id="">
+                </div>
+            </div>
+
+
+
 
 			<div id="rowresponsiveinputs" class="row-fluid">
 				<div class="span6">
@@ -150,6 +209,13 @@
                             <input type="hidden" class="rownameinput" name="" value="<?php echo $items->name ?>">
                             <input type="hidden" class="rowcustomclassinput" name="" value="<?php echo $items->class ?>">
                             <input type="hidden" class="rowresponsiveinput" name="" value="<?php echo $items->responsive ?>">
+
+                            <input type="hidden" class="rowbackgroundcolorinput" name="" value="<?php echo get_color($items,'backgroundcolor') ?>">
+                            <input type="hidden" class="rowtextcolorinput" name="" value="<?php echo get_color($items,'textcolor') ?>">
+                            <input type="hidden" class="rowlinkcolorinput" name="" value="<?php echo get_color($items,'linkcolor') ?>">
+                            <input type="hidden" class="rowlinkhovercolorinput" name="" value="<?php echo get_color($items,'linkhovercolor') ?>">
+                            <input type="hidden" class="rowmargininput" name="" value="<?php echo get_value($items,'margin') ?>">
+                            <input type="hidden" class="rowpaddinginput" name="" value="<?php echo get_value($items,'padding') ?>">
                         </span>
                     </div>
                     <div class="pull-right row-tools">
@@ -209,6 +275,16 @@
                                                         <input type="hidden" class="rownameinput" name="" value="<?php echo $children->name ?>">
                                                         <input type="hidden" class="rowcustomclassinput" name="" value="<?php echo $children->class ?>">
                                                         <input type="hidden" class="rowresponsiveinput" name="" value="<?php echo $children->responsive ?>">
+
+                                                        
+
+                                                        <input type="hidden" class="rowbackgroundcolorinput" name="" value="<?php echo get_color($children,'backgroundcolor') ?>">
+                                                        <input type="hidden" class="rowtextcolorinput" name="" value="<?php echo get_color($children,'textcolor') ?>">
+                                                        <input type="hidden" class="rowlinkcolorinput" name="" value="<?php echo get_color($children,'linkcolor') ?>">
+                                                        <input type="hidden" class="rowlinkhovercolorinput" name="" value="<?php echo get_color($children,'linkhovercolor') ?>">
+                                                        <input type="hidden" class="rowmargininput" name="" value="<?php echo get_value($children,'margin') ?>">
+                                                        <input type="hidden" class="rowpaddinginput" name="" value="<?php echo get_value($children,'padding') ?>">
+
                                                     </span>
                                                 </div>
 
@@ -279,6 +355,14 @@
                                                                                     <input type="hidden" class="rownameinput" name="" value="<?php echo $children->name ?>">
                                                                                     <input type="hidden" class="rowcustomclassinput" name="" value="<?php echo $children->class ?>">
                                                                                     <input type="hidden" class="rowresponsiveinput" name="" value="<?php echo $children->responsive ?>">
+
+
+                                                                                    <input type="hidden" class="rowbackgroundcolorinput" name="" value="<?php echo get_color($children,'backgroundcolor') ?>">
+                                                        <input type="hidden" class="rowtextcolorinput" name="" value="<?php echo get_color($children,'textcolor') ?>">
+                                                        <input type="hidden" class="rowlinkcolorinput" name="" value="<?php echo get_color($children,'linkcolor') ?>">
+                                                        <input type="hidden" class="rowlinkhovercolorinput" name="" value="<?php echo get_color($children,'linkhovercolor') ?>">
+                                                        <input type="hidden" class="rowmargininput" name="" value="<?php echo get_value($children,'margin') ?>">
+                                                        <input type="hidden" class="rowpaddinginput" name="" value="<?php echo get_value($children,'padding') ?>">
                                                                                 </span>
                                                                             </div>
 
@@ -344,6 +428,15 @@
                                                                                                                 <input type="hidden" class="rownameinput" name="" value="<?php echo $children->name ?>">
                                                                                                                 <input type="hidden" class="rowcustomclassinput" name="" value="<?php echo $children->class ?>">
                                                                                                                 <input type="hidden" class="rowresponsiveinput" name="" value="<?php echo $children->responsive ?>">
+
+
+
+                                                                                                                <input type="hidden" class="rowbackgroundcolorinput" name="" value="<?php echo get_color($children,'backgroundcolor') ?>">
+                                                        <input type="hidden" class="rowtextcolorinput" name="" value="<?php echo get_color($children,'textcolor') ?>">
+                                                        <input type="hidden" class="rowlinkcolorinput" name="" value="<?php echo get_color($children,'linkcolor') ?>">
+                                                        <input type="hidden" class="rowlinkhovercolorinput" name="" value="<?php echo get_color($children,'linkhovercolor') ?>">
+                                                        <input type="hidden" class="rowmargininput" name="" value="<?php echo get_value($children,'margin') ?>">
+                                                        <input type="hidden" class="rowpaddinginput" name="" value="<?php echo get_value($children,'padding') ?>">
                                                                                                             </span>
                                                                                                         </div>
                                                                                                         <div class="pull-right row-tools">

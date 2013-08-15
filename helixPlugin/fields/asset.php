@@ -27,22 +27,29 @@
 
             $templateCss= "templates/".JFactory::getApplication()->getTemplate().'/css/template.css';    
             $doc->addStyleSheet($templateCss);
-			
-			$doc->addScript($plg_path.'/js/jquery.min.js');
-            $doc->addScript($plg_path.'/js/bootstrap.min.js');
-			$doc->addScript($plg_path.'/js/admin/jquery-ui.min.js');
 
-            // 2.5
+
+
+            
+
+         
+           // 2.5
             if( JVERSION < 3 ){
+                $doc->addScript($plg_path.'/js/jquery.min.js');
+                $doc->addScript($plg_path.'/js/admin/jquery-ui.min.js');
+                $doc->addScript($plg_path.'/js/bootstrap.min.js');
                 $doc->addStyleSheet($plg_path.'/css/bootstrap.min.css');
                 $doc->addScript($plg_path.'/js/admin/helix.admin.25.js');
             } else {
+                $doc->addScript($plg_path.'/js/admin/jquery-ui.min.js');
                 $doc->addScript($plg_path.'/js/admin/helix.admin.30.js');
             }
-			
-			$doc->addScript($plg_path.'/js/admin/layout.admin.js');
-			
-			$doc->addStyleSheet($plg_path.'/css/admin/helix.admin.css');
+
+
+
+            $doc->addScript($plg_path.'/js/admin/layout.admin.js');
+
+            $doc->addStyleSheet($plg_path.'/css/admin/helix.admin.css');
 
             $doc->addStyleSheet($plg_path.'/css/font-awesome.css');
 
@@ -65,4 +72,4 @@
             }
 
         }
-}
+    }

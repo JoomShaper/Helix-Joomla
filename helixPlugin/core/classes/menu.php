@@ -300,7 +300,15 @@ class HelixMenu {
 					$style = $width?" style=\"width: {$width}px;\"":"";
 					$data .= '<div class="sp-submenu"><div class="sp-submenu-wrap"><div class="sp-submenu-inner clearfix"' . $style . '>';
 				}
-			}else {//Others menu
+			} 
+
+			elseif($this->_menu=='mobile') {//mobile menu
+					$data .= '';
+				
+			} 
+
+
+			else {//Others menu
 				$width = $this->getParam ('menu_col_width',200);
 				$style = $width?" style=\"width: {$width}px;\"":"";
 				$data .= '<div class="sp-submenu"><div class="sp-submenu-wrap"><div class="sp-submenu-inner clearfix"' . $style . '>';
@@ -322,7 +330,14 @@ class HelixMenu {
 				if ($level != 1) {
 					$data .= '</div></div></div>';
 				}
-			}else {
+			} 
+
+			elseif($this->_menu=='mobile') {//mobile menu
+					$data .= '';
+				
+			} 
+
+			else {
 				$data .= '</div></div></div>';
 			}
 		if ($ret) return $data; else echo $data;
@@ -331,7 +346,9 @@ class HelixMenu {
 
 	function beginLi($mitem=null, $level = 0, $pos = ''){
 		$active = $this->genClass ($mitem, $level, $pos);
-		echo "<li id='menu-item-{$mitem->id}' $active>";
+		//echo "<li id='menu-item-{$mitem->id}' $active>";
+		echo "<li $active>";
+
 		if ($this->_menu=='mega' && $mitem->megaparams->get('group')) echo "<div class=\"sp-menu-group\">";//If megamenu
 	}
 	
@@ -365,7 +382,15 @@ class HelixMenu {
 					$data .= "<div class=\"megacol ".($pos?" $pos":"")."\"$style>";
 				}
 			}		
-		}else{
+		}
+
+elseif($this->_menu=='mobile') {//mobile menu
+					$data .= '';
+				
+			} 
+
+
+		else{
 			if (isset ($this->items[$pid]) && $level) {
 				$colw=$this->getParam ('menu_col_width',200);
 				if(is_null($colw) || !is_numeric($colw)) $colw = 200;
@@ -373,7 +398,22 @@ class HelixMenu {
 				$data .= "<div class=\"megacol ".($pos?" $pos":"")."\"$style>";
 			}		
 		}
-		if (@$this->children[$pid]) $data .= '<ul class="sp-menu level-' . $level . '">';//modified
+
+		if($this->_menu=='mobile') {
+			if($level>0) {
+				$collapse = 'collapse collapse-'. $pid;
+				$icon = '<span class="sp-menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-' . $pid . '"><i class="icon-angle-right"></i><i class="icon-angle-down"></i></span>';
+			} else{
+				$collapse = '';
+				$icon = '';
+			}
+
+			if (@$this->children[$pid]) $data .= $icon . '<ul class="' . $collapse . '">';//modified
+		} else {
+			if (@$this->children[$pid]) $data .= '<ul class="sp-menu level-' . $level . '">';//modified
+		}
+
+		
 		if ($ret) return $data; else echo $data;
 	}
 	
@@ -397,7 +437,14 @@ class HelixMenu {
 					$data .= "</div>";
 				}
 			}		
-		}else{
+		}
+
+		elseif($this->_menu=='mobile') {//mobile menu
+					$data .= '';
+				
+			} 
+
+		else{
 			if (isset ($this->items[$pid]) && $level) {
 				$data .= "</div>";
 			}		

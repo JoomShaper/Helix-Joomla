@@ -7,8 +7,8 @@
     <license>http://www.gnu.org/licenses/gpl-2.0.html GPLv2 or later</license>
     <authorEmail>support@joomshaper.com</authorEmail>
     <authorUrl>www.joomshaper.com</authorUrl>
-    <version>2.0.9</version>
-    <description>Helix Framework - JoomShaper Template Framework for Joomla 2.5 and 3.0</description>
+    <version>2.1.0</version>
+    <description>Helix Framework - JoomShaper Template Framework for Joomla 2.5 and 3.X</description>
 	
     <updateservers> 
         <server type="extension" priority="1" name="System - Helix Framework">http://www.joomshaper.com/updates/plg_system_helix.xml</server>
