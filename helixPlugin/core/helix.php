@@ -2,7 +2,7 @@
     /**
     * @package Helix Framework
     * @author JoomShaper http://www.joomshaper.com
-    * @copyright Copyright (c) 2010 - 2013 JoomShaper
+    * @copyright Copyright (c) 2010 - 2014 JoomShaper
     * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
     */
     //no direct accees
@@ -410,6 +410,29 @@
             return '';    
         }
 
+        private static function toObject(&$array, $class = 'stdClass')
+        {
+            $obj = null;
+
+            if (is_array($array))
+            {
+                $obj = new $class;
+
+                foreach ($array as $k => $v)
+                {
+                    if (is_array($v))
+                    {
+                        $obj->$k = self::toObject($v, $class);
+                    }
+                    else
+                    {
+                        $obj->$k = $v;
+                    }
+                }
+            }
+            return $obj;
+        }
+
         /**
         * Layout generator
         * 
@@ -417,6 +440,12 @@
         */
         private static function generatelayout($layout)
         {
+
+            if( is_array( $layout ) )
+            {
+                $layout = self::getInstance()->toObject( $layout );
+            }
+
             foreach($layout as $index=>$value)
             {
                 if( is_null( self::getInstance()->showRow($value) ) ) continue;

@@ -30,7 +30,7 @@
             $layout      = (string) $this->element['default'];
 
 
-            $layoutsettings = $this->value;
+            $layoutsettings = self::toObject( $this->value );
 
             if( file_exists($theme_path.'html/modules.php') ){
                 include_once( $theme_path.'html/modules.php' );
@@ -112,5 +112,28 @@
             return $selectOption;
 
 
+        }
+
+        private static function toObject(&$array, $class = 'stdClass')
+        {
+            $obj = null;
+
+            if (is_array($array))
+            {
+                $obj = new $class;
+
+                foreach ($array as $k => $v)
+                {
+                    if (is_array($v))
+                    {
+                        $obj->$k = self::toObject($v, $class);
+                    }
+                    else
+                    {
+                        $obj->$k = $v;
+                    }
+                }
+            }
+            return $obj;
         }
 }
