@@ -100,12 +100,12 @@ select{height:36px;padding:0 0 0 10px;width:110px}
 #layout-options .show-grid .show-grid [class*=span]{margin-top:5px}
 #layout-options .row-tools{margin-top:3px}
 #layout-options .row-tools a{color:#a5a5a5;font-size:18px;margin:0 0 0 6px}
-#layout-options .row-tools a.icon-move{border-right:1px solid #ccc;cursor:move;padding-right:6px}
+#layout-options .row-tools a.fa-arrows{border-right:1px solid #ccc;cursor:move;padding-right:6px}
 #layout-options .columntools{-webkit-transition:opacity 300ms;float:right;margin-right:15px;opacity:0}
 #layout-options .columntools a{color:#a5a5a5;font-size:14px;margin:0 0 0 3px}
-#layout-options .columntools a.icon-move{cursor:move}
-#layout-options .row-tools a.icon-remove,
-#layout-options .columntools a.icon-remove{color:#e52626}
+#layout-options .columntools a.fa-arrows{cursor:move}
+#layout-options .row-tools a.fa-times,
+#layout-options .columntools a.fa-times{color:#e52626}
 #layout-options .columntools.open,
 #layout-options .column:hover >.columntools,
 #layout-options .column:focus >.columntools{opacity:1}

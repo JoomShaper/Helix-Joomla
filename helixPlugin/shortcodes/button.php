@@ -8,7 +8,6 @@
 //no direct accees
 defined ('_JEXEC') or die('resticted aceess');
 
-//[button type="primary" size="large" link="" trget=""]
 if(!function_exists('button_sc')){
 	function button_sc($atts, $content='') {
 		extract(shortcode_atts(array(
@@ -17,7 +16,7 @@ if(!function_exists('button_sc')){
 					"link" => '',
 					"target"=>''
 				), $atts));
-		return '<a href="' . $link . '" class="btn btn-' . $type . ' btn-' . $size . '">' .  do_shortcode($content)  . '</a>';
+		return '<a href="' . $link . '" target=" '.$target.' "  class="btn btn-' . $type . ' btn-' . $size . '" >' .  do_shortcode($content)  . '</a>';
 	}
 	add_shortcode('button', 'button_sc');
 }

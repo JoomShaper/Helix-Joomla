@@ -6,10 +6,6 @@
 */
 jQuery(function($){
 
-
-
-
-
         var reArrangePopOvers = function(){
 
             $('#layout-options .row-fluid').each(function(){

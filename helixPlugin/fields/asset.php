@@ -23,15 +23,13 @@
 
             $doc = JFactory::getDocument();
 
-            $doc->addScriptDeclaration("var basepath = '{$plg_path}'");
+            $doc->addScriptDeclaration("var basepath = '{$plg_path}';");
+            $doc->addScriptDeclaration("var spjversion = '" . JVERSION . "';");
 
-            $templateCss= "templates/".JFactory::getApplication()->getTemplate().'/css/template.css';    
-            $doc->addStyleSheet($templateCss);
-
-
-
-            
-
+            if( JVERSION < 3 ){
+                $templateCss= "templates/".JFactory::getApplication()->getTemplate().'/css/template.css';    
+                $doc->addStyleSheet($templateCss);
+            }
          
            // 2.5
             if( JVERSION < 3 ){
@@ -45,13 +43,16 @@
                 $doc->addScript($plg_path.'/js/admin/helix.admin.30.js');
             }
 
-
-
             $doc->addScript($plg_path.'/js/admin/layout.admin.js');
 
-            $doc->addStyleSheet($plg_path.'/css/admin/helix.admin.css');
+            if( JVERSION < 3 ){
+                $doc->addStyleSheet($plg_path.'/css/admin/helix.admin.css');
+            } else {
+                $doc->addStyleSheet($plg_path.'/css/admin/helix.admin3.css');
+            }
 
-            $doc->addStyleSheet($plg_path.'/css/font-awesome.css');
+            $doc->addStyleSheet($plg_path.'/css/admin/font-awesome.min.css');
+
 
             if(isset($this->element['loadbefore']) and (int) $this->element['loadbefore'] > JVERSION )
             {

@@ -29,7 +29,7 @@ if(!function_exists('blocknumber_sc')) {
 				'type' =>''//rounded, circle
 		 ), $atts));
 	
-		return '<p class="sp-blocknumber"><span style="background:'.$background.';color:'.$color.'" class="' .$type .'">' . $text . '</span> ' . $content . '</p>';
+		return '<p class="sp-blocknumber"><span style="background:'.$background.';color:'.$color.'" class="' .$type .'">' . $text . '</span> ' . do_shortcode( $content ) . '</p>';
 	}
 		
 	add_shortcode( 'blocknumber', 'blocknumber_sc' );
@@ -47,7 +47,7 @@ if(!function_exists('block_sc')) {
 				'type' =>''//rounded, circle
 		 ), $atts));
 	
-		return '<div class="sp-block '.$type.'" style="background:'.$background.';color:'.$color.';padding:'.$padding.';border:'.$border.'">'.$content.'</div>';
+		return '<div class="sp-block '.$type.'" style="background:'.$background.';color:'.$color.';padding:'.$padding.';border:'.$border.'">'. do_shortcode( $content ) .'</div>';
 	}
 		
 	add_shortcode( 'block', 'block_sc' );
@@ -78,7 +78,7 @@ if(!function_exists('bubble_sc')) {
 		
 		$cite = ($border!=0) ? $border_color : $bg;
 	
-		return '<div class="sp-bubble '.$type.'" style="'.$background.'padding:'.$padding.';border:'.$border.'"><div style="'.$color.'">'.$content.'</div><cite><span style="border:15px solid '.$cite.'"></span>'.$author.'</cite></div>';
+		return '<div class="sp-bubble '.$type.'" style="'.$background.'padding:'.$padding.';border:'.$border.'"><div style="'.$color.'">'. do_shortcode( $content ) .'</div><cite><span style="border:15px solid '.$cite.'"></span>'.$author.'</cite></div>';
 	}
 		
 	add_shortcode( 'bubble', 'bubble_sc' );

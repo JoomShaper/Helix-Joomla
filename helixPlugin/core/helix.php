@@ -80,14 +80,18 @@
         */
         public static function bodyClass($class='')
         {
-            $classes = '';
-            $classes .= JRequest::getVar( 'view' );
+            $classes  = '';
+            $classes  .= JRequest::getVar( 'view' );
 
             $classes .= self::getInstance()->isFrontPage() ? ' homepage ':' subpage ';
 
             $classes .= ' '. self::getInstance()->direction() . ' ';
 
             $classes .= self::getInstance()->preset();
+
+            $app      = JFactory::getApplication();
+            $menu     = $app->getMenu();
+            $classes .= ' menu-' . @$menu->getActive()->alias;
 
             $classes .= ' ' . self::getInstance()->Param('layout_type');
 
@@ -366,7 +370,7 @@
         private $inline_css = '';
 
         private static function get_layout_value($class, $method){
-            if( $class->$method=="" ) return false;
+            if( isset($class->$method) and $class->$method=="" ) return false;
             return (isset( $class->$method )) ? $class->$method : FALSE;
         }
 
@@ -375,6 +379,36 @@
             return ('rgba(255, 255, 255, 0)'==$get) ? FALSE : $get;
         }
 
+        private static function get_row_class($classname){
+
+            $replace = array( 'container'=>'', 'container-fluid'=>'' );
+
+            if( self::getInstance()->has_container_class($classname, 'container') or self::getInstance()->has_container_class($classname, 'container-fluid') ){
+                return strtr($classname, $replace);
+            }
+            return $classname;
+        }
+
+
+        private static function has_container_class($classname, $hasclass){
+
+            $class =  explode(' ', $classname);
+
+            if( in_array($hasclass, $class) ){
+                return true;
+            }        
+            return false;    
+        }
+
+        private static function get_container_class($classname, $hasclass){
+
+            $class =  explode(' ', $classname);
+
+            if( in_array($hasclass, $class) ){
+                return $hasclass;
+            }        
+            return '';    
+        }
 
         /**
         * Layout generator
@@ -390,16 +424,16 @@
                 // set html5 stracture
                 switch( self::getInstance()->slug($value->name) ){
                     case "header":
-                        $sematic = 'header';
-                        break;
+                    $sematic = 'header';
+                    break;
 
                     case "footer":
-                        $sematic = 'footer';
-                        break;
+                    $sematic = 'footer';
+                    break;
 
                     default:
-                        $sematic = 'section';
-                        break;
+                    $sematic = 'section';
+                    break;
                 }
 
                 //  self::getInstance()->layout.="\n\n".'<!-- Start Row: '.$index.' -->'."\n";
@@ -412,57 +446,49 @@
                 $endcss = "\n".'}';
 
 
-
                 self::getInstance()->inline_css .= $id;
                 if( self::getInstance()->get_color_value( $value, 'backgroundcolor' ) ){
-                    self::getInstance()->inline_css .= 'background: '. self::getInstance()->get_color_value( $value, 'backgroundcolor' ) .';';                   
+                    self::getInstance()->inline_css .= 'background: '. self::getInstance()->get_color_value( $value, 'backgroundcolor' ) .' !important;';                   
                 }
 
                 if( self::getInstance()->get_color_value( $value, 'textcolor' ) ){
-                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'textcolor' ) .';';                   
+                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'textcolor' ) .' !important;';                   
                 }  
 
 
-
                 if( FALSE !== self::getInstance()->get_layout_value( $value, 'margin' ) ){
-                    self::getInstance()->inline_css .= 'margin: '. self::getInstance()->get_layout_value( $value, 'margin' ) .';';                   
+                    self::getInstance()->inline_css .= 'margin: '. self::getInstance()->get_layout_value( $value, 'margin' ) .' !important;';                   
                 }
                 if( FALSE !== self::getInstance()->get_layout_value( $value, 'padding' ) ){
-                    self::getInstance()->inline_css .= 'padding: '. self::getInstance()->get_layout_value( $value, 'padding' ) .';';                   
+                    self::getInstance()->inline_css .= 'padding: '. self::getInstance()->get_layout_value( $value, 'padding' ) .' !important;';                   
                 }
                 self::getInstance()->inline_css .= $endcss;
-
-
 
                 self::getInstance()->inline_css .= $link;
                 if( self::getInstance()->get_color_value( $value, 'linkcolor' ) ){
-                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkcolor' ) .';';                   
+                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkcolor' ) .' !important;';                   
                 }
                 self::getInstance()->inline_css .= $endcss;
-
 
                 self::getInstance()->inline_css .= $linkhover;
                 if( self::getInstance()->get_color_value( $value, 'linkhovercolor' ) ){
-                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkhovercolor' ) .';';                   
+                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkhovercolor' ) .' !important;';                   
                 }
                 self::getInstance()->inline_css .= $endcss;
 
-
-
-
-
-               
-
-
-
-
-                self::getInstance()->layout.='<'.$sematic.' id="sp-'. self::getInstance()->slug($value->name) .'-wrapper" class="'.(((empty($value->class) or $value->class!='container' or $value->class!='container-fluid')?'':' '.$value->class.' ')).' '.((empty($value->responsive)?'':' '.$value->responsive.'')).'">';
+                self::getInstance()->layout.='<'.$sematic.' id="sp-'. self::getInstance()->slug($value->name) .'-wrapper" 
+                class="'. self::getInstance()->get_row_class($value->class) . ' '.((empty($value->responsive)?'':''.$value->responsive.'')).'">';
                 //
 
-                if( $value->class=='container' or $value->class=='container-fluid' )
+                if(self::getInstance()->has_container_class($value->class,'container') 
+                    or 
+                    self::getInstance()->has_container_class($value->class,'container-fluid'))
                 {
-                    //  start container
-                    self::getInstance()->layout.='<div class="'.$value->class.'">';
+                    //  start container  
+                    self::getInstance()->layout.='<div class="' 
+                    . self::getInstance()->get_container_class($value->class,'container-fluid') 
+                    . self::getInstance()->get_container_class($value->class,'container')
+                    . '">';
                 }
 
                 //   start row fluid
@@ -524,12 +550,12 @@
 
                             case "left":
                             case "right":
-                                $sematicSpan = 'aside';
-                                break;
+                            $sematicSpan = 'aside';
+                            break;
 
                             default:
-                                $sematicSpan = 'div';
-                                break;
+                            $sematicSpan = 'div';
+                            break;
                         }
 
                         // self::getInstance()->layout.= ' <!-- Start Span --> ';
@@ -581,9 +607,11 @@
                 // end row fluid
                 self::getInstance()->layout.='</div>';
 
-                if( $value->class=='container' or $value->class=='container-fluid' )
+                if(self::getInstance()->has_container_class($value->class,'container') 
+                    or 
+                    self::getInstance()->has_container_class($value->class,'container-fluid'))
                 {
-                    // container end
+                    //  end container  
                     self::getInstance()->layout.='</div>';
                 }
 
@@ -1002,8 +1030,8 @@
             } else {
                 $current = self::getInstance()->getDocument()->direction;
             }
-			
-			self::getInstance()->getDocument()->direction = $current;
+
+            self::getInstance()->getDocument()->direction = $current;
 
             return $current;
         }
@@ -1028,7 +1056,7 @@
             $replace = array(
                 '[' => '<',
                 ']' => '>'
-            );
+                );
             $text = strtr($text, $replace);
 
             preg_match_all('/<(.+?)[\s]*\/?[\s]*>/si', trim($tags), $tags); 
@@ -1098,7 +1126,8 @@
 
             self::getInstance()->Compression();
 
-            echo '<a style="font-size:0; height:0; width:0; opacity:0; position:absolute" target="_blank" href="http://www.joomshaper.com">JoomShaper</a>';
+            self::getInstance()->addCSS('custom.css');
+
             return self::getInstance();
         }
 
@@ -1252,20 +1281,20 @@
 
         // Add bootstrap	
         public function addBootstrap($responsive=true, $rtl=false) {
-            
+
 
 			// RTL enable
             if( self::getInstance()->direction()=='rtl' ) {
-				self::getInstance()->addCSS('bootstrap.min.rtl.css');
+                self::getInstance()->addCSS('bootstrap.min.rtl.css');
 				// BootStrap responsive layout rtl
-				if (self::getInstance()->Param('layout_type')=='responsive') self::getInstance()->addCSS('bootstrap-responsive.min.rtl.css');
-			} else {
-				self::getInstance()->addCSS('bootstrap.min.css');
+                if (self::getInstance()->Param('layout_type')=='responsive') self::getInstance()->addCSS('bootstrap-responsive.min.rtl.css');
+            } else {
+                self::getInstance()->addCSS('bootstrap.min.css');
 				// BootStrap responsive layout normal
-				if (self::getInstance()->Param('layout_type')=='responsive') self::getInstance()->addCSS('bootstrap-responsive.min.css');
-			}
-			
-			self::getInstance()->addCSS('font-awesome.css');
+                if (self::getInstance()->Param('layout_type')=='responsive') self::getInstance()->addCSS('bootstrap-responsive.min.css');
+            }
+
+            self::getInstance()->addCSS('font-awesome.css');
             self::getInstance()->addJQuery();
             self::getInstance()->addJS('bootstrap.min.js');
 
@@ -1496,7 +1525,7 @@
                 if( JVERSION >= 3 ){
                     // override core joomla 3 class
                     if (!class_exists('JViewLegacy', false))  self::getInstance()->Import('core/classes/joomla30/viewlegacy.php');
-                    if (!class_exists('JModuleHelper', false)) self::getInstance()->Import('core/classes/joomla25/helper.php'); 
+                    if (!class_exists('JModuleHelper', false)) self::getInstance()->Import('core/classes/joomla30/helper.php'); 
 
                 } else {
                     // override core joomla 2.5 class
@@ -1533,4 +1562,4 @@
             if (stristr($agent, 'msie'.$ieversion)) return true;
             return false;        
         }
-}
+    }

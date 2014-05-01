@@ -12,5 +12,5 @@ if(!function_exists('hide_sc')) {
         <?php
         return ob_get_clean();
     }
-    add_shortcode( 'hide', 'hide_sc' );
+    add_shortcode( 'sp_hide', 'hide_sc' );
 }

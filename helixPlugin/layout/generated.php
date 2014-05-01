@@ -219,11 +219,11 @@ if( !function_exists('get_color') ){
                         </span>
                     </div>
                     <div class="pull-right row-tools">
-                        <a href="" title="Move this row" class="icon-move rowmove"></a>
-                        <a href="#rowsettingbox" title="Row settings" class="icon-cog rowsetting" rel="rowpopover"></a>
-                        <a href="" title="Add new row" class="icon-align-justify add-row"></a>
-                        <a href="" title="Add new column" class="icon-columns add-column"></a>
-                        <a href="" title="Delete row" class="icon-remove rowdelete"></a>
+                        <a href="" title="Move this row" class="fa fa-arrows rowmove"></a>
+                        <a href="#rowsettingbox" title="Row settings" class="fa fa-gear rowsetting" rel="rowpopover"></a>
+                        <a href="" title="Add new row" class="fa fa-align-justify add-row"></a>
+                        <a href="" title="Add new column" class="fa fa-columns add-column"></a>
+                        <a href="" title="Delete row" class="fa fa-times rowdelete"></a>
                     </div>
 
                     <div class="hr clr"></div>
@@ -245,10 +245,10 @@ if( !function_exists('get_color') ){
 
                                 ?></span>
                                 <div class="columntools">
-                                    <a href="#columnsettingbox" rel="popover" data-placement="bottom" title="Column settings" class="icon-cog rowcolumnspop"></a>
-                                    <a href="" title="Add new row" class="icon-align-justify add-rowin-column"></a>
-                                    <a href="" title="Remove column" class="icon-remove columndelete"></a>
-                                    <a href="" title="Move column" class="icon-move columnmove"></a>
+                                    <a href="#columnsettingbox" rel="popover" data-placement="bottom" title="Column settings" class="fa fa-gear rowcolumnspop"></a>
+                                    <a href="" title="Add new row" class="fa fa-align-justify add-rowin-column"></a>
+                                    <a href="" title="Remove column" class="fa fa-times columndelete"></a>
+                                    <a href="" title="Move column" class="fa fa-arrows columnmove"></a>
                                 </div> 
 
                                 <input type="hidden" class="widthinput" name="" value="<?php echo $item->span ?>"> 
@@ -289,11 +289,11 @@ if( !function_exists('get_color') ){
                                                 </div>
 
                                                 <div class="pull-right row-tools">
-                                                    <a href="" title="Move this row" class="icon-move row-move-in-column"></a>
-                                                    <a href="" title="Add new row" class="icon-align-justify add-row"></a>
-                                                    <a href="" title="Add new column" class="icon-columns add-column"></a>
-                                                    <a href="#rowsettingbox" title="Row settings" class="icon-cog rowsetting" rel="rowpopover"></a>
-                                                    <a href="" title="Delete row" class="icon-remove rowdelete"></a>
+                                                    <a href="" title="Move this row" class="fa fa-arrows row-move-in-column"></a>
+                                                    <a href="" title="Add new row" class="fa fa-align-justify add-row"></a>
+                                                    <a href="" title="Add new column" class="fa fa-columns add-column"></a>
+                                                    <a href="#rowsettingbox" title="Row settings" class="fa fa-gear rowsetting" rel="rowpopover"></a>
+                                                    <a href="" title="Delete row" class="fa fa-times rowdelete"></a>
                                                 </div>
 
                                                 <div class="clearfix"></div>
@@ -316,10 +316,10 @@ if( !function_exists('get_color') ){
                                                             ?></span>
 
                                                             <span class="columntools">
-                                                                <a href="#columnsettingbox" rel="popover" data-placement="bottom" title="Column settings" class="icon-cog rowcolumnspop"></a>
-																<a href="" title="Add new row" class="icon-align-justify add-rowin-column"></a>
-																<a href="" title="Remove column" class="icon-remove columndelete"></a>
-																<a href="" title="Move column" class="icon-move columnmove"></a>
+                                                                <a href="#columnsettingbox" rel="popover" data-placement="bottom" title="Column settings" class="fa fa-gear rowcolumnspop"></a>
+																<a href="" title="Add new row" class="fa fa-align-justify add-rowin-column"></a>
+																<a href="" title="Remove column" class="fa fa-times columndelete"></a>
+																<a href="" title="Move column" class="fa fa-arrows columnmove"></a>
                                                             </span> 
 
                                                             <input type="hidden" class="widthinput" name="" value="<?php echo $children->span ?>"> 
@@ -368,11 +368,11 @@ if( !function_exists('get_color') ){
 
 
                                                                             <div class="pull-right row-tools">
-                                                                                <a href="" title="Move this row" class="icon-move rowmove"></a>
-                                                                                <a href="" title="Add new row" class="icon-align-justify add-row"></a>
-                                                                                <a href="" title="Add new column" class="icon-columns add-column"></a>
-                                                                                <a href="#rowsettingbox" title="Row settings" class="icon-cog rowsetting" rel="rowpopover"></a>
-                                                                                <a href="" title="Delete row" class="icon-remove rowdelete"></a>
+                                                                                <a href="" title="Move this row" class="fa fa-arrows rowmove"></a>
+                                                                                <a href="" title="Add new row" class="fa fa-align-justify add-row"></a>
+                                                                                <a href="" title="Add new column" class="fa fa-columns add-column"></a>
+                                                                                <a href="#rowsettingbox" title="Row settings" class="fa fa-gear rowsetting" rel="rowpopover"></a>
+                                                                                <a href="" title="Delete row" class="fa fa-times rowdelete"></a>
                                                                             </div>
 
                                                                             <div class="clearfix"></div>
@@ -394,10 +394,10 @@ if( !function_exists('get_color') ){
 
                                                                                         ?></span>
                                                                                         <span class="columntools">
-																							<a href="#columnsettingbox" rel="popover" data-placement="bottom" title="Column settings" class="icon-cog rowcolumnspop"></a>
-																							<a href="" title="Add new row" class="icon-align-justify add-rowin-column"></a>
-																							<a href="" title="Remove column" class="icon-remove columndelete"></a>
-																							<a href="" title="Move column" class="icon-move columnmove"></a>
+																							<a href="#columnsettingbox" rel="popover" data-placement="bottom" title="Column settings" class="fa fa-gear rowcolumnspop"></a>
+																							<a href="" title="Add new row" class="fa fa-align-justify add-rowin-column"></a>
+																							<a href="" title="Remove column" class="fa fa-times columndelete"></a>
+																							<a href="" title="Move column" class="fa fa-arrows columnmove"></a>
                                                                                         </span> 
 
                                                                                         <input type="hidden" class="widthinput" name="" value="<?php echo $children->span ?>"> 
@@ -440,11 +440,11 @@ if( !function_exists('get_color') ){
                                                                                                             </span>
                                                                                                         </div>
                                                                                                         <div class="pull-right row-tools">
-                                                                                                            <a href="" title="Move this row" class="icon-move rowmove"></a>
-                                                                                                            <a href="" title="Add new row" class="icon-align-justify add-row"></a>
-                                                                                                            <a href="" title="Add new column" class="icon-columns add-column"></a>
-                                                                                                            <a href="#rowsettingbox" title="Row settings" class="icon-cog rowsetting" rel="rowpopover"></a>
-                                                                                                            <a href="" title="Delete row" class="icon-remove rowdelete"></a>
+                                                                                                            <a href="" title="Move this row" class="fa fa-arrows rowmove"></a>
+                                                                                                            <a href="" title="Add new row" class="fa fa-align-justify add-row"></a>
+                                                                                                            <a href="" title="Add new column" class="fa fa-columns add-column"></a>
+                                                                                                            <a href="#rowsettingbox" title="Row settings" class="fa fa-gear rowsetting" rel="rowpopover"></a>
+                                                                                                            <a href="" title="Delete row" class="fa fa-times rowdelete"></a>
                                                                                                         </div>
 
                                                                                                         <div class="clearfix"></div>
@@ -466,10 +466,10 @@ if( !function_exists('get_color') ){
 
                                                                                                                     ?></span>
                                                                                                                     <span class="columntools">
-																														<a href="#columnsettingbox" rel="popover" data-placement="bottom" title="Column settings" class="icon-cog rowcolumnspop"></a>
-																														<a href="" title="Add new row" class="icon-align-justify add-rowin-column"></a>
-																														<a href="" title="Remove column" class="icon-remove columndelete"></a>
-																														<a href="" title="Move column" class="icon-move columnmove"></a>                                                                
+																														<a href="#columnsettingbox" rel="popover" data-placement="bottom" title="Column settings" class="fa fa-gear rowcolumnspop"></a>
+																														<a href="" title="Add new row" class="fa fa-align-justify add-rowin-column"></a>
+																														<a href="" title="Remove column" class="fa fa-times columndelete"></a>
+																														<a href="" title="Move column" class="fa fa-arrows columnmove"></a>                                                                
                                                                                                                     </span> 
 
                                                                                                                     <input type="hidden" class="widthinput" name="" value="<?php echo $children->span ?>"> 

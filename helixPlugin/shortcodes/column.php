@@ -11,6 +11,7 @@ defined ('_JEXEC') or die('resticted aceess');
 //[Row]
 if(!function_exists('row_sc')) {
 	$columnArray = array();
+
 	function row_sc( $atts, $content="" ){
 		global $columnArray;
 		$id='';
@@ -28,7 +29,7 @@ if(!function_exists('row_sc')) {
 		//Row
 		$html = '<div class="row-fluid ' . $params['class'] . '" ' . $id . '>';
 		//Columns
-		foreach ($columnArray as $key=>$value) $html .='<div class=' . $value['class'] . '>' . do_shortcode($value['content']) . '</div>';
+		foreach ($columnArray as $key=>$value) $html .='<div class="' . $value['class'] . '">' . do_shortcode($value['content']) . '</div>';
 		$html .='</div>';
 	
 		$columnArray = array();	

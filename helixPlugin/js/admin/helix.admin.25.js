@@ -220,21 +220,21 @@ jQuery(function($){
         });
 
         //Icons
-        $('.overview-options > a i').addClass('icon-info-sign color1');
-        $('.basic-options > a i').addClass('icon-home color2');
-        $('.presets-options > a i').addClass('icon-pencil color3');
-        $('.layout-options > a i').addClass('icon-th color4');
-        $('.menu-options > a i').addClass('icon-list color5');
-        $('.advanced-options > a i').addClass('icon-cog color6');
-        $('.menus-assignment-option > a i').addClass('icon-list color7');
-        $('.fonts-options > a i').addClass('icon-font color8');
+        $('.overview-options > a i').addClass('fa fa-info-circle color1');
+        $('.basic-options > a i').addClass('fa fa-home color2');
+        $('.presets-options > a i').addClass('fa fa-pencil color3');
+        $('.layout-options > a i').addClass('fa fa-th color4');
+        $('.menu-options > a i').addClass('fa fa-list color5');
+        $('.advanced-options > a i').addClass('fa fa-gear color6');
+        $('.menus-assignment-option > a i').addClass('fa fa-list color7');
+        $('.fonts-options > a i').addClass('fa fa-font color8');
 
         //Custom Icons
-        $('.icon-32-apply').replaceWith('<i class="icon-check color8"></i>');
-        $('.icon-32-save').replaceWith('<i class="icon-save color5"></i>');
-        $('.icon-32-save-copy').replaceWith('<i class="icon-copy color3"></i>');
-        $('.icon-32-cancel').replaceWith('<i class="icon-remove-sign color4"></i>');
-        $('.icon-32-help').replaceWith('<i class="icon-question-sign color6"></i>');
+        $('.icon-32-apply').replaceWith('<i class="fa fa-check color8"></i>');
+        $('.icon-32-save').replaceWith('<i class="fa fa-save color5"></i>');
+        $('.icon-32-save-copy').replaceWith('<i class="fa fa-copy color3"></i>');
+        $('.icon-32-cancel').replaceWith('<i class="fa fa-times-circle color4"></i>');
+        $('.icon-32-help').replaceWith('<i class="fa fa-question-circle color6"></i>');
         $('.icon-48-thememanager').removeClass('icon-48-thememanager');
         $('li.divider').remove();
 

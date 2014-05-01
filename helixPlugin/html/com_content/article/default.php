@@ -15,7 +15,10 @@ $params		= $this->item->params;
 $images 	= json_decode($this->item->images);
 $urls 		= json_decode($this->item->urls);
 $canEdit	= $this->item->params->get('access-edit');
+$info    	= $params->get('info_block_position', 0);
 $user		= JFactory::getUser();
+$useDefList = ($params->get('show_modify_date') || $params->get('show_publish_date') || $params->get('show_create_date')
+	|| $params->get('show_hits') || $params->get('show_category') || $params->get('show_parent_category') || $params->get('show_author'));
 ?>
 
 <article class="item-page post-<?php echo $this->item->id ?> post hentry <?php echo ($this->item->state == 0)?'status-unpublish alert':'status-publish'; echo ' category-'.$this->escape($this->item->category_alias) . ' ' . strtolower($this->pageclass_sfx) ?>">
@@ -69,15 +72,7 @@ $user		= JFactory::getUser();
 	<?php echo $this->item->event->beforeDisplayContent; ?>
 
 	<?php 
-	if ($params->get('show_create_date') 
-	|| ($params->get('show_publish_date'))
-	|| ($params->get('show_author') && !empty($this->item->author ))
-	|| ($params->get('show_category')) 
-	|| ($params->get('show_parent_category'))	
-	|| ($params->get('show_print_icon')) 
-	|| ($params->get('show_email_icon'))
-	|| ($params->get('show_hits')) 
-	|| $canEdit): 
+	if ( $useDefList || $canEdit): 
 	?>
 	
 	<div class="entry-meta muted clearfix">
@@ -196,7 +191,7 @@ $user		= JFactory::getUser();
 		<?php  if (isset($images->image_fulltext) and !empty($images->image_fulltext)) : ?>
 		<?php $imgfloat = (empty($images->float_fulltext)) ? $params->get('float_fulltext') : $images->float_fulltext; ?>
 		<div class="pull-<?php echo htmlspecialchars($imgfloat); ?>">
-		<img
+		<img class="fulltext-image"
 			<?php if ($images->image_fulltext_caption):
 				echo 'class="caption"'.' title="' .htmlspecialchars($images->image_fulltext_caption) .'"';
 			endif; ?>

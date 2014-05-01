@@ -61,6 +61,10 @@ class HelixFeatureFooter {
 		if( $this->helix->Param('validator', 0) )
 			echo '<span class="validation-link">' . JText::_('Valid') . ' <a target="_blank" href="http://validator.w3.org/check/referer">XHTML</a> ' . JText::_('and') .' <a target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3">CSS</a></span>';
 		
+
+		//back link
+		echo '<a href="http://www.joomshaper.com" title="joomshaper.com"></a>';
+
 		return ob_get_clean();
 	}    
 }
