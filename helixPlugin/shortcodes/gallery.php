@@ -83,26 +83,26 @@ if(!function_exists('gallery_sc')) {
 		
 		<?php if($filter=='yes') { ?>
 			<script type="text/javascript">
-				window.addEvent('load', function(){
-					spnoConflict(function($){
-					$gallery = $('.gallery');
-					$gallery.isotope({
-					  // options
-					  itemSelector : 'li',
-					  layoutMode : 'fitRows'
-					});
-					
-					$filter = $('.gallery-filters');
-					$selectors = $filter.find('>a');
-					
-					$filter.find('>a').click(function(){
-						var selector = $(this).attr('data-filter');
-						
+				spnoConflict(function($){
+					$(window).load(function(){
+						$gallery = $('.gallery');
+						$gallery.isotope({
+				  			// options
+				  			itemSelector : 'li',
+				  			layoutMode : 'fitRows'
+						});
+
+						$filter = $('.gallery-filters');
+						$selectors = $filter.find('>a');
+
+						$filter.find('>a').click(function(){
+							var selector = $(this).attr('data-filter');
+
 							$selectors.removeClass('active');
 							$(this).addClass('active');
 							
 							$gallery.isotope({ filter: selector });
-						  return false;
+							return false;
 						});
 					});
 				});
