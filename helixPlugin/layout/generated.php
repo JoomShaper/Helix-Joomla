@@ -11,14 +11,14 @@
 if( !function_exists('get_value') ){
 
     function get_value($item, $method){
-        return isset($item->$method) ? $item->$method : '';
+        return isset($item[$method]) ? $item[$method] : '';
     }
 }
 
 if( !function_exists('get_color') ){
 
     function get_color($item, $method){
-        return isset($item->$method) ? $item->$method : 'rgba(255, 255, 255, 0)';
+        return isset($item[$method]) ? $item[$method] : 'rgba(255, 255, 255, 0)';
     }
 }
 
