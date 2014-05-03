@@ -5,9 +5,9 @@
     <author>JoomShaper.com</author>
     <authorEmail>support@joomshaper.com</authorEmail>
     <authorUrl>http://www.joomshaper.com</authorUrl>
-    <copyright>Copyright (C) 2010 - 2013 JoomShaper.com. All rights reserved.</copyright>
+    <copyright>Copyright (C) 2010 - 2014 JoomShaper.com. All rights reserved.</copyright>
     <license>http://www.gnu.org/licenses/gpl-2.0.html GPLv2 or later</license>
-    <version>2.0.9</version>
+    <version>2.1.6</version>
     <description>
 		<![CDATA[
 			Shaper Helix – II is the default/blank template of Helix Framework version 2.<br />
@@ -44,6 +44,15 @@
         <position>left</position>
         <position>right</position>
         <position>feature</position>
+        <position>slider</position>
+        <position>position1</position>
+        <position>position2</position>
+        <position>position3</position>
+        <position>position4</position>
+        <position>position5</position>
+        <position>position6</position>
+        <position>position7</position>
+        <position>position8</position>
         <position>bottom1</position>
         <position>bottom2</position>
         <position>bottom3</position>
@@ -57,6 +66,7 @@
         <file>index.html</file>
         <file>index.php</file>
         <file>favicon.ico</file>
+        <file>en-GB.tpl_shaper_helix_ii.ini</file>
         <file>template_preview.png</file>
         <file>template_thumbnail.png</file>
         <file>templateDetails.xml</file>
@@ -199,15 +209,24 @@
 
                 <field name="menutype" type="list" default="mega" label="MENU_TYPE">
                     <option value="mega">Mega Menu</option>
+                    <option value="drop">Dropline Menu</option>
+                    <option value="split">Split Menu</option>
                 </field>
+
                 <field name="menu_col_width" type="text" default="200" label="DROP_COL_WIDTH" />
                 <field name="show_menu_image" class="parent menuimage" type="radio" default="1" label="SHOW_MENU_IMAGE">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </field>
+
                 <field name="menu_image_position" class="child menuimage menuimage_1" type="radio" default="1" label="MENU_IMAGE_POSITION">
                     <option value="0">Background Image</option>
                     <option value="1">Image Source</option>
+                </field>
+
+                <field name="submenu_position" type="list" default="0" label="Submenu Position">
+                    <option value="0">Default</option>
+                    <option value="1">Center</option>
                 </field>
 
 				<field type="group" title="Menu Offsets" />
@@ -234,7 +253,7 @@
 
             <!--Start Advanced Tab-->
             <fieldset name="advanced">
-                <field type="group" title="Cache Setting" />
+                <field type="group" title="CACHE_SETTINGS" />
                 <field name="cache_time" size="40" type="text" default="60" label="CACHE_TIME" />
                 <field name="compress_css" type="radio" default="0" label="CSS_COMPRESS">
                     <option value="0">Disable</option>
@@ -252,18 +271,24 @@
                 <field name="ga_code" class="child analytics analytics_1" type="text" default="" label="GA_CODE" />
 				
                 <field type="group" title="LOAD_JQUERY" />
-                <field name="loadjquery" class="parent loadjquery" type="radio" default="0" label="Force Load">
+                <field name="loadjquery" class="parent loadjquery" type="radio" default="0" label="FORCE_LOAD">
                     <option value="0">No</option>
                     <option value="1">YES</option>
                 </field>
 				
-				<field name="loadfromcdn" class="child loadjquery loadjquery_1" type="radio" default="0" label="Use CDN">
+				<field name="loadfromcdn" class="child loadjquery loadjquery_1" type="radio" default="0" label="USE_CDN">
                     <option value="0">No</option>
                     <option value="1">YES</option>
                 </field>
 				
 				<field type="group" title="LESS" />
 				 <field name="lessoption" class="" type="radio" default="1" label="Enable">
+                    <option value="0">No</option>
+                    <option value="1">YES</option>
+                </field>
+				
+				<field type="group" title="COMPONENT_AREA" />
+				<field name="hide_component_area" class="" type="radio" default="0" label="HIDE_FRONTPAGE">				
                     <option value="0">No</option>
                     <option value="1">YES</option>
                 </field>

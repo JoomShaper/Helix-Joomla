@@ -1,13 +1,10 @@
 <?php
-/*---------------------------------------------------------------
-# Package - Joomla Template based on Helix Framework   
-# ---------------------------------------------------------------
-# Author - JoomShaper http://www.joomshaper.com
-# Copyright (C) 2010 - 2012 JoomShaper.com. All Rights Reserved.
-# license - PHP files are licensed under  GNU/GPL V2
-# license - CSS  - JS - IMAGE files  are Copyrighted material 
-# Websites: http://www.joomshaper.com
------------------------------------------------------------------*/
+/**
+ * @package Helix Framework
+ * @author JoomShaper http://www.joomshaper.com
+ * @copyright Copyright (c) 2010 - 2014 JoomShaper
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
+*/
 //no direct accees
 defined ('_JEXEC') or die ('resticted aceess');
 
@@ -46,4 +43,3 @@ function pagination_item_active(&$item) {
 function pagination_item_inactive(&$item) {
 	return "<li class=\"pagination-active\"><a>".$item->text."</a></li>";
 }
-?>
