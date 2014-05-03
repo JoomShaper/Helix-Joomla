@@ -1,5 +1,10 @@
 <?php
-//Hide component area
+/**
+ * @package Helix Framework
+ * @author JoomShaper http://www.joomshaper.com
+ * @copyright Copyright (c) 2010 - 2014 JoomShaper
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
+*/
 if(!function_exists('hide_sc')) {
     function hide_sc($atts, $content="") {
         ob_start();

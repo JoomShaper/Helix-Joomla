@@ -25,6 +25,7 @@ abstract class JHtmlBootstrap
 	protected static $loaded = array();
 
 	/**
+	 *                                                               If a single number is provided, the offset will be applied in both top
 	 * Add javascript support for Bootstrap alerts
 	 *
 	 * @param   string  $selector  Common class for the alerts

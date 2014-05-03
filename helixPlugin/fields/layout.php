@@ -2,7 +2,7 @@
 	/**
 	 * @package Helix Framework
 	 * @author JoomShaper http://www.joomshaper.com
-	 * @copyright Copyright (c) 2010 - 2013 JoomShaper
+	 * @copyright Copyright (c) 2010 - 2014 JoomShaper
 	 * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
 	*/
     defined('JPATH_BASE') or die;
@@ -20,8 +20,6 @@
                 var fieldName = 'jform[params][".$this->element['name']."]';
             ");
 
-
-
             $template     = $this->form->getValue('template');
 
             $theme_layout_path    = JPATH_SITE.'/templates/'.$template.'/layout/';
@@ -29,8 +27,9 @@
             $helix_layout_path = JPATH_SITE.'/plugins/system/helix/layout/';
             $layout      = (string) $this->element['default'];
 
-
-            $layoutsettings = self::toObject( $this->value );
+            $layoutsettings = json_decode( json_encode( $this->value ), true);
+            
+            $positions = $this->getPositions();
 
             if( file_exists($theme_path.'html/modules.php') ){
                 include_once( $theme_path.'html/modules.php' );
@@ -39,29 +38,41 @@
 
                 $modChromes=array();
             }
-            if( !empty($layoutsettings) ){
-                file_put_contents( $theme_layout_path.$template.'.json', json_encode($layoutsettings) );
-            }
 
-            $positions = $this->getPositions();
+            //Check error
+            if( !empty($layoutsettings) )
+            {
+
+                if( strpos(serialize($layoutsettings), 'Trying to get property of non-object') )
+                {
+                    $layoutsettings = json_decode(file_get_contents($theme_layout_path.$template.'.json'), true);
+                    JError::raiseWarning(100, 'Template layout is corrupted! Please update the template or just update the layout json file.');
+                }
+                else
+                {
+                    //write layout json file
+                    file_put_contents( $theme_layout_path.$template.'.json', json_encode($layoutsettings) );
+                }
+            }
+            
 
             if( is_array($layoutsettings) ){
+
                 return $this->generateLayout($helix_layout_path,$layoutsettings, $positions, $modChromes);
 
             } else{
 
                 if( file_exists($theme_layout_path.$template.'.json') )
                 {
-                    $layoutsettings = json_decode(file_get_contents($theme_layout_path.$template.'.json'));
+                    $layoutsettings = json_decode(file_get_contents($theme_layout_path.$template.'.json'), true);
                     return $this->generateLayout($helix_layout_path,$layoutsettings, $positions,$modChromes);
                 }
 
-                $layoutsettings = json_decode(file_get_contents($helix_layout_path.'default.json'));
-                return $this->generateLayout($helix_layout_path,$layoutsettings, $positions,$modChromes);
+                $layoutsettings = json_decode(file_get_contents($helix_layout_path.'default.json'), true);
+                return $this->generateLayout($helix_layout_path, $layoutsettings, $positions,$modChromes);
             }
 
         }
-
 
 
         private function generateLayout($path, $layout, $positions, $modChromes)
@@ -112,28 +123,5 @@
             return $selectOption;
 
 
-        }
-
-        private static function toObject(&$array, $class = 'stdClass')
-        {
-            $obj = null;
-
-            if (is_array($array))
-            {
-                $obj = new $class;
-
-                foreach ($array as $k => $v)
-                {
-                    if (is_array($v))
-                    {
-                        $obj->$k = self::toObject($v, $class);
-                    }
-                    else
-                    {
-                        $obj->$k = $v;
-                    }
-                }
-            }
-            return $obj;
         }
 }

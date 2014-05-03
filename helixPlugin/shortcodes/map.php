@@ -20,11 +20,12 @@ if(!function_exists('map_sc')) {
 				  'zoom' => 8
 			 ), $atts));
 			
+			Helix::addShortcodeScript('https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true', ',', false);
+
 			ob_start();
+
 			?>
 				
-			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true"></script>
-		
 			<script type="text/javascript">
 			  var myLatlng  = new google.maps.LatLng(<?php echo $lat ?>,<?php echo $lng ?>);
 			  function initialize() {

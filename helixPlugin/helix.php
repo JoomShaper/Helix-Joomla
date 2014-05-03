@@ -18,26 +18,59 @@
             $helix_path = JPATH_PLUGINS.'/system/helix/core/helix.php';
             if (file_exists($helix_path)) {
                 require_once($helix_path);
-                Helix::getInstance();
-                Helix::getInstance()->loadHelixOverwrite();
-
-            } else {
-                echo JText::_('Helix framework not found.');
-                jexit();
+                Helix::getInstance()
+                    ->loadHelixOverwrite()
+                    ->importShortCodeFiles();
             }
+
         }
 
-        function onAfterRoute()
+        //Added 2.1.6
+        function onContentPrepare($context, &$article)
         {
 
-            $app = JFactory::getApplication();
-            if('com_search' == JRequest::getCMD('option') and !$app->isAdmin()) {
-                require_once(dirname(__FILE__) .'/html/com_search/view.html.php');
+            $userDef =  ( $context == 'com_content.article' ) ||
+                        ( $context == 'com_content.category' ) ||
+                        ( $context == 'com_content.featured' ) ||
+                        ( $context == 'mod_custom.content' );
+
+            if( $userDef ) {
+                $article->text = do_shortcode($article->text);
             }
+ 
         }
+
+
+        function onAfterRender()
+        {
+            $shortcodes_scripts    = Helix::getInstance()->_shortcodes_scripts;
+            $shortcodes_styles     = Helix::getInstance()->_shortcodes_styles;
+
+            $shortcodes_scripts    = array_unique($shortcodes_scripts);
+            $shortcodes_styles     = array_unique($shortcodes_styles);
+
+            $data           =  JResponse::getBody();
+            $new_head_data  = '';
+
+            foreach ($shortcodes_styles as $style)
+            {
+                $new_head_data .= '<link rel="stylesheet" href="' . $style . '" />'. "\n"; 
+            }     
+
+            foreach ($shortcodes_scripts as $script)
+            {
+                $new_head_data .= '<script type="text/javascript" src="' . $script . '"></script>'. "\n"; 
+            }    
+
+            $data = str_replace('</head>', $new_head_data . "\n</head>", $data);
+
+            JResponse::setBody($data);
+        }
+
 
         function onAfterDispatch()
         {
+
             if(  !JFactory::getApplication()->isAdmin() ){
 
                 $activeMenu = JFactory::getApplication()->getMenu()->getActive();
@@ -51,42 +84,6 @@
                     $style->load($template_style_id);
 
                     if( !empty($style->template) ) JFactory::getApplication()->setTemplate($style->template, $style->params);
-                }
-            }
-        }
-
-
-        function onAfterRender()
-        {
-            if(  !JFactory::getApplication()->isAdmin() ){
-
-                $document = JFactory::getDocument();
-                $type = $document->getType();
-
-                if($type=='html') {
-
-                    $oldhead = $document->getHeadData();  // old head
-
-                    $data =  JResponse::getBody();
-                    Helix::getInstance()->importShortCodeFiles();
-
-                    $data = shortcode_unautop($data);
-                    $data = do_shortcode($data); 
-                    $newhead = $document->getHeadData();  // new head
-                    $scripts =  (array)  array_diff_key($newhead['scripts'], $oldhead['scripts']);
-                    $styles  =  (array) array_diff_key($newhead['styleSheets'], $oldhead['styleSheets']);
-
-                    $new_head_data = '';
-
-                    foreach ($scripts as $key => $type)
-                        $new_head_data .= '<script type="' . $type['mime'] . '" src="' . $key . '"></script>';
-
-                    foreach ($styles as $key => $type)
-                        $new_head_data .=  '<link rel="stylesheet" href="' . $key . '" />';
-
-                    $data = str_replace('</head>', $new_head_data . "\n</head>", $data);
-
-                    JResponse::setBody($data);
                 }
             }
         }

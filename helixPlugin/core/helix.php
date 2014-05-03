@@ -17,6 +17,8 @@
         private $document;
         private $importedFiles=array();
         private $_less;
+        public $_shortcodes_scripts = array();
+        public $_shortcodes_styles = array();
 
         //initialize 
         public function __construct(){
@@ -441,11 +443,6 @@
         private static function generatelayout($layout)
         {
 
-            if( is_array( $layout ) )
-            {
-                $layout = self::getInstance()->toObject( $layout );
-            }
-
             foreach($layout as $index=>$value)
             {
                 if( is_null( self::getInstance()->showRow($value) ) ) continue;
@@ -465,46 +462,53 @@
                     break;
                 }
 
-                //  self::getInstance()->layout.="\n\n".'<!-- Start Row: '.$index.' -->'."\n";
-                //  start row
+                $row_variables = (  ( self::getInstance()->get_color_value( $value, 'backgroundcolor' ) ) || 
+                                    ( self::getInstance()->get_color_value( $value, 'textcolor' ) ) ||
+                                    ( FALSE !== self::getInstance()->get_layout_value( $value, 'margin' ) ) ||
+                                    ( FALSE !== self::getInstance()->get_layout_value( $value, 'padding' ) ) );
 
+                $row_css = '';
 
-                $id = ' #sp-'. self::getInstance()->slug($value->name) .'-wrapper{'."\n";
-                $link = ' #sp-'. self::getInstance()->slug($value->name) .'-wrapper a{'."\n";
-                $linkhover = ' #sp-'. self::getInstance()->slug($value->name) .'-wrapper a:hover{'."\n";
-                $endcss = "\n".'}';
+                //double instance
+                if ( $row_variables )
+                {
 
+                    $row_css .= "\n" . '#sp-'. self::getInstance()->slug($value->name) .'-wrapper{';
 
-                self::getInstance()->inline_css .= $id;
-                if( self::getInstance()->get_color_value( $value, 'backgroundcolor' ) ){
-                    self::getInstance()->inline_css .= 'background: '. self::getInstance()->get_color_value( $value, 'backgroundcolor' ) .' !important;';                   
+                    if( self::getInstance()->get_color_value( $value, 'backgroundcolor' ) ){
+                        $row_css .= 'background: '. self::getInstance()->get_color_value( $value, 'backgroundcolor' ) .' !important; ';                   
+                    }
+
+                    if( self::getInstance()->get_color_value( $value, 'textcolor' ) ){
+                        $row_css .= 'color: '. self::getInstance()->get_color_value( $value, 'textcolor' ) .' !important; ';                   
+                    }  
+
+                    if( FALSE !== self::getInstance()->get_layout_value( $value, 'margin' ) ){
+                        $row_css .= 'margin: '. self::getInstance()->get_layout_value( $value, 'margin' ) .' !important; ';                   
+                    }
+                    if( FALSE !== self::getInstance()->get_layout_value( $value, 'padding' ) ){
+                        $row_css .= 'padding: '. self::getInstance()->get_layout_value( $value, 'padding' ) .' !important; ';                   
+                    }
+
+                    $row_css .= '}' . "\n";
+
                 }
 
-                if( self::getInstance()->get_color_value( $value, 'textcolor' ) ){
-                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'textcolor' ) .' !important;';                   
-                }  
-
-
-                if( FALSE !== self::getInstance()->get_layout_value( $value, 'margin' ) ){
-                    self::getInstance()->inline_css .= 'margin: '. self::getInstance()->get_layout_value( $value, 'margin' ) .' !important;';                   
-                }
-                if( FALSE !== self::getInstance()->get_layout_value( $value, 'padding' ) ){
-                    self::getInstance()->inline_css .= 'padding: '. self::getInstance()->get_layout_value( $value, 'padding' ) .' !important;';                   
-                }
-                self::getInstance()->inline_css .= $endcss;
-
-                self::getInstance()->inline_css .= $link;
                 if( self::getInstance()->get_color_value( $value, 'linkcolor' ) ){
-                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkcolor' ) .' !important;';                   
+                    $row_css .= "\n" . '#sp-'. self::getInstance()->slug($value->name) .'-wrapper a{';
+                    $row_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkcolor' ) .' !important; ';
+                    $row_css .= '}' . "\n";            
                 }
-                self::getInstance()->inline_css .= $endcss;
 
-                self::getInstance()->inline_css .= $linkhover;
                 if( self::getInstance()->get_color_value( $value, 'linkhovercolor' ) ){
-                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkhovercolor' ) .' !important;';                   
+                    $row_css .= "\n" . '#sp-'. self::getInstance()->slug($value->name) .'-wrapper a:hover{';
+                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkhovercolor' ) .' !important; ';
+                    $row_css .= '}' . "\n";                  
                 }
-                self::getInstance()->inline_css .= $endcss;
 
+                self::getInstance()->inline_css .= $row_css;
+
+                //Layout
                 self::getInstance()->layout.='<'.$sematic.' id="sp-'. self::getInstance()->slug($value->name) .'-wrapper" 
                 class="'. self::getInstance()->get_row_class($value->class) . ' '.((empty($value->responsive)?'':''.$value->responsive.'')).'">';
                 //
@@ -600,13 +604,11 @@
 
                         $i++;
 
-                        if( $v->type=='message' ){
-                            self::getInstance()->layout.='<jdoc:include type="message" />';
-                        }
-                        elseif( $v->type=='component' )
+                        if( $v->type=='component' )
                         {
                             self::getInstance()->layout.='<section id="sp-component-wrapper">';
                             self::getInstance()->layout.='<div id="sp-component">';
+                            self::getInstance()->layout.='<jdoc:include type="message" />';
                             self::getInstance()->layout.='<jdoc:include type="component" />';
                             self::getInstance()->layout.='</div>';
                             self::getInstance()->layout.='</section>';
@@ -824,7 +826,75 @@
                 }        
             }
             return self::getInstance();
-        }    
+        }
+
+
+
+        /**
+        * Add stylesheet
+        * 
+        * @param mixed $sources. string or array
+        * @param string $seperator. default is , (comma)
+        * @return self
+        */
+        public static function addShortcodeStyle($sources, $seperator=',',$checkpath=true) {
+
+            $srcs = array();
+            if( is_string($sources) ) $sources = explode($seperator,$sources);
+            if(!is_array($sources)) $sources = array($sources);
+
+            foreach( (array) $sources as $source ) $srcs[] = trim($source);
+
+            foreach ($srcs as $src) {
+
+                if(self::getInstance()->isExternalURL($src)) self::getInstance()->_shortcodes_styles[] = $src;
+
+                if( $checkpath==false ){
+                    self::getInstance()->_shortcodes_styles[] = $src;
+                    continue; 
+                } 
+
+                //cheack in template path
+                if( file_exists( self::getInstance()->themePath() . '/css/'. $src)) { 
+                    self::getInstance()->_shortcodes_styles[] = self::getInstance()->themePath(true) . '/css/' . $src;
+                } 
+                //if not found, then check from helix path
+                elseif( file_exists( self::getInstance()->frameworkPath() . '/css/' . $src ) ) {
+                    self::getInstance()->_shortcodes_styles[] = self::getInstance()->frameworkPath(true) . '/css/' . $src;
+                }        
+            }
+            return self::getInstance();
+        } 
+
+        public static function addShortcodeScript($sources, $seperator=',', $checkpath=true) {
+
+            $srcs = array();
+            if( is_string($sources) ) $sources = explode($seperator,$sources);
+            if(!is_array($sources)) $sources = array($sources);
+
+            foreach( (array) $sources as $source ) $srcs[] = trim($source);
+
+            foreach ($srcs as $src) {
+
+                if(self::getInstance()->isExternalURL($src)) self::getInstance()->_shortcodes_scripts[] = $src;
+
+                if( $checkpath==false ){
+                    self::getInstance()->_shortcodes_scripts[] = $src;
+                    continue; 
+                } 
+
+                //cheack in template path
+                if( file_exists( self::getInstance()->themePath() . '/js/'. $src)) { 
+                    self::getInstance()->_shortcodes_scripts[] = self::getInstance()->themePath(true) . '/js/' . $src;
+                } 
+                //if not found, then check from helix path
+                elseif( file_exists( self::getInstance()->frameworkPath() . '/js/' . $src ) ) { 
+                    self::getInstance()->_shortcodes_scripts[] = self::getInstance()->frameworkPath(true) . '/js/' . $src;
+                }        
+            }
+            return self::getInstance();
+        }
+
 
         /**
         * Add Inline Javascript
@@ -1063,47 +1133,7 @@
             self::getInstance()->getDocument()->direction = $current;
 
             return $current;
-        }
-
-        private static function cleanMeta(){
-
-            $cMetaTitle = self::getInstance()->strip_shortcode(self::getInstance()->document->getMetaData('title'));
-            $cMetaDescription = self::getInstance()->strip_shortcode(self::getInstance()->document->getMetaData('description'));
-            $ogMetaTitle = self::getInstance()->strip_shortcode(self::getInstance()->document->getMetaData('og:title'));
-            $ogMetaDescription = self::getInstance()->strip_shortcode(self::getInstance()->document->getMetaData('og:description'));
-
-            self::getInstance()->document->setMetaData('title', $cMetaTitle);
-            self::getInstance()->document->setMetaData('description', $cMetaDescription);
-            self::getInstance()->document->setMetaData('og:title', $ogMetaTitle);
-            self::getInstance()->document->setMetaData('og:description', $ogMetaDescription);
-
-            return self::getInstance();			
-        }
-
-        public static function strip_shortcode($text, $tags = '', $invert = FALSE) {
-
-            $replace = array(
-                '[' => '<',
-                ']' => '>'
-                );
-            $text = strtr($text, $replace);
-
-            preg_match_all('/<(.+?)[\s]*\/?[\s]*>/si', trim($tags), $tags); 
-            $tags = array_unique($tags[1]); 
-
-            if(is_array($tags) AND count($tags) > 0) { 
-                if($invert == FALSE) { 
-                    return preg_replace('@<(?!(?:'. implode('|', $tags) .')\b)(\w+)\b.*?>.*?</\1>@si', '', $text); 
-                } 
-                else { 
-                    return preg_replace('@<('. implode('|', $tags) .')\b.*?>.*?</\1>@si', '', $text); 
-                } 
-            } 
-            elseif($invert == FALSE) { 
-                return preg_replace('@<(\w+)\b.*?>.*?</\1>@si', '', $text); 
-            } 
-            return $text; 
-        } 		
+        }		
 
         /**
         * Load Head
@@ -1113,9 +1143,6 @@
         * @update    2.0
         */    
         public static function Header() {
-            JHtml::_('behavior.framework');
-            self::getInstance()->cleanMeta();
-
             //layout option
             if (self::getInstance()->Param('layout_type')=='responsive') {
                 self::getInstance()->document->setMetaData('viewport', 'width=device-width, initial-scale=1.0');
@@ -1361,7 +1388,7 @@
             else $font_name = str_replace('+', ' ', $name );
 
             self::getInstance()->document->addStyleSheet("http://fonts.googleapis.com/css?family=" . $name);
-            $styleDeclaration = "$field{font-family:'" . $font_name . "'; -webkit-font-smoothing: subpixel-antialiased !important;}";
+            $styleDeclaration = "$field{font-family:'" . $font_name . "';}";
             self::getInstance()->document->addStyleDeclaration($styleDeclaration);
         }    
 
@@ -1549,9 +1576,10 @@
 
         public static function loadHelixOverwrite(){
 
-            if (!JFactory::getApplication()->isAdmin()) {
+             if (!JFactory::getApplication()->isAdmin()) {
 
                 if( JVERSION >= 3 ){
+                    
                     // override core joomla 3 class
                     if (!class_exists('JViewLegacy', false))  self::getInstance()->Import('core/classes/joomla30/viewlegacy.php');
                     if (!class_exists('JModuleHelper', false)) self::getInstance()->Import('core/classes/joomla30/helper.php'); 
@@ -1561,10 +1589,12 @@
                     if (!class_exists('JHtmlBehavior', false)) self::getInstance()->Import('core/classes/joomla25/behavior.php'); 
                     if (!class_exists('JViewLegacy', false)) self::getInstance()->Import('core/classes/joomla25/view.php'); 
                     if (!class_exists('JDocumentRendererMessage', false)) self::getInstance()->Import('core/classes/joomla25/message.php'); 
-                    if (!class_exists('JModuleHelper', false)) self::getInstance()->Import('core/classes/joomla25/helper.php');  
-                }
-                if (!class_exists('JHtmlBootstrap', false)) Helix::Import('core/classes/joomla30/bootstrap.php'); 
-            } 
+                    if (!class_exists('JModuleHelper', false)) self::getInstance()->Import('core/classes/joomla25/helper.php');
+                    if (!class_exists('JHtmlBootstrap', false)) Helix::Import('core/classes/joomla30/bootstrap.php');
+                } 
+            }
+
+            return self::getInstance();
 
         }
 

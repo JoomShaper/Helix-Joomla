@@ -16,7 +16,7 @@ if(!function_exists('video_sc')) {
 			  'height' => 281
 		), $atts));
 	
-		Helix::addJS('fitvids.js');
+		Helix::addShortcodeScript('fitvids.js');
 		ob_start();
 
 		$video = parse_url($content);

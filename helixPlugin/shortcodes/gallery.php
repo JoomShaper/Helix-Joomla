@@ -25,10 +25,10 @@ if(!function_exists('gallery_sc')) {
 		do_shortcode( $content );
 		
 		//Add gallery.css file
-		Helix::addCSS('gallery.css');
+		Helix::addShortcodeStyle('gallery.css');
 		//isotope
 		if($filter=='yes')
-			Helix::addJS('jquery.isotope.min.js');
+			Helix::addShortcodeScript('jquery.isotope.min.js');
 		
 		$tags = '';
 		

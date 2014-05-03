@@ -2,7 +2,7 @@
 /**
  * @package Helix Framework
  * @author JoomShaper http://www.joomshaper.com
- * @copyright Copyright (c) 2010 - 2013 JoomShaper
+ * @copyright Copyright (c) 2010 - 2014 JoomShaper
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
 */
 
@@ -38,7 +38,6 @@ if( !function_exists('get_color') ){
                     <label>Type: </label>
                     <select class="includetypes">
                         <option value="modules">Modules</option>
-                        <option value="message">Message</option> 
                         <option value="component">Component</option>
                     </select>
                 </div>
@@ -194,8 +193,6 @@ if( !function_exists('get_color') ){
     <div class="generator">
         <?php
 
-            //print_r($layout); die;
-
             foreach($layout as $items )
             {
             ?>
@@ -204,11 +201,11 @@ if( !function_exists('get_color') ){
                 <div class="span12">
 
                     <div class="rowpropperties pull-left"> 
-                        <span class="rowname"><?php echo $items->name ?></span>
+                        <span class="rowname"><?php echo $items['name'] ?></span>
                         <span class="rowdocs">
-                            <input type="hidden" class="rownameinput" name="" value="<?php echo $items->name ?>">
-                            <input type="hidden" class="rowcustomclassinput" name="" value="<?php echo $items->class ?>">
-                            <input type="hidden" class="rowresponsiveinput" name="" value="<?php echo $items->responsive ?>">
+                            <input type="hidden" class="rownameinput" name="" value="<?php echo $items['name'] ?>">
+                            <input type="hidden" class="rowcustomclassinput" name="" value="<?php echo $items['class'] ?>">
+                            <input type="hidden" class="rowresponsiveinput" name="" value="<?php echo $items['responsive'] ?>">
 
                             <input type="hidden" class="rowbackgroundcolorinput" name="" value="<?php echo get_color($items,'backgroundcolor') ?>">
                             <input type="hidden" class="rowtextcolorinput" name="" value="<?php echo get_color($items,'textcolor') ?>">
@@ -232,16 +229,16 @@ if( !function_exists('get_color') ){
 
                         <!-- Columns -->
                         <?php
-                            foreach( $items->children as $item )
+                            foreach( $items['children'] as $item )
                             {
                             ?>
-                            <div class="<?php echo ($item->type=='component' or $item->type=='message') ? 'type-'.$item->type:'' ?>  span<?php echo $item->span ?> column <?php echo ( empty($item->offset)?'':'offset'.$item->offset )?>"> 
+                            <div class="<?php echo ($item['type']=='component' or $item['type']=='message') ? 'type-'.$item['type']:'' ?>  span<?php echo $item['span'] ?> column <?php echo ( empty($item['offset'])?'':'offset'.$item['offset'] )?>"> 
 
                                 <span class="position-name"><?php
 
-                                        if($item->type=='component' or $item->type=='message') echo strtoupper($item->type);
-                                        elseif(empty($item->position)) echo '(none)';
-                                        else echo $item->position;
+                                        if($item['type']=='component' or $item['type']=='message') echo strtoupper($item['type']);
+                                        elseif(empty($item['position'])) echo '(none)';
+                                        else echo $item['position'];
 
                                 ?></span>
                                 <div class="columntools">
@@ -251,31 +248,30 @@ if( !function_exists('get_color') ){
                                     <a href="" title="Move column" class="fa fa-arrows columnmove"></a>
                                 </div> 
 
-                                <input type="hidden" class="widthinput" name="" value="<?php echo $item->span ?>"> 
-                                <input type="hidden" class="offsetinput" name="" value="<?php echo $item->offset ?>"> 
-                                <input type="hidden" class="typeinput" name="" value="<?php echo $item->type ?>"> 
-                                <input type="hidden" class="positioninput" name="" value="<?php echo $item->position ?>"> 
-                                <input type="hidden" class="styleinput" name="" value="<?php echo $item->style ?>"> 
-                                <input type="hidden" class="customclassinput" name="" value="<?php echo $item->customclass ?>"> 
-                                <input type="hidden" class="responsiveclassinput" name="" value="<?php echo $item->responsiveclass ?>"> 
+                                <input type="hidden" class="widthinput" name="" value="<?php echo $item['span'] ?>"> 
+                                <input type="hidden" class="offsetinput" name="" value="<?php echo $item['offset'] ?>"> 
+                                <input type="hidden" class="typeinput" name="" value="<?php echo $item['type'] ?>"> 
+                                <input type="hidden" class="positioninput" name="" value="<?php echo $item['position'] ?>"> 
+                                <input type="hidden" class="styleinput" name="" value="<?php echo $item['style'] ?>"> 
+                                <input type="hidden" class="customclassinput" name="" value="<?php echo $item['customclass'] ?>"> 
+                                <input type="hidden" class="responsiveclassinput" name="" value="<?php echo $item['responsiveclass'] ?>"> 
 
                                 <!-- Row in Columns -->
                                 <?php
-                                    if( !empty($item->children) and is_array($item->children) )
+                                    if( !empty($item['children']) and is_array($item['children']) )
                                     {
-                                        foreach( $item->children as $children )
+                                        foreach( $item['children'] as $children )
                                         {
                                         ?>
                                         <div class="row-fluid child-row">
                                             <div class="span12">
 
                                                 <div class="rowpropperties pull-left"> 
-                                                    <span class="rowname"><?php echo $children->name ?></span>
+                                                    <span class="rowname"><?php echo $children['name'] ?></span>
                                                     <span class="rowdocs">
-                                                        <input type="hidden" class="rownameinput" name="" value="<?php echo $children->name ?>">
-                                                        <input type="hidden" class="rowcustomclassinput" name="" value="<?php echo $children->class ?>">
-                                                        <input type="hidden" class="rowresponsiveinput" name="" value="<?php echo $children->responsive ?>">
-
+                                                        <input type="hidden" class="rownameinput" name="" value="<?php echo $children['name'] ?>">
+                                                        <input type="hidden" class="rowcustomclassinput" name="" value="<?php echo $children['class'] ?>">
+                                                        <input type="hidden" class="rowresponsiveinput" name="" value="<?php echo $children['responsive'] ?>">
                                                         
 
                                                         <input type="hidden" class="rowbackgroundcolorinput" name="" value="<?php echo get_color($children,'backgroundcolor') ?>">
@@ -301,17 +297,17 @@ if( !function_exists('get_color') ){
                                                 <div class="row-fluid show-grid">
 
                                                     <?php
-                                                        foreach($children->children as $children)
+                                                        foreach($children['children'] as $children)
                                                         {
                                                         ?>
 
-                                                        <div class="<?php echo ($children->type=='component' or $children->type=='message') ? 'type-'.$children->type:'' ?>  span<?php echo $children->span ?> column <?php echo ( empty($children->offset)?'':'offset'.$children->offset )?>"> 
+                                                        <div class="<?php echo ($children['type']=='component' or $children['type']=='message') ? 'type-'.$children['type']:'' ?>  span<?php echo $children['span'] ?> column <?php echo ( empty($children['offset'])?'':'offset'.$children['offset'] )?>"> 
 
                                                             <span class="position-name"><?php
 
-                                                                    if($children->type=='component' or $children->type=='message') echo strtoupper($children->type);
-                                                                    elseif(empty($children->position)) echo '(none)';
-                                                                    else echo $children->position;
+                                                                    if($children['type']=='component' or $children['type']=='message') echo strtoupper($children['type']);
+                                                                    elseif(empty($children['position'])) echo '(none)';
+                                                                    else echo $children['position'];
 
                                                             ?></span>
 
@@ -320,26 +316,24 @@ if( !function_exists('get_color') ){
 																<a href="" title="Add new row" class="fa fa-align-justify add-rowin-column"></a>
 																<a href="" title="Remove column" class="fa fa-times columndelete"></a>
 																<a href="" title="Move column" class="fa fa-arrows columnmove"></a>
-                                                            </span> 
+                                                            </span>
 
-                                                            <input type="hidden" class="widthinput" name="" value="<?php echo $children->span ?>"> 
-                                                            <input type="hidden" class="offsetinput" name="" value="<?php echo $children->offset ?>"> 
-                                                            <input type="hidden" class="typeinput" name="" value="<?php echo $children->type ?>"> 
-                                                            <input type="hidden" class="positioninput" name="" value="<?php echo $children->position ?>"> 
-                                                            <input type="hidden" class="styleinput" name="" value="<?php echo $children->style ?>"> 
-                                                            <input type="hidden" class="customclassinput" name="" value="<?php echo $children->customclass ?>"> 
-                                                            <input type="hidden" class="responsiveclassinput" name="" value="<?php echo $children->responsiveclass ?>">
+                                                            <input type="hidden" class="widthinput" name="" value="<?php echo $children['span'] ?>"> 
+                                                            <input type="hidden" class="offsetinput" name="" value="<?php echo $children['offset'] ?>"> 
+                                                            <input type="hidden" class="typeinput" name="" value="<?php echo $children['type'] ?>"> 
+                                                            <input type="hidden" class="positioninput" name="" value="<?php echo $children['position'] ?>"> 
+                                                            <input type="hidden" class="styleinput" name="" value="<?php echo $children['style'] ?>"> 
+                                                            <input type="hidden" class="customclassinput" name="" value="<?php echo $children['customclass'] ?>"> 
+                                                            <input type="hidden" class="responsiveclassinput" name="" value="<?php echo $children['responsiveclass'] ?>">
 
                                                             <!--3-->
 
-
-
                                                             <?php
 
-                                                                if( !empty($children->children) and is_array($children->children) )
+                                                                if( !empty($children['children']) and is_array($children['children']) )
                                                                 {
 
-                                                                    foreach( $children->children as $children )
+                                                                    foreach( $children['children'] as $children )
                                                                     {
 
 
@@ -350,19 +344,19 @@ if( !function_exists('get_color') ){
                                                                     <div class="row-fluid child-row">
                                                                         <div class="span12">
                                                                             <div class="rowpropperties pull-left"> 
-                                                                                <span class="rowname"><?php echo $children->name ?></span>
+                                                                                <span class="rowname"><?php echo $children['name'] ?></span>
                                                                                 <span class="rowdocs">
-                                                                                    <input type="hidden" class="rownameinput" name="" value="<?php echo $children->name ?>">
-                                                                                    <input type="hidden" class="rowcustomclassinput" name="" value="<?php echo $children->class ?>">
-                                                                                    <input type="hidden" class="rowresponsiveinput" name="" value="<?php echo $children->responsive ?>">
+                                                                                    <input type="hidden" class="rownameinput" name="" value="<?php echo $children['name'] ?>">
+                                                                                    <input type="hidden" class="rowcustomclassinput" name="" value="<?php echo $children['class'] ?>">
+                                                                                    <input type="hidden" class="rowresponsiveinput" name="" value="<?php echo $children['responsive'] ?>">
 
 
                                                                                     <input type="hidden" class="rowbackgroundcolorinput" name="" value="<?php echo get_color($children,'backgroundcolor') ?>">
-                                                        <input type="hidden" class="rowtextcolorinput" name="" value="<?php echo get_color($children,'textcolor') ?>">
-                                                        <input type="hidden" class="rowlinkcolorinput" name="" value="<?php echo get_color($children,'linkcolor') ?>">
-                                                        <input type="hidden" class="rowlinkhovercolorinput" name="" value="<?php echo get_color($children,'linkhovercolor') ?>">
-                                                        <input type="hidden" class="rowmargininput" name="" value="<?php echo get_value($children,'margin') ?>">
-                                                        <input type="hidden" class="rowpaddinginput" name="" value="<?php echo get_value($children,'padding') ?>">
+                                                                                    <input type="hidden" class="rowtextcolorinput" name="" value="<?php echo get_color($children,'textcolor') ?>">
+                                                                                    <input type="hidden" class="rowlinkcolorinput" name="" value="<?php echo get_color($children,'linkcolor') ?>">
+                                                                                    <input type="hidden" class="rowlinkhovercolorinput" name="" value="<?php echo get_color($children,'linkhovercolor') ?>">
+                                                                                    <input type="hidden" class="rowmargininput" name="" value="<?php echo get_value($children,'margin') ?>">
+                                                                                    <input type="hidden" class="rowpaddinginput" name="" value="<?php echo get_value($children,'padding') ?>">
                                                                                 </span>
                                                                             </div>
 
@@ -380,17 +374,17 @@ if( !function_exists('get_color') ){
                                                                             <div class="row-fluid show-grid">
 
                                                                                 <?php
-                                                                                    foreach($children->children as $children)
+                                                                                    foreach($children['children'] as $children)
                                                                                     {
                                                                                     ?>
 
-                                                                                    <div class="<?php echo ($children->type=='component' or $children->type=='message') ? 'type-'.$children->type:'' ?>  span<?php echo $children->span ?> column <?php echo ( empty($children->offset)?'':'offset'.$children->offset )?>"> 
+                                                                                    <div class="<?php echo ($children['type']=='component' or $children['type']=='message') ? 'type-'.$children['type']:'' ?>  span<?php echo $children['span'] ?> column <?php echo ( empty($children['offset'])?'':'offset'.$children['offset'] )?>"> 
 
                                                                                         <span class="position-name"><?php
 
-                                                                                                if($children->type=='component' or $children->type=='message') echo strtoupper($children->type);
-                                                                                                elseif(empty($children->position)) echo '(none)';
-                                                                                                else echo $children->position;
+                                                                                                if($children['type']=='component' or $children['type']=='message') echo strtoupper($children['type']);
+                                                                                                elseif(empty($children['position'])) echo '(none)';
+                                                                                                else echo $children['position'];
 
                                                                                         ?></span>
                                                                                         <span class="columntools">
@@ -400,13 +394,13 @@ if( !function_exists('get_color') ){
 																							<a href="" title="Move column" class="fa fa-arrows columnmove"></a>
                                                                                         </span> 
 
-                                                                                        <input type="hidden" class="widthinput" name="" value="<?php echo $children->span ?>"> 
-                                                                                        <input type="hidden" class="offsetinput" name="" value="<?php echo $children->offset ?>"> 
-                                                                                        <input type="hidden" class="typeinput" name="" value="<?php echo $children->type ?>"> 
-                                                                                        <input type="hidden" class="positioninput" name="" value="<?php echo $children->position ?>"> 
-                                                                                        <input type="hidden" class="styleinput" name="" value="<?php echo $children->style ?>"> 
-                                                                                        <input type="hidden" class="customclassinput" name="" value="<?php echo $children->customclass ?>"> 
-                                                                                        <input type="hidden" class="responsiveclassinput" name="" value="<?php echo $children->responsiveclass ?>">
+                                                                                        <input type="hidden" class="widthinput" name="" value="<?php echo $children['span'] ?>"> 
+                                                                                        <input type="hidden" class="offsetinput" name="" value="<?php echo $children['offset'] ?>"> 
+                                                                                        <input type="hidden" class="typeinput" name="" value="<?php echo $children['type'] ?>"> 
+                                                                                        <input type="hidden" class="positioninput" name="" value="<?php echo $children['position'] ?>"> 
+                                                                                        <input type="hidden" class="styleinput" name="" value="<?php echo $children['style'] ?>"> 
+                                                                                        <input type="hidden" class="customclassinput" name="" value="<?php echo $children['customclass'] ?>"> 
+                                                                                        <input type="hidden" class="responsiveclassinput" name="" value="<?php echo $children['responsiveclass'] ?>">
 
 
                                                                                         <!-- 4-->
@@ -414,29 +408,27 @@ if( !function_exists('get_color') ){
 
                                                                                         <?php
 
-                                                                                            if( !empty($children->children) and is_array($children->children) )
+                                                                                            if( !empty($children['children']) and is_array($children['children']) )
                                                                                             {
-                                                                                                foreach( $children->children as $children )
+                                                                                                foreach( $children['children'] as $children )
                                                                                                 {
 
                                                                                                 ?>
                                                                                                 <div class="row-fluid child-row">
                                                                                                     <div class="span12">
                                                                                                         <div class="rowpropperties pull-left"> 
-                                                                                                            <span class="rowname"><?php echo $children->name ?></span>
+                                                                                                            <span class="rowname"><?php echo $children['name'] ?></span>
                                                                                                             <span class="rowdocs">
-                                                                                                                <input type="hidden" class="rownameinput" name="" value="<?php echo $children->name ?>">
-                                                                                                                <input type="hidden" class="rowcustomclassinput" name="" value="<?php echo $children->class ?>">
-                                                                                                                <input type="hidden" class="rowresponsiveinput" name="" value="<?php echo $children->responsive ?>">
-
-
+                                                                                                                <input type="hidden" class="rownameinput" name="" value="<?php echo $children['name'] ?>">
+                                                                                                                <input type="hidden" class="rowcustomclassinput" name="" value="<?php echo $children['class'] ?>">
+                                                                                                                <input type="hidden" class="rowresponsiveinput" name="" value="<?php echo $children['responsive'] ?>">
 
                                                                                                                 <input type="hidden" class="rowbackgroundcolorinput" name="" value="<?php echo get_color($children,'backgroundcolor') ?>">
-                                                        <input type="hidden" class="rowtextcolorinput" name="" value="<?php echo get_color($children,'textcolor') ?>">
-                                                        <input type="hidden" class="rowlinkcolorinput" name="" value="<?php echo get_color($children,'linkcolor') ?>">
-                                                        <input type="hidden" class="rowlinkhovercolorinput" name="" value="<?php echo get_color($children,'linkhovercolor') ?>">
-                                                        <input type="hidden" class="rowmargininput" name="" value="<?php echo get_value($children,'margin') ?>">
-                                                        <input type="hidden" class="rowpaddinginput" name="" value="<?php echo get_value($children,'padding') ?>">
+                                                                                                                <input type="hidden" class="rowtextcolorinput" name="" value="<?php echo get_color($children,'textcolor') ?>">
+                                                                                                                <input type="hidden" class="rowlinkcolorinput" name="" value="<?php echo get_color($children,'linkcolor') ?>">
+                                                                                                                <input type="hidden" class="rowlinkhovercolorinput" name="" value="<?php echo get_color($children,'linkhovercolor') ?>">
+                                                                                                                <input type="hidden" class="rowmargininput" name="" value="<?php echo get_value($children,'margin') ?>">
+                                                                                                                <input type="hidden" class="rowpaddinginput" name="" value="<?php echo get_value($children,'padding') ?>">
                                                                                                             </span>
                                                                                                         </div>
                                                                                                         <div class="pull-right row-tools">
@@ -452,17 +444,17 @@ if( !function_exists('get_color') ){
                                                                                                         <div class="row-fluid show-grid">
 
                                                                                                             <?php
-                                                                                                                foreach($children->children as $children)
+                                                                                                                foreach($children['children'] as $children)
                                                                                                                 {
                                                                                                                 ?>
 
-                                                                                                                <div class="<?php echo ($children->type=='component' or $children->type=='message') ? 'type-'.$children->type:'' ?>  span<?php echo $children->span ?> column <?php echo ( empty($children->offset)?'':'offset'.$children->offset )?>"> 
+                                                                                                                <div class="<?php echo ($children['type']=='component' or $children['type']=='message') ? 'type-'.$children['type']:'' ?>  span<?php echo $children['span'] ?> column <?php echo ( empty($children['offset'])?'':'offset'.$children['offset'] )?>"> 
 
                                                                                                                     <span class="position-name"><?php
 
-                                                                                                                            if($children->type=='component' or $children->type=='message') echo strtoupper($children->type);
-                                                                                                                            elseif(empty($children->position)) echo '(none)';
-                                                                                                                            else echo $children->position;
+                                                                                                                            if($children['type']=='component' or $children['type']=='message') echo strtoupper($children['type']);
+                                                                                                                            elseif(empty($children['position'])) echo '(none)';
+                                                                                                                            else echo $children['position'];
 
                                                                                                                     ?></span>
                                                                                                                     <span class="columntools">
@@ -472,13 +464,13 @@ if( !function_exists('get_color') ){
 																														<a href="" title="Move column" class="fa fa-arrows columnmove"></a>                                                                
                                                                                                                     </span> 
 
-                                                                                                                    <input type="hidden" class="widthinput" name="" value="<?php echo $children->span ?>"> 
-                                                                                                                    <input type="hidden" class="offsetinput" name="" value="<?php echo $children->offset ?>"> 
-                                                                                                                    <input type="hidden" class="typeinput" name="" value="<?php echo $children->type ?>"> 
-                                                                                                                    <input type="hidden" class="positioninput" name="" value="<?php echo $children->position ?>"> 
-                                                                                                                    <input type="hidden" class="styleinput" name="" value="<?php echo $children->style ?>"> 
-                                                                                                                    <input type="hidden" class="customclassinput" name="" value="<?php echo $children->customclass ?>"> 
-                                                                                                                    <input type="hidden" class="responsiveclassinput" name="" value="<?php echo $children->responsiveclass ?>">
+                                                                                                                    <input type="hidden" class="widthinput" name="" value="<?php echo $children['span'] ?>"> 
+                                                                                                                    <input type="hidden" class="offsetinput" name="" value="<?php echo $children['offset'] ?>"> 
+                                                                                                                    <input type="hidden" class="typeinput" name="" value="<?php echo $children['type'] ?>"> 
+                                                                                                                    <input type="hidden" class="positioninput" name="" value="<?php echo $children['position'] ?>"> 
+                                                                                                                    <input type="hidden" class="styleinput" name="" value="<?php echo $children['style'] ?>"> 
+                                                                                                                    <input type="hidden" class="customclassinput" name="" value="<?php echo $children['customclass'] ?>"> 
+                                                                                                                    <input type="hidden" class="responsiveclassinput" name="" value="<?php echo $children['responsiveclass'] ?>">
 
                                                                                                                 </div>
 
@@ -523,8 +515,6 @@ if( !function_exists('get_color') ){
                                                             <!--3-->
 
 
-
-
                                                         </div>
 
 
@@ -555,12 +545,7 @@ if( !function_exists('get_color') ){
             }
         ?>
 
-
-
-
     </div>
-
-
 
     <div class="clearfix"></div>
 

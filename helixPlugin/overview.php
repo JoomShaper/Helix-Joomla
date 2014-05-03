@@ -11,7 +11,7 @@
 			<div class="sp-block sp-style1">
 				<h2><i class="fa fa-question-circle"></i> Helix Information</h2>
 				<div class="sp-content">
-					<h3>Version 2.1.5</h3>
+					<h3>Version 2.1.6</h3>
 					<p>
 						Powerful template framework for Joomla templating. It is now very much easy to develop a Joomla website using Helix Framework.
 						<br />
