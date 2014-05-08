@@ -502,7 +502,7 @@
 
                 if( self::getInstance()->get_color_value( $value, 'linkhovercolor' ) ){
                     $row_css .= "\n" . '#sp-'. self::getInstance()->slug($value->name) .'-wrapper a:hover{';
-                    self::getInstance()->inline_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkhovercolor' ) .' !important; ';
+                    $row_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkhovercolor' ) .' !important; ';
                     $row_css .= '}' . "\n";                  
                 }
 
