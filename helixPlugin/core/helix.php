@@ -1357,6 +1357,10 @@
             {
                 self::getInstance()->addJS('bootstrap.min.js');
             }
+            else
+            {
+                JHtml::_('bootstrap.framework');
+            }
 
             return self::getInstance();
         }
