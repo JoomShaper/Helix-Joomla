@@ -1352,7 +1352,11 @@
 
             self::getInstance()->addCSS('font-awesome.css');
             self::getInstance()->addJQuery();
-            self::getInstance()->addJS('bootstrap.min.js');
+            
+            if(JVERSION < 3)
+            {
+                self::getInstance()->addJS('bootstrap.min.js');
+            }
 
             return self::getInstance();
         }
