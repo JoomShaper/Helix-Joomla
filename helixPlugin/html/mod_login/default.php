@@ -34,6 +34,15 @@ endif; ?>
 				<input id="modlgn-passwd" type="password" name="password" class="input-large" tabindex="2" size="18" placeholder="<?php echo JText::_('JGLOBAL_PASSWORD') ?>" />
 			</div>
 		</div>
+
+		<?php if (count($twofactormethods) > 1): ?>
+		<div id="form-login-secretkey" class="control-group">
+			<div class="controls">
+				<input id="modlgn-secretkey" autocomplete="off" type="text" name="secretkey" class="input-large" tabindex="0" size="18" placeholder="<?php echo JText::_('JGLOBAL_SECRETKEY') ?>" />
+			</div>
+		</div>
+		<?php endif; ?>
+
 		<?php if (JPluginHelper::isEnabled('system', 'remember')) : ?>
 		<div id="form-login-remember" class="control-group checkbox">
 			<label for="modlgn-remember" class="control-label"><?php echo JText::_('MOD_LOGIN_REMEMBER_ME') ?></label> <input id="modlgn-remember" type="checkbox" name="remember" class="inputbox" value="yes"/>

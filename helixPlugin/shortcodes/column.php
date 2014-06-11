@@ -29,7 +29,7 @@ if(!function_exists('row_sc')) {
 		//Row
 		$html = '<div class="row-fluid ' . $params['class'] . '" ' . $id . '>';
 		//Columns
-		foreach ($columnArray as $key=>$value) $html .='<div class="' . $value['class'] . '">' . do_shortcode($value['content']) . '</div>';
+		foreach ($columnArray as $key=>$value) $html .='<div class="' . $value['width'] . ' ' . $value['class'] . '">' . do_shortcode($value['content']) . '</div>';
 		$html .='</div>';
 	
 		$columnArray = array();	
@@ -41,7 +41,22 @@ if(!function_exists('row_sc')) {
 	//Row Items
 	function span_sc( $atts, $content="" ){
 		global $columnArray;
-		$columnArray[] = array('class'=>$atts['class'], 'content'=>$content);
+		$width = array(
+			'1' => 'span12',
+			'1/2' => 'span6',
+			'1/3' => 'span4',
+			'1/4' => 'span3',
+			'2/3' => 'span8',
+			'3/4' => 'span9'
+		);
+
+		$atts['width'] = isset($atts['width']) ? $atts['width'] : '';
+
+		$columnArray[] = array(
+			'class'=>$atts['class'],
+			'width' => strtr( $atts['width'], $width ),
+			'content'=>$content
+		);
 	}
 
 	add_shortcode( 'col', 'span_sc' );			
