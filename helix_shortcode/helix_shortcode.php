@@ -1,10 +1,9 @@
 <?php
 /**
- * @version   	1.4
- * @package     Joomla
- * @subpackage  System
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters. All rights reserved.
- * @license     GNU GPL v2.0
+ * @package Helix Shortcode Generator
+ * @author JoomShaper http://www.joomshaper.com
+ * @copyright Copyright (c) 2010 - 2014 JoomShaper
+ * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
  */
 
 defined('_JEXEC') or die;
@@ -12,55 +11,31 @@ defined('_JEXEC') or die;
 class plgButtonHelix_Shortcode extends JPlugin
 {
 
-
-	/**
-	 * Load the language file on instantiation.
-	 *
-	 * @var    boolean
-	 * @since  3.1
-	 */
 	protected $autoloadLanguage = true;
 
-
-	private function getShortcodes(){
-		
-	}
-
-	/**
-	 * Display the button
-	 *
-	 * @param   string  $name  The name of the button to add
-	 *
-	 * @return array A four element array of (article_id, article_title, category_id, object)
-	 */
 	public function onDisplay($name)
 	{
-
 
 		require_once( dirname( __FILE__ ) . '/shortcodes.php' );
 
 		$doc = JFactory::getDocument();
-
 		JHtml::_('jquery.ui', array('core', 'more', 'sortable'));
-		
 		$doc->addScriptDeclaration( "var helix_editor = '{$name}';" );
-
 		asort($sp_shortcodes);
-
 		?>
 		
 		<div id="helix-shortcode-modal" class="modal hide">
 			<div class="modal-header">
 				<div class="row-fluid">
 					<div class="span4">
-						<h3>Select Shortcode</h3>
+						<h3><?php echo JText::_('PLG_HELIX_SHORTCODE_SELECT_SHORTCODE'); ?></h3>
 					</div>
 					<div class="span7">
 
 						<?php
 
 						echo '<select id="select-shortcode">>';
-						echo '<option value="">--Select Shortcode--</option>';
+						echo '<option value="">--' . JText::_('PLG_HELIX_SHORTCODE_SELECT_SHORTCODE') . '--</option>';
 
 						foreach( $sp_shortcodes as $shortcode => $options ){
 							echo '<option value="sp-' . $shortcode . '">'. $options['title'] .'</option>';
@@ -81,12 +56,11 @@ class plgButtonHelix_Shortcode extends JPlugin
 			</div>
 
 			<div class="modal-footer">
-				<a href="#" class="btn btn-info pull-left" id="add-shortcode" data-dismiss="modal">Add Shortcode</a>
-				<button class="btn btn-danger pull-left" data-dismiss="modal" aria-hidden="true">Cancel</button>
+				<a href="#" class="btn btn-info pull-left" id="add-shortcode" data-dismiss="modal"><?php echo JText::_('PLG_HELIX_SHORTCODE_ADD_SHORTCODE'); ?></a>
+				<button class="btn btn-danger pull-left" data-dismiss="modal" aria-hidden="true"><?php echo JText::_('PLG_HELIX_SHORTCODE_CANCEL'); ?></button>
 			</div>
 
 		</div>
-
 
 			<div id="generated-shortcode" style="display:none;">
 
@@ -105,11 +79,11 @@ class plgButtonHelix_Shortcode extends JPlugin
 						{
 
 
-							if( !empty($attr_option['type'] == 'repetable') )
+							if( $attr_option['type'] == 'repetable' )
 							{
 
 								echo '<div class="shortcode-repeatable">';
-								echo '<a href="#" class="clone-shortcode btn btn-success"><i class="icon-new"></i> Add ' . $options['title'] . '</a>';
+								echo '<a href="#" class="clone-shortcode btn btn-success"><i class="icon-new"></i> ' . JText::_('PLG_HELIX_SHORTCODE_ADD') . ' ' . $options['title'] . '</a>';
 								echo '<div class="repeatable-container">';
 								echo '<div data-shortcode_item="' . $shortcode . '_item" class="repeatable-item">';
 
@@ -255,4 +229,4 @@ class plgButtonHelix_Shortcode extends JPlugin
 	}
 
 }
-?>
+
