@@ -1395,7 +1395,7 @@
             if( is_array($font_name) ) $font_name = str_replace('+', ' ', $font_name[0] );
             else $font_name = str_replace('+', ' ', $name );
 
-            self::getInstance()->document->addStyleSheet("http://fonts.googleapis.com/css?family=" . $name);
+            self::getInstance()->document->addStyleSheet("//fonts.googleapis.com/css?family=" . $name);
             $styleDeclaration = "$field{font-family:'" . $font_name . "';}";
             self::getInstance()->document->addStyleDeclaration($styleDeclaration);
         }    

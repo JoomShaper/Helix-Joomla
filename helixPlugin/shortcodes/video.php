@@ -24,20 +24,20 @@ if(!function_exists('video_sc')) {
 		switch($video['host']) {
 			case 'youtu.be':
 				$id = trim($video['path'],'/');
-				$src = 'https://www.youtube.com/embed/' . $id;
+				$src = '//www.youtube.com/embed/' . $id;
 			break;
 			
 			case 'www.youtube.com':
 			case 'youtube.com':
 				parse_str($video['query'], $query);
 				$id = $query['v'];
-				$src = 'https://www.youtube.com/embed/' . $id;
+				$src = '//www.youtube.com/embed/' . $id;
 			break;
 			
 			case 'vimeo.com':
 			case 'www.vimeo.com':
 				$id = trim($video['path'],'/');
-				$src = "http://player.vimeo.com/video/{$id}";
+				$src = "//player.vimeo.com/video/{$id}";
 		}
 		
 	?>
