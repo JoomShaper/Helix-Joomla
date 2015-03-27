@@ -12,11 +12,6 @@ defined ('_JEXEC') or die('resticted aceess');
 if(!function_exists('video_sc')) {
 	function video_sc( $atts, $content="" ){
 	
-		extract(shortcode_atts(array(
-			  'height' => 281
-		), $atts));
-	
-		Helix::addShortcodeScript('fitvids.js');
 		ob_start();
 
 		$video = parse_url($content);
@@ -42,14 +37,36 @@ if(!function_exists('video_sc')) {
 		
 	?>
 	
-	<div id="video-<?php echo $id; ?>" class="shortcode-video">
-		<iframe src="<?php echo $src; ?>" width="500" height="<?php echo $height; ?>" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+	<div class="shortcode-video embed-responsive embed-responsive-16by9">
+		<iframe class="embed-responsive-item" src="<?php echo $src; ?>" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 	</div>
-	<script>
-		spnoConflict(function($){
-			$("#video-<?php echo $id; ?>").fitVids();
-		});
-	</script>
+
+	<style type="text/css">
+	.embed-responsive {
+		position: relative;
+		display: block;
+		height: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+
+	.embed-responsive-16by9 {
+		padding-bottom: 56.25%;
+	}
+
+	.embed-responsive .embed-responsive-item,
+	.embed-responsive embed, .embed-responsive iframe,
+	.embed-responsive object, .embed-responsive video {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+	</style>
+
 	<?php
 		$data = ob_get_clean();
 		return $data;
