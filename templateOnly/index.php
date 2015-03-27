@@ -1,9 +1,9 @@
 <?php
 /**
  * @package Helix Framework
- * Template Name - Shaper Helix
+ * Template Name - Shaper Helix - II
  * @author JoomShaper http://www.joomshaper.com
- * @copyright Copyright (c) 2010 - 2014 JoomShaper
+ * @copyright Copyright (c) 2010 - 2015 JoomShaper
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
 */
 //no direct accees
