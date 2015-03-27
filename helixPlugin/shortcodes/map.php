@@ -2,7 +2,7 @@
 /**
  * @package Helix Framework
  * @author JoomShaper http://www.joomshaper.com
- * @copyright Copyright (c) 2010 - 2014 JoomShaper
+ * @copyright Copyright (c) 2010 - 2015 JoomShaper
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
 */
 //no direct accees
@@ -20,7 +20,7 @@ if(!function_exists('map_sc')) {
 				  'zoom' => 8
 			 ), $atts));
 			
-			Helix::addShortcodeScript('https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true', ',', false);
+			Helix::addShortcodeScript('//maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true', ',', false);
 
 			ob_start();
 
