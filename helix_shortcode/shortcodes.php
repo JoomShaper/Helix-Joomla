@@ -491,12 +491,6 @@ $sp_shortcodes['spvideo'] = array(
     'title'=>'Video', 
     'attr'=>array(
 
-        'height'=>array(
-            'type'=>'text', 
-            'title'=>'Height',
-            'value' => 281
-        ),
-
         'url'=>array(
             'type'=>'text', 
             'title'=>'Video URL',
