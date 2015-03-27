@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.4" type="plugin" group="system" method="upgrade">
+    <name>Helix V2 based template installer</name>
+    <description>
+        <![CDATA[
+            Shaper Helix – II is the default/blank template of Helix Framework version 2.<br />
+            This template has all the in built functionality of Helix 2.0. Helix - II comes with tons of shortcode such for video, gallery, slideshow, tabs, accordion etc. 
+            Helix 2.0 especially comes with rich administration features such as logo settings, masterpiece layout builder,
+            mega menu, unlimited fonts control, Google analytics,
+            Less complitation and all types of presets control like header color, link color, background color so on.
+            Now you don’t need to worry about its speed. The built-in css and javascript compresses 
+            used by Helix to provide optimal performance.
+            <h3>Key Features</h3>
+            <ul class="arrow">
+                <li>Unlimited module positions with the power of unique layout builder</li>
+                <li>Powered by Bootstrap and compatible with Joomla 2.5 and 3.0</li>
+                <li>Three (3) presets with presets manager</li>
+                <li>Uses latest web technologies like html5 and css3</li>
+                <li>Tons of shortcodes in built</li>
+                <li>Built with LESS CSS</li>
+                <li>Megamenu, RTL Support, CSS and JS compression and many more...</li>
+            </ul>
+        ]]>
+    </description>
+    <scriptfile>installer.script.php</scriptfile>
+	
+    <files>
+		<filename plugin="tmp_helixv2">installer.script.php</filename>
+    </files>
+    <plugins>
+        <plugin plugin="helix" group="system" />
+        <plugin plugin="helix_shortcode" group="editors-xtd" />
+    </plugins>
+</extension>
