@@ -20,14 +20,14 @@
         public $_shortcodes_scripts = array();
         public $_shortcodes_styles = array();
 
-        //initialize 
+        //initialize
         public function __construct(){
 
         }
 
         /**
         * making self object for singleton method
-        * 
+        *
         */
         final public static function getInstance()
         {
@@ -35,14 +35,14 @@
                 self::$_instance = new self();
                 self::getInstance()->getDocument();
                 self::getInstance()->getDocument()->helix = self::getInstance();
-            } 
+            }
             return self::$_instance;
         }
 
 
         /**
         * Get Document
-        * 
+        *
         * @param string $key
         */
         public static function getDocument($key=false)
@@ -56,7 +56,7 @@
 
         /**
         * Get Template name
-        * 
+        *
         * @return string
         */
         public static function themeName()
@@ -76,7 +76,7 @@
 
         /**
         * Body Class
-        * 
+        *
         * @param mixed $class
         * @return string
         */
@@ -103,7 +103,7 @@
 
         /**
         * Get theme path
-        * 
+        *
         * @param bool $base
         * @return string
         */
@@ -125,16 +125,16 @@
 
         /**
         * Get Base Path
-        * 
+        *
         */
         public static function basePath()
         {
             return JPATH_BASE;
-        } 
+        }
 
         /**
         * Get Base URL
-        * 
+        *
         */
         public static function baseURL()
         {
@@ -143,7 +143,7 @@
 
         /**
         * Get Framework HELIX path
-        * 
+        *
         */
         public static function frameworkPath($base=false)
         {
@@ -158,7 +158,7 @@
 
         /**
         * Save Features
-        * 
+        *
         * @var array
         * @access private
         */
@@ -176,12 +176,12 @@
 
             foreach($fromPlugin as $file){
                 $files[JFile::stripExt(basename($file))] = $file;
-            } 
+            }
 
             if(is_array($fromTemplate)) {
                 foreach($fromTemplate as $file){
                     $files[JFile::stripExt(basename($file))] = $file;
-                } 
+                }
             }
 
             return $files;
@@ -219,9 +219,9 @@
                         //self::getInstance()->inPositions[$hasposition][] = $class->onPosition();
                         self::getInstance()->inPositions[$hasposition][] = true;
 
-                        if( isset($class->beforeModule) and $class->beforeModule==true ) 
+                        if( isset($class->beforeModule) and $class->beforeModule==true )
                             self::getInstance()->beforeModule[$hasposition][] = $class->onPosition();
-                        else 
+                        else
                             self::getInstance()->afterModule[$hasposition][] = $class->onPosition();
                     }
                 }
@@ -239,7 +239,7 @@
 
         /**
         * Make string to slug
-        * 
+        *
         * @param mixed $text
         * @return string
         */
@@ -250,7 +250,7 @@
         }
 
         /**
-        * Get or set Template param. If value not setted params get and return, 
+        * Get or set Template param. If value not setted params get and return,
         * else set params
         *
         * @param string $name
@@ -279,7 +279,7 @@
 
         /**
         * Import required file/files
-        * 
+        *
         * @param array | string $paths
         * @param object $helix
         * @return self
@@ -293,7 +293,7 @@
 
         /**
         * Single file import
-        * 
+        *
         * @param string $path
         * @return self
         */
@@ -303,10 +303,10 @@
             $inplugin = self::getInstance()->frameworkPath() . '/' . $path;
 
             if( file_exists( $intheme ) && !is_dir( $intheme ) ){
-                self::getInstance()->importedFiles[] = $intheme; 
+                self::getInstance()->importedFiles[] = $intheme;
                 require_once $intheme;
             } elseif( file_exists( $inplugin ) && !is_dir( $inplugin ) ){
-                self::getInstance()->importedFiles[] = $inplugin; 
+                self::getInstance()->importedFiles[] = $inplugin;
                 require_once $inplugin;
             }
             return self::getInstance();
@@ -323,14 +323,14 @@
 
         /**
         * Saved layout
-        * 
+        *
         * @var string
         * @access private
         */
         private $layout='';
         /**
         * Generating row
-        * 
+        *
         * @param string $layout
         * @access private
         */
@@ -398,8 +398,8 @@
 
             if( in_array($hasclass, $class) ){
                 return true;
-            }        
-            return false;    
+            }
+            return false;
         }
 
         private static function get_container_class($classname, $hasclass){
@@ -408,8 +408,8 @@
 
             if( in_array($hasclass, $class) ){
                 return $hasclass;
-            }        
-            return '';    
+            }
+            return '';
         }
 
         private static function toObject(&$array, $class = 'stdClass')
@@ -437,7 +437,7 @@
 
         /**
         * Layout generator
-        * 
+        *
         * @param mixed $layout
         */
         private static function generatelayout($layout)
@@ -462,7 +462,7 @@
                     break;
                 }
 
-                $row_variables = (  ( self::getInstance()->get_color_value( $value, 'backgroundcolor' ) ) || 
+                $row_variables = (  ( self::getInstance()->get_color_value( $value, 'backgroundcolor' ) ) ||
                                     ( self::getInstance()->get_color_value( $value, 'textcolor' ) ) ||
                                     ( FALSE !== self::getInstance()->get_layout_value( $value, 'margin' ) ) ||
                                     ( FALSE !== self::getInstance()->get_layout_value( $value, 'padding' ) ) );
@@ -476,18 +476,18 @@
                     $row_css .= "\n" . '#sp-'. self::getInstance()->slug($value->name) .'-wrapper{';
 
                     if( self::getInstance()->get_color_value( $value, 'backgroundcolor' ) ){
-                        $row_css .= 'background: '. self::getInstance()->get_color_value( $value, 'backgroundcolor' ) .' !important; ';                   
+                        $row_css .= 'background: '. self::getInstance()->get_color_value( $value, 'backgroundcolor' ) .' !important; ';
                     }
 
                     if( self::getInstance()->get_color_value( $value, 'textcolor' ) ){
-                        $row_css .= 'color: '. self::getInstance()->get_color_value( $value, 'textcolor' ) .' !important; ';                   
-                    }  
+                        $row_css .= 'color: '. self::getInstance()->get_color_value( $value, 'textcolor' ) .' !important; ';
+                    }
 
                     if( FALSE !== self::getInstance()->get_layout_value( $value, 'margin' ) ){
-                        $row_css .= 'margin: '. self::getInstance()->get_layout_value( $value, 'margin' ) .' !important; ';                   
+                        $row_css .= 'margin: '. self::getInstance()->get_layout_value( $value, 'margin' ) .' !important; ';
                     }
                     if( FALSE !== self::getInstance()->get_layout_value( $value, 'padding' ) ){
-                        $row_css .= 'padding: '. self::getInstance()->get_layout_value( $value, 'padding' ) .' !important; ';                   
+                        $row_css .= 'padding: '. self::getInstance()->get_layout_value( $value, 'padding' ) .' !important; ';
                     }
 
                     $row_css .= '}' . "\n";
@@ -497,29 +497,29 @@
                 if( self::getInstance()->get_color_value( $value, 'linkcolor' ) ){
                     $row_css .= "\n" . '#sp-'. self::getInstance()->slug($value->name) .'-wrapper a{';
                     $row_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkcolor' ) .' !important; ';
-                    $row_css .= '}' . "\n";            
+                    $row_css .= '}' . "\n";
                 }
 
                 if( self::getInstance()->get_color_value( $value, 'linkhovercolor' ) ){
                     $row_css .= "\n" . '#sp-'. self::getInstance()->slug($value->name) .'-wrapper a:hover{';
                     $row_css .= 'color: '. self::getInstance()->get_color_value( $value, 'linkhovercolor' ) .' !important; ';
-                    $row_css .= '}' . "\n";                  
+                    $row_css .= '}' . "\n";
                 }
 
                 self::getInstance()->inline_css .= $row_css;
 
                 //Layout
-                self::getInstance()->layout.='<'.$sematic.' id="sp-'. self::getInstance()->slug($value->name) .'-wrapper" 
+                self::getInstance()->layout.='<'.$sematic.' id="sp-'. self::getInstance()->slug($value->name) .'-wrapper"
                 class="'. self::getInstance()->get_row_class($value->class) . ' '.((empty($value->responsive)?'':''.$value->responsive.'')).'">';
                 //
 
-                if(self::getInstance()->has_container_class($value->class,'container') 
-                    or 
+                if(self::getInstance()->has_container_class($value->class,'container')
+                    or
                     self::getInstance()->has_container_class($value->class,'container-fluid'))
                 {
-                    //  start container  
-                    self::getInstance()->layout.='<div class="' 
-                    . self::getInstance()->get_container_class($value->class,'container-fluid') 
+                    //  start container
+                    self::getInstance()->layout.='<div class="'
+                    . self::getInstance()->get_container_class($value->class,'container-fluid')
                     . self::getInstance()->get_container_class($value->class,'container')
                     . '">';
                 }
@@ -545,9 +545,9 @@
                                 if( !self::getInstance()->countModules($val->position))
                                 {
                                     $absspan+=$val->span;
-                                    $absoffset+=$val->offset; 
+                                    $absoffset+=$val->offset;
                                     $totalPublished--;
-                                    $totalItem--;  
+                                    $totalItem--;
                                 }
                             }
                         }
@@ -574,7 +574,7 @@
                             if( empty($v->offset) )
                             {
                                 $v->span+=$absspan+$absoffset;
-                                $v->offset='';   
+                                $v->offset='';
                             }
                         }
 
@@ -593,7 +593,7 @@
 
                         // self::getInstance()->layout.= ' <!-- Start Span --> ';
                         // start span
-                        //  debugging  data-i="'.$i.'" data-total="'.$totalPublished.'" data-absspan="'.$absspan.'"  data-type="'.$v->type.'" 
+                        //  debugging  data-i="'.$i.'" data-total="'.$totalPublished.'" data-absspan="'.$absspan.'"  data-type="'.$v->type.'"
 
                         if( $v->type=='component' and self::getInstance()->hideComponentArea() ) continue;
 
@@ -626,7 +626,7 @@
                         if( isset($v->children) )
                         {
                             self::getInstance()->generatelayout( $v->children );
-                        } 
+                        }
 
                         // end span
                         self::getInstance()->layout.='</'.$sematicSpan.'>'."\n";
@@ -638,11 +638,11 @@
                 // end row fluid
                 self::getInstance()->layout.='</div>';
 
-                if(self::getInstance()->has_container_class($value->class,'container') 
-                    or 
+                if(self::getInstance()->has_container_class($value->class,'container')
+                    or
                     self::getInstance()->has_container_class($value->class,'container-fluid'))
                 {
-                    //  end container  
+                    //  end container
                     self::getInstance()->layout.='</div>';
                 }
 
@@ -659,7 +659,7 @@
 
         /**
         * Get layout from saved item or template dir or plugin dir
-        * 
+        *
         */
         private static function get_layout(){
 
@@ -685,7 +685,7 @@
 
         /**
         * Detact External URL
-        * 
+        *
         * @param string $url
         * @return boolean
         */
@@ -700,12 +700,12 @@
 
             if( $currentHost===$urlHost or $currentRemoteAddr===$urlHost ) return false;
             else return true;
-        } 
+        }
 
 
         /**
         * Layout output
-        * 
+        *
         */
         public static function layout()
         {
@@ -737,7 +737,7 @@
 
         /**
         * Has only module
-        * 
+        *
         * @param string $position
         */
         public static function hasModule($position)
@@ -747,7 +747,7 @@
 
         /**
         * Has feature
-        * 
+        *
         * @param string $position
         */
 
@@ -758,7 +758,7 @@
 
         /**
         * Add stylesheet
-        * 
+        *
         * @param mixed $sources. string or array
         * @param string $seperator. default is , (comma)
         * @return self
@@ -777,24 +777,24 @@
 
                 if( $checkpath==false ){
                     self::getInstance()->document->addStyleSheet($src);
-                    continue; 
-                } 
+                    continue;
+                }
 
                 //cheack in template path
-                if( file_exists( self::getInstance()->themePath() . '/css/'. $src)) { 
+                if( file_exists( self::getInstance()->themePath() . '/css/'. $src)) {
                     self::getInstance()->document->addStyleSheet( self::getInstance()->themePath(true) . '/css/' . $src );
-                } 
+                }
                 //if not found, then check from helix path
-                elseif( file_exists( self::getInstance()->frameworkPath() . '/css/' . $src ) ) { 
+                elseif( file_exists( self::getInstance()->frameworkPath() . '/css/' . $src ) ) {
                     self::getInstance()->document->addStyleSheet( self::getInstance()->frameworkPath(true) . '/css/' . $src);
-                }        
+                }
             }
             return self::getInstance();
-        }    
+        }
 
         /**
         * Add javascript
-        * 
+        *
         * @param mixed $sources. string or array
         * @param string $seperator. default is , (comma)
         * @return self
@@ -813,17 +813,17 @@
 
                 if( $checkpath==false ){
                     self::getInstance()->document->addScript($src);
-                    continue; 
-                } 
+                    continue;
+                }
 
                 //cheack in template path
-                if( file_exists( self::getInstance()->themePath() . '/js/'. $src)) { 
+                if( file_exists( self::getInstance()->themePath() . '/js/'. $src)) {
                     self::getInstance()->document->addScript( self::getInstance()->themePath(true) . '/js/' . $src );
-                } 
+                }
                 //if not found, then check from helix path
-                elseif( file_exists( self::getInstance()->frameworkPath() . '/js/' . $src ) ) { 
+                elseif( file_exists( self::getInstance()->frameworkPath() . '/js/' . $src ) ) {
                     self::getInstance()->document->addScript( self::getInstance()->frameworkPath(true) . '/js/' . $src);
-                }        
+                }
             }
             return self::getInstance();
         }
@@ -832,7 +832,7 @@
 
         /**
         * Add stylesheet
-        * 
+        *
         * @param mixed $sources. string or array
         * @param string $seperator. default is , (comma)
         * @return self
@@ -851,20 +851,20 @@
 
                 if( $checkpath==false ){
                     self::getInstance()->_shortcodes_styles[] = $src;
-                    continue; 
-                } 
+                    continue;
+                }
 
                 //cheack in template path
-                if( file_exists( self::getInstance()->themePath() . '/css/'. $src)) { 
+                if( file_exists( self::getInstance()->themePath() . '/css/'. $src)) {
                     self::getInstance()->_shortcodes_styles[] = self::getInstance()->themePath(true) . '/css/' . $src;
-                } 
+                }
                 //if not found, then check from helix path
                 elseif( file_exists( self::getInstance()->frameworkPath() . '/css/' . $src ) ) {
                     self::getInstance()->_shortcodes_styles[] = self::getInstance()->frameworkPath(true) . '/css/' . $src;
-                }        
+                }
             }
             return self::getInstance();
-        } 
+        }
 
         public static function addShortcodeScript($sources, $seperator=',', $checkpath=true) {
 
@@ -880,17 +880,17 @@
 
                 if( $checkpath==false ){
                     self::getInstance()->_shortcodes_scripts[] = $src;
-                    continue; 
-                } 
+                    continue;
+                }
 
                 //cheack in template path
-                if( file_exists( self::getInstance()->themePath() . '/js/'. $src)) { 
+                if( file_exists( self::getInstance()->themePath() . '/js/'. $src)) {
                     self::getInstance()->_shortcodes_scripts[] = self::getInstance()->themePath(true) . '/js/' . $src;
-                } 
+                }
                 //if not found, then check from helix path
-                elseif( file_exists( self::getInstance()->frameworkPath() . '/js/' . $src ) ) { 
+                elseif( file_exists( self::getInstance()->frameworkPath() . '/js/' . $src ) ) {
                     self::getInstance()->_shortcodes_scripts[] = self::getInstance()->frameworkPath(true) . '/js/' . $src;
-                }        
+                }
             }
             return self::getInstance();
         }
@@ -898,7 +898,7 @@
 
         /**
         * Add Inline Javascript
-        * 
+        *
         * @param mixed $code
         * @return self
         */
@@ -909,7 +909,7 @@
 
         /**
         * Add Inline CSS
-        * 
+        *
         * @param mixed $code
         * @return self
         */
@@ -920,17 +920,19 @@
 
         /**
         * Less Init
-        * 
+        *
         */
         private static function lessInit() {
+            if (!class_exists('lessc')) {
             //import less class file
-            self::getInstance()->Import('core/classes/lessc.inc.php');
-            self::getInstance()->_less = new lessc();
+             self::getInstance()->Import('core/classes/lessc.inc.php');
+             self::getInstance()->_less = new lessc();
+            }
         }
 
         /**
         * Instance of Less
-        */  
+        */
         public static function less() {
             return self::getInstance()->_less;
         }
@@ -938,7 +940,7 @@
 
         /**
         * Set Less Variables using array key and value
-        * 
+        *
         * @param mixed $array
         * @return self
         */
@@ -949,7 +951,7 @@
 
         /**
         * Set less variable using name and value
-        * 
+        *
         * @param mixed $name
         * @param mixed $value
         * @return self
@@ -961,7 +963,7 @@
 
         /**
         * Compile less to css when less modified or css not exist
-        * 
+        *
         * @param mixed $less
         * @param mixed $css
         * @return self
@@ -995,7 +997,7 @@
 
         /**
         * Add Less
-        * 
+        *
         * @param mixed $less
         * @param mixed $css
         * @return self
@@ -1009,7 +1011,7 @@
                 if( file_exists( $themepath. "/less/".$less.".less" ) ){
                     //self::getInstance()->less()->compileFile($themepath. "/less/".$less.".less", $themepath ."/css/".$css.".css");
                     self::getInstance()->autoCompileLess($themepath. "/less/".$less.".less", $themepath ."/css/".$css.".css");
-                } 
+                }
                 elseif( file_exists( $plugpath. "/less/".$less.".less") ) {
                     //self::getInstance()->less()->compileFile($plugpath. "/less/".$less.".less", $plugpath ."/css/".$css.".css");
                     self::getInstance()->autoCompileLess($plugpath. "/less/".$less.".less", $plugpath ."/css/".$css.".css");
@@ -1066,11 +1068,11 @@
         private static function file($file)
         {
             // searching in template path
-            if( file_exists( self::getInstance()->themePath() . '/'. $file)) { 
+            if( file_exists( self::getInstance()->themePath() . '/'. $file)) {
                 return self::getInstance()->themePath() . '/'. $file;
-            } 
+            }
             //if not found, then check from helix path
-            elseif( file_exists( self::getInstance()->frameworkPath() . '/'. $file ) ) { 
+            elseif( file_exists( self::getInstance()->frameworkPath() . '/'. $file ) ) {
                 return self::getInstance()->frameworkPath() . '/'. $file;
             }
             return false;
@@ -1084,7 +1086,7 @@
 
         /**
         * Set Presets
-        * 
+        *
         */
         public static function Preset() {
             $name = self::getInstance()->theme() . '_preset';
@@ -1094,7 +1096,7 @@
             if( !empty( $require ) ){
                 setcookie( $name, $require, time() + 3600, '/');
                 $current = $require;
-            } 
+            }
             elseif( empty( $require ) and  isset( $_COOKIE[$name] )) {
                 $current = $_COOKIE[$name];
             } else {
@@ -1112,7 +1114,7 @@
 
         /**
         * Set Direction
-        * 
+        *
         */
         public static function direction() {
 
@@ -1123,7 +1125,7 @@
             if( !empty( $require ) ){
                 setcookie( $name, $require, time() + 3600, '/');
                 $current = $require;
-            } 
+            }
             elseif( empty( $require ) and  isset( $_COOKIE[$name] )) {
                 $current = $_COOKIE[$name];
             } else {
@@ -1133,7 +1135,7 @@
             self::getInstance()->getDocument()->direction = $current;
 
             return $current;
-        }		
+        }
 
         /**
         * Load Head
@@ -1141,7 +1143,7 @@
         * @since    1.0
         *
         * @update    2.0
-        */    
+        */
         public static function Header() {
             //layout option
             if (self::getInstance()->Param('layout_type')=='responsive') {
@@ -1169,7 +1171,7 @@
             //Initiate less
             self::getInstance()->lessInit();
 
-            //Import all features			
+            //Import all features
             self::getInstance()->importFeatures();
 
             foreach(self::getInstance()->inHeader as $load) echo $load;
@@ -1178,7 +1180,7 @@
         }
 
         public static function Footer() {
-            foreach(self::getInstance()->inFooter as $load) echo $load;			
+            foreach(self::getInstance()->inFooter as $load) echo $load;
 
             self::getInstance()->Compression();
 
@@ -1202,13 +1204,13 @@
             }
             else {
                 return false;
-            } 
+            }
         }
 
 
         /**
         * Set Menus
-        * 
+        *
         */
         public static function megaMenuType() {
             $name = self::getInstance()->theme() . '_menu';
@@ -1218,7 +1220,7 @@
             if( !empty( $require ) ){
                 setcookie( $name, $require, time() + 3600, '/');
                 $current = $require;
-            } 
+            }
             elseif( empty( $require ) and  isset( $_COOKIE[$name] )) {
                 $current = $_COOKIE[$name];
             } else {
@@ -1251,7 +1253,7 @@
 
         /**
         * Add jQuery
-        * 
+        *
         * @since    1.9.5
         * @param mixed $usecdn
         * @param mixed $forceLoad
@@ -1260,21 +1262,21 @@
         public function addJQuery($usecdn=false, $forceLoad=false) {
             if (JVERSION>=3) {
                 JHtml::_('jquery.framework');
-                
+
             } else {
                 $scripts = (array) array_keys( self::getInstance()->getDocument()->_scripts );
                 $hasjquery=false;
                 foreach($scripts as $script) {
                     if (preg_match("/\b(jquery|jquery-latest).([0-9\.min|max]+).(.js)\b/i", $script)) {
                         $hasjquery = true;
-                    }  
+                    }
                 }
 
                 if( $forceLoad ) $hasjquery=false;
 
                 if( !$hasjquery ) {
                     if( $usecdn ) self::getInstance()->addJS( 'http://code.jquery.com/jquery-latest.min.js' );
-                    else self::getInstance()->addJS( 'jquery.min.js' );                    
+                    else self::getInstance()->addJS( 'jquery.min.js' );
                 }
             }
             self::getInstance()->addJS( 'jquery-noconflict.js' );
@@ -1284,7 +1286,7 @@
 
         /**
         * Remove CSS
-        * 
+        *
         * @param mixed $sources
         * @param mixed $seperator
         */
@@ -1303,7 +1305,7 @@
                     if (preg_match("/\b".$src."\b/i", $script)) {
                         $removedJS[] = $script;
                         unset( self::getInstance()->getDocument()->_scripts[$script] );
-                    }  
+                    }
                 }
             }
             return $removedJS;
@@ -1325,7 +1327,7 @@
                     if (preg_match("/\b".$src."\b/i", $script)) {
                         $removedCSS[] = $script;
                         unset( self::getInstance()->getDocument()->_styleSheets[$script] );
-                    }  
+                    }
                 }
             }
             return $removedCSS;
@@ -1335,7 +1337,7 @@
 
 
 
-        // Add bootstrap	
+        // Add bootstrap
         public function addBootstrap($responsive=true, $rtl=false) {
 
 
@@ -1352,7 +1354,7 @@
 
             self::getInstance()->addCSS('font-awesome.css');
             self::getInstance()->addJQuery();
-            
+
             if(JVERSION < 3)
             {
                 self::getInstance()->addJS('bootstrap.min.js');
@@ -1366,30 +1368,30 @@
         }
 
         /**
-        * 
+        *
         *
         */
         public static function selectivizr(){
             if(self::getInstance()->isIE(8))
-                self::getInstance()->addJS('selectivizr-min.js');    
-            return self::getInstance();    
+                self::getInstance()->addJS('selectivizr-min.js');
+            return self::getInstance();
         }
 
         public static function respondJS(){
             if(self::getInstance()->isIE(8))
-                self::getInstance()->addJS('respond.min.js');	
-            return self::getInstance();	
+                self::getInstance()->addJS('respond.min.js');
+            return self::getInstance();
         }
 
         /**
         * Add Google Fonts
-        * 
+        *
         * @param string $name. Name of font. Ex: Yanone+Kaffeesatz:400,700,300,200 or Yanone+Kaffeesatz  or Yanone Kaffeesatz
         * @param string $field. Applied selector. Ex: h1, h2, #id, .classname
         */
         public static function GoogleFont($name, $field) {
 
-            $name = str_replace(' ', '+', $name ); 
+            $name = str_replace(' ', '+', $name );
 
             $font_name = explode(':', $name);
             if( is_array($font_name) ) $font_name = str_replace('+', ' ', $font_name[0] );
@@ -1398,13 +1400,13 @@
             self::getInstance()->document->addStyleSheet("//fonts.googleapis.com/css?family=" . $name);
             $styleDeclaration = "$field{font-family:'" . $font_name . "';}";
             self::getInstance()->document->addStyleDeclaration($styleDeclaration);
-        }    
+        }
 
         //////////
         public static function Compression() {//compress css and js files
             if (self::getInstance()->Param('compress_css')) self::getInstance()->compressCSS();
-            if (self::getInstance()->Param('compress_js')) self::getInstance()->compressJS(); 
-            return self::getInstance();       
+            if (self::getInstance()->Param('compress_js')) self::getInstance()->compressJS();
+            return self::getInstance();
         }
 
         private static function compressJS() {//function to compress js files
@@ -1427,7 +1429,7 @@
 
             if (!is_writable(JPATH_CACHE)) {//check for cache path writable, if not return
                 return;
-            } 
+            }
 
             if (is_writable(JPATH_CACHE)) {//add helix_assets folder under cache directory
                 if (!file_exists(JPATH_CACHE.DIRECTORY_SEPARATOR.$helix_folder)) mkdir (JPATH_CACHE.DIRECTORY_SEPARATOR.$helix_folder);
@@ -1440,9 +1442,9 @@
 
                 //see if file is stale
                 if (!file_exists($cache_path)) {
-                    $diff=true;   
+                    $diff=true;
                 } elseif(filesize($cache_path) == 0 || ((filemtime($cache_path) + $cache_time * 60) < time())) {
-                    $diff=true; 
+                    $diff=true;
                 }
 
                 foreach ($js_files as $files) {
@@ -1492,7 +1494,7 @@
 
             if (!is_writable(JPATH_CACHE)) {//check for cache path writable, if not return
                 return;
-            } 
+            }
 
             if (is_writable(JPATH_CACHE)) {//add helix_assets folder under cache directory
                 if (!file_exists(JPATH_CACHE.DIRECTORY_SEPARATOR.$helix_folder)) mkdir (JPATH_CACHE.DIRECTORY_SEPARATOR.$helix_folder);
@@ -1505,9 +1507,9 @@
 
                 //see if file is stale
                 if (!file_exists($cache_path)) {
-                    $diff=true;   
+                    $diff=true;
                 } elseif(filesize($cache_path) == 0 || ((filemtime($cache_path) + $cache_time * 60) < time())) {
-                    $diff=true; 
+                    $diff=true;
                 }
 
                 foreach ($css_files as $files) {
@@ -1565,7 +1567,7 @@
 
             $url = $base . '/' . $url;
             return $url;
-        }    
+        }
 
         private static function realPath($strSrc) { //Real path of css or js file
             if (preg_match('/^https?\:/', $strSrc)) {
@@ -1580,26 +1582,26 @@
             $strSrc = str_replace('//', '/', $strSrc);
             $strSrc = preg_replace('/^\//', '', $strSrc);
             return $strSrc;
-        }    
+        }
 
         public static function loadHelixOverwrite(){
 
              if (!JFactory::getApplication()->isAdmin()) {
 
                 if( JVERSION >= 3 ){
-                    
+
                     // override core joomla 3 class
                     if (!class_exists('JViewLegacy', false))  self::getInstance()->Import('core/classes/joomla30/viewlegacy.php');
-                    if (!class_exists('JModuleHelper', false)) self::getInstance()->Import('core/classes/joomla30/helper.php'); 
+                    if (!class_exists('JModuleHelper', false)) self::getInstance()->Import('core/classes/joomla30/helper.php');
 
                 } else {
                     // override core joomla 2.5 class
-                    if (!class_exists('JHtmlBehavior', false)) self::getInstance()->Import('core/classes/joomla25/behavior.php'); 
-                    if (!class_exists('JViewLegacy', false)) self::getInstance()->Import('core/classes/joomla25/view.php'); 
-                    if (!class_exists('JDocumentRendererMessage', false)) self::getInstance()->Import('core/classes/joomla25/message.php'); 
+                    if (!class_exists('JHtmlBehavior', false)) self::getInstance()->Import('core/classes/joomla25/behavior.php');
+                    if (!class_exists('JViewLegacy', false)) self::getInstance()->Import('core/classes/joomla25/view.php');
+                    if (!class_exists('JDocumentRendererMessage', false)) self::getInstance()->Import('core/classes/joomla25/message.php');
                     if (!class_exists('JModuleHelper', false)) self::getInstance()->Import('core/classes/joomla25/helper.php');
                     if (!class_exists('JHtmlBootstrap', false)) Helix::Import('core/classes/joomla30/bootstrap.php');
-                } 
+                }
             }
 
             return self::getInstance();
@@ -1611,12 +1613,12 @@
         *
         * @since	1.0
         */
-        public static function isIE($version = false) {  
-            $agent=$_SERVER['HTTP_USER_AGENT'];  
-            $found = strpos($agent,'MSIE ');  
-            if ($found) { 
+        public static function isIE($version = false) {
+            $agent=$_SERVER['HTTP_USER_AGENT'];
+            $found = strpos($agent,'MSIE ');
+            if ($found) {
                 if ($version) {
-                    $ieversion = substr(substr($agent,$found+5),0,1);   
+                    $ieversion = substr(substr($agent,$found+5),0,1);
                     if ($ieversion == $version) return true;
                     else return false;
                 } else {
@@ -1627,6 +1629,6 @@
                 return false;
             }
             if (stristr($agent, 'msie'.$ieversion)) return true;
-            return false;        
+            return false;
         }
     }
