@@ -925,7 +925,7 @@
         private static function lessInit() {
             //import less class file
             self::getInstance()->Import('core/classes/lessc.inc.php');
-            self::getInstance()->_less = new lessc();
+            self::getInstance()->_less = new helixv2_lessc();
         }
 
         /**
