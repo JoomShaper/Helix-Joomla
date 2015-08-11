@@ -10,7 +10,7 @@
   position: absolute;
   top: 30px;
   right: 20px;
-  z-index: 1;
+  z-index: 999;
  }
 
 .sp-mobile-menu{
