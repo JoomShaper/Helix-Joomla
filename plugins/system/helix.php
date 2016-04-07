@@ -15,6 +15,11 @@
     {
         function onAfterInitialise()
         {
+            if (!JFactory::getApplication()->isSite())
+            {
+                return;
+            }
+
             $helix_path = JPATH_PLUGINS.'/system/helix/core/helix.php';
             if (file_exists($helix_path)) {
                 require_once($helix_path);
@@ -28,6 +33,10 @@
         //Added 2.1.6
         function onContentPrepare($context, &$article)
         {
+            if (!JFactory::getApplication()->isSite())
+            {
+                return;
+            }
 
             $userDef =  ( $context == 'com_content.article' ) ||
                         ( $context == 'com_content.category' ) ||
@@ -37,12 +46,17 @@
             if( $userDef ) {
                 $article->text = do_shortcode($article->text);
             }
- 
+
         }
 
 
         function onAfterRender()
         {
+            if (!JFactory::getApplication()->isSite())
+            {
+                return;
+            }
+
             $shortcodes_scripts    = Helix::getInstance()->_shortcodes_scripts;
             $shortcodes_styles     = Helix::getInstance()->_shortcodes_styles;
 
@@ -70,6 +84,10 @@
 
         function onAfterDispatch()
         {
+            if (!JFactory::getApplication()->isSite())
+            {
+                return;
+            }
 
             if(  !JFactory::getApplication()->isAdmin() ){
 
@@ -91,6 +109,11 @@
         // Updated 1.9.5
         function onContentPrepareForm($form, $data)
         {
+            if (!JFactory::getApplication()->isSite())
+            {
+                return;
+            }
+
             if ($form->getName()=='com_menus.item') //Add Helix menu params to the menu item
             {
                 JHtml::_('behavior.framework');
