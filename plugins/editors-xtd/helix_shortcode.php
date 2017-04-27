@@ -2,19 +2,19 @@
 /**
  * @package Helix Shortcode Generator
  * @author JoomShaper http://www.joomshaper.com
- * @copyright Copyright (c) 2010 - 2016 JoomShaper
+ * @copyright Copyright (c) 2010 - 2017 JoomShaper
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
  */
 
 defined('_JEXEC') or die;
 
-class plgButtonHelix_Shortcode extends JPlugin
-{
+jimport( 'joomla.version' );
+
+class plgButtonHelix_Shortcode extends JPlugin{
 
 	protected $autoloadLanguage = true;
 
-	public function onDisplay($name)
-	{
+	public function onDisplay($name){
 
 		require_once( dirname( __FILE__ ) . '/shortcodes.php' );
 
@@ -22,6 +22,14 @@ class plgButtonHelix_Shortcode extends JPlugin
 		JHtml::_('jquery.ui', array('core', 'more', 'sortable'));
 		$doc->addScriptDeclaration( "var helix_editor = '{$name}';" );
 		asort($sp_shortcodes);
+
+		// if joomla version is more than 3.5
+		if ( version_compare(JVERSION, '3.5', 'ge') ) {
+			$doc->addScriptDeclaration( "var helix_jversion = 'true';" );
+		} else {
+			$doc->addScriptDeclaration( "var helix_jversion = 'false';" );
+		}
+
 		?>
 		
 		<div id="helix-shortcode-modal" class="modal hide">
@@ -138,47 +146,12 @@ class plgButtonHelix_Shortcode extends JPlugin
 		$doc->addStylesheet( JURI::root( true ) . '/plugins/editors-xtd/helix_shortcode/assets/css/helix-shortcode.css');
 		$doc->addScript( JURI::root( true ) . '/plugins/editors-xtd/helix_shortcode/assets/js/shortcode-generator.js');
 
-
-		JHtml::_('jquery.framework');
-$js = <<<JS
-function helixv2_shortcode_modal() {
-
-		var modal = '#helix-shortcode-modal';
-
-		event.preventDefault();
-		
-		jQuery(modal).find('#select-shortcode').val('').trigger('liszt:updated');
-		jQuery(modal).find('.modal-body').empty();
-
-		var clone 	= jQuery('#generated-shortcode > .shortcode-list').clone();
-		clone 		= clone.appendTo(jQuery(modal).find('.modal-body'));
-
-		jQuery(modal + ' .repeatable-content .shortcode-title').each(function(){
-			jQuery(this).closest('.repeatable-item').find('.repeatable-title h3 span').text( jQuery(this).val() );
-		});
-
-		//Destroy Chosen
-		clone.find('select').chosenDestroy();
-		clone.find('select').chosen();
-
-		//Sortable
-		jQuery(modal + ' .repeatable-container').sortable({
-			handle: '.action-move'
-		});
-
-		jQuery(modal).modal();
-	}
-
-JS;
-		$doc->addScriptDeclaration($js);
-
 		$button = new JObject;
 		$button->modal 		= false;
-		$button->class 		= '';
+		$button->class 		= 'btn btn-modal btn-primary btn-helixv2-shortcode';
 		$button->link 		= '#';
-		$button->onclick 	= 'helixv2_shortcode_modal();return false;';
 		$button->text 		= 'Helix Shortcodes';
-       	$button->name 		= 'plus-circle';
+       	$button->name 		= 'plus-circle helixv2-shortcode';
 
 		return $button;
 	}

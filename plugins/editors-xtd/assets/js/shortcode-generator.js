@@ -1,14 +1,22 @@
 /**
  * @package Helix Shortcode Generator
  * @author JoomShaper http://www.joomshaper.com
- * @copyright Copyright (c) 2010 - 2016 JoomShaper
+ * @copyright Copyright (c) 2010 - 2017 JoomShaper
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
  */
 
  jQuery(function($) {
 
+	var $generated_shortcodes = $('#generated-shortcode > .shortcode-list');
 	var modal = '#helix-shortcode-modal';
-	
+
+	if (helix_jversion == 'true') {
+		// after window loaded add class in parent of helix button icon
+		$( window ).load(function() {
+			$('.helixv2-shortcode').parent().addClass('btn-helixv2-shortcode');
+		});
+	}
+		
 	$('body').on('change', modal + ' #select-shortcode', function(){
 		var $shortcode_items = $(modal).find('.shortcode-item').removeClass('active');
 		$( modal + ' .shortcode-item.' + $(this).val() ).addClass('active');
@@ -17,6 +25,33 @@
 	//Title
 	$(document).on('keyup', '.shortcode-repeatable .shortcode-title', function(){
 		$(this).closest('.repeatable-item').find('.repeatable-title h3 span').text( $(this).val() );
+	});
+
+
+	$(document).on('click', '.btn-helixv2-shortcode', function(event){
+
+		event.preventDefault();
+		
+		$(modal).find('#select-shortcode').val('').trigger('liszt:updated');
+		$(modal).find('.modal-body').empty();
+
+		var clone 	= $generated_shortcodes.clone();
+		clone 		= clone.appendTo($(modal).find('.modal-body'));
+
+		$(modal + ' .repeatable-content .shortcode-title').each(function(){
+			$(this).closest('.repeatable-item').find('.repeatable-title h3 span').text( $(this).val() );
+		});
+
+		//Destroy Chosen
+		clone.find('select').chosenDestroy();
+		clone.find('select').chosen();
+
+		//Sortable
+		$(modal + ' .repeatable-container').sortable({
+			handle: '.action-move'
+		});
+
+		$(modal).modal();
 	});
 
 	//Repeatable

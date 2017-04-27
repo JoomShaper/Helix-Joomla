@@ -2,7 +2,7 @@
 /**
  * @package Helix Framework
  * @author JoomShaper http://www.joomshaper.com
- * @copyright Copyright (c) 2010 - 2016 JoomShaper
+ * @copyright Copyright (c) 2010 - 2017 JoomShaper
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
 */
 //no direct accees
@@ -14,13 +14,21 @@ if(!function_exists('map_sc')) {
 		
 			extract(shortcode_atts(array(
 				  'lat' => '-34.397',
+				  'gmap_api' => '',
 				  'lng' => '150.644',
 				  'maptype'=>'ROADMAP',
 				  'height' => '200',
 				  'zoom' => 8
 			 ), $atts));
-			
-			Helix::addShortcodeScript('//maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true', ',', false);
+
+			$genid 		= md5(uniqid(rand(), true));
+
+			if ($gmap_api) {
+				Helix::addShortcodeScript('//maps.googleapis.com/maps/api/js?v=3.exp&amp;key='. $gmap_api .'', ',', false);
+			} else{
+				Helix::addShortcodeScript('//maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true', ',', false);
+			}
+
 
 			ob_start();
 
@@ -34,13 +42,13 @@ if(!function_exists('map_sc')) {
 				  center: myLatlng,
 					mapTypeId: google.maps.MapTypeId.<?php echo $maptype; ?>
 				};
-				var map = new google.maps.Map(document.getElementById('sp_simple_map_canvas'), mapOptions);
+				var map = new google.maps.Map(document.getElementById('sp_simple_map_canvas<?php echo $genid ?>'), mapOptions);
 				var marker = new google.maps.Marker({position:myLatlng, map:map});	
 			  }
 			  google.maps.event.addDomListener(window, 'load', initialize);
 			</script>
 			
-			<div style="height:<?php echo $height ?>px" id="sp_simple_map_canvas"></div>
+			<div style="height:<?php echo $height ?>px" id="sp_simple_map_canvas<?php echo $genid; ?>"></div>
 				
 			<?php
 			

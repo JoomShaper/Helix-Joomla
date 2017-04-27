@@ -3,14 +3,14 @@
     <name>System - Helix Framework</name>
     <author>JoomShaper.com</author>
     <creationDate>March 2011</creationDate>
-    <copyright>Copyright (c) 2010 - 2016 JoomShaper. All rights reserved.</copyright>
+    <copyright>Copyright (C) 2010 - 2017 JoomShaper. All rights reserved.</copyright>
     <license>http://www.gnu.org/licenses/gpl-2.0.html GPLv2 or later</license>
     <authorEmail>support@joomshaper.com</authorEmail>
     <authorUrl>www.joomshaper.com</authorUrl>
-    <version>2.2</version>
+    <version>2.4</version>
     <description>Helix Framework - JoomShaper Template Framework for Joomla 2.5 and 3.X</description>
-	
-    <updateservers> 
+
+    <updateservers>
         <server type="extension" priority="1" name="System - Helix Framework">http://www.joomshaper.com/updates/plg_system_helix.xml</server>
     </updateservers>
     <files>
