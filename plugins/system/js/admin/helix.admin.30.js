@@ -41,7 +41,7 @@ jQuery(function($){
                 var eleclass = $(this).attr('class').split(/\s/g);
                 var $key = $.inArray("parent", eleclass);
                 if( $key!=-1 ){
-                    classes.push( eleclass[$key+1] ); 
+                    classes.push( eleclass[$key+1] );
                 }
             });
 
@@ -58,7 +58,7 @@ jQuery(function($){
                         continue;
                     } else {
 
-                        var elecls =  '.' + eleclass[i]; 
+                        var elecls =  '.' + eleclass[i];
 
                         $(childClassName+elecls).parents('.control-group').hide();
                         if( $(parent).prop('type')=='fieldset' ){
@@ -147,13 +147,6 @@ jQuery(function($){
 
     //Add .btn-group class
     $('.radio').addClass('btn-group');
-
-    //Modal
-    setTimeout(function(){
-        SqueezeBox.assign($$('a.modal'), {
-            parse: 'rel'
-        });
-    }, 200);
 
     setTimeout(function(){
         $('.chzn-done').css('display', 'inline-block').next().remove();

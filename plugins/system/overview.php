@@ -3,15 +3,15 @@
 		<div class="span5">
 			<img class="img-polaroid pull-left" style="margin-right:15px;" src="<?php echo THEME_URL; ?>/template_thumbnail.png" alt=" " />
 			<h2>Overview</h2>
-			<p id="sp-theme-info" class="clearfix">	
+			<p id="sp-theme-info" class="clearfix">
 			</p>
 		</div>
-		
+
 		<div class="span7">
 			<div class="sp-block sp-style1">
 				<h2><i class="fa fa-question-circle"></i> Helix Information</h2>
 				<div class="sp-content">
-					<h3>Version 2.2</h3>
+					<h3>Version 2.5</h3>
 					<p>
 						Powerful template framework for Joomla templating. It is now very much easy to develop a Joomla website using Helix Framework.
 						<br />
@@ -27,7 +27,7 @@
 						<a href="#myCarousel" data-slide="next"><i class="fa fa-angle-right"></i></a>
 					</div>
 				</h2>
-				
+
 				<div class="sp-content">
 					<div id="myCarousel" class="carousel slide">
 						<div class="carousel-inner">
@@ -97,24 +97,9 @@
 							</div>
 						</div>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-	var carousel = jQuery('.carousel');
-	if(carousel){
-		window.addEvent('domready', function(){
-			if (typeof jQuery != 'undefined' && typeof MooTools != 'undefined' ) {
-				Element.implement({
-					slide: function(how, mode){
-						return this;
-					}
-				});
-			}
-		});
-	}
-</script>
