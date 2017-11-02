@@ -89,6 +89,7 @@ class HelixMenu {
 					if ($v->megaparams->get('cols')) {
 						$v->cols = $v->megaparams->get('cols');							
 						$v->col = array();
+						$v->colw = array();
 						for ($i=0;$i<$v->cols;$i++) {
 							if ($v->megaparams->get("colw$i")) $v->colw[$i]=$v->megaparams->get("colw$i");
 						}
