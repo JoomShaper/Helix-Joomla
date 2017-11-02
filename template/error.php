@@ -19,12 +19,15 @@
     $doc = JFactory::getDocument();
     $this->language = $doc->language;
     $this->direction = $doc->direction;
-
     $this->helix->getDocument()->setTitle($this->error->getCode() . ' - '.$this->title);
-
     $this->helix->header()->addLess('error', 'error');
-
-    require_once(JPATH_LIBRARIES.'/joomla/document/html/renderer/head.php');
+    $header_contents = '';
+    if(!class_exists('JDocumentRendererHead')) {
+      $head = JPATH_LIBRARIES . '/joomla/document/html/renderer/head.php';
+      if(file_exists($head)) {
+        require_once($head);
+      }
+    }
     $header_renderer = new JDocumentRendererHead($doc);
     $header_contents = $header_renderer->render(null);
 	
