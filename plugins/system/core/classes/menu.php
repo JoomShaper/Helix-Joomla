@@ -282,7 +282,7 @@ class HelixMenu {
 				} else {
 				//If not group
 				$cols = $pid && $this->_menu=='mega' && isset($this->items[$pid]->cols) && $this->items[$pid]->cols ? $this->items[$pid]->cols : 1;
-				$width = $this->items[$pid]->megaparams->get('cwidth', 0);
+				$width = (int) $this->items[$pid]->megaparams->get('cwidth', 0);
 				if (!$width) {
 					for ($col=0;$col<$cols;$col++) {
 						$colw = $this->items[$pid]->megaparams->get('colw'.($col+1), 0);
