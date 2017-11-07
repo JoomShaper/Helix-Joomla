@@ -544,8 +544,8 @@
                             {
                                 if( !self::getInstance()->countModules($val->position))
                                 {
-                                    $absspan+=$val->span;
-                                    $absoffset+=$val->offset; 
+                                    $absspan+=(int)$val->span;
+                                    $absoffset+=(int)$val->offset; 
                                     $totalPublished--;
                                     $totalItem--;  
                                 }
